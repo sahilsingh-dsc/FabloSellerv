@@ -15,6 +15,7 @@ import com.myfablo.seller.common.BasicResponse;
 import com.myfablo.seller.databinding.ActivityManageBinding;
 import com.myfablo.seller.interfaces.OutletInterface;
 import com.myfablo.seller.manage.bank.BankActivity;
+import com.myfablo.seller.manage.discount.DiscountPromotionActivity;
 import com.myfablo.seller.manage.kyc.SellerKycActivity;
 import com.myfablo.seller.manage.menu.MenuActivity;
 import com.myfablo.seller.manage.orders.NewOrderBottomSheet;
@@ -61,6 +62,7 @@ public class ManageActivity extends AppCompatActivity implements View.OnClickLis
         binding.lhBank.setOnClickListener(this);
         binding.lhMenu.setOnClickListener(this);
         binding.lhSellerKys.setOnClickListener(this);
+        binding.lhDiscount.setOnClickListener(this);
         binding.switchOutletStatus.setOnCheckedChangeListener(this);
         getDefaultOutletData();
     }
@@ -119,6 +121,9 @@ public class ManageActivity extends AppCompatActivity implements View.OnClickLis
             startActivity(intent);
         } else if (view == binding.lhSellerKys) {
             Intent intent = new Intent(context, SellerKycActivity.class);
+            startActivity(intent);
+        } else if (view == binding.lhDiscount) {
+            Intent intent = new Intent(context, DiscountPromotionActivity.class);
             startActivity(intent);
         }
     }

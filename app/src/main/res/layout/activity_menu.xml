@@ -106,6 +106,25 @@
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/lottie_error"/>
 
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardAddMenu"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:cardElevation="5dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/color_primary"
+            app:shapeAppearance="@style/circle">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_add"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
     </FrameLayout>
 
     <TextView

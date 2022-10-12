@@ -43,8 +43,10 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView() {
-        binding.recyclerMenu.setLayoutManager(new LinearLayoutManager(context));
         binding.ivGoBack.setOnClickListener(this);
+        binding.cardAddMenu.setOnClickListener(this);
+
+        binding.recyclerMenu.setLayoutManager(new LinearLayoutManager(context));
         binding.lottieLoading.addAnimatorListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animator) {
@@ -143,6 +145,8 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         if (view == binding.ivGoBack) {
             onBackPressed();
+        } else if (view == binding.cardAddMenu) {
+
         }
     }
 }

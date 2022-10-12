@@ -20,18 +20,12 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvOutlets"
-                android:layout_width="wrap_content"
+            <ImageView
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:fontFamily="@font/google_sans_medium"
-                android:text="Outlets"
-                android:textColor="@color/color_text_title"
-                android:textSize="22sp" />
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/fablo_logo"/>
 
         </LinearLayout>
 
