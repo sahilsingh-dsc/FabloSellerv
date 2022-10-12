@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Outlet"
+        android:fontFamily="@font/google_sans_bold"
+        android:textSize="24sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="24dp"
+        android:textColor="@color/color_text_head"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/line_dashed"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerOutlets"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/list_item_outlet"
+        tools:itemCount="5"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="100dp" />
+
+</LinearLayout>

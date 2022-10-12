@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.myfablo.seller">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <application
+        android:name=".App"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.FabloSeller"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
+        <activity
+            android:name=".home.outlets.AllOutletsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".home.outlets.OutletActivity"
+            android:exported="false" />
+        <activity
+            android:name=".manage.kyc.SellerKycActivity"
+            android:exported="false" />
+        <activity
+            android:name=".manage.menu.MenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".manage.bank.BankActivity"
+            android:exported="false" />
+        <activity
+            android:name=".manage.outlet.OutletDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".home.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".auth.InitActivity"
+            android:exported="false" />
+        <activity
+            android:name=".auth.OnboardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".auth.OtpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".catalogue.product.ProductDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".catalogue.category.CategoryDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".catalogue.CatalogueActivity"
+            android:exported="false" />
+        <activity
+            android:name=".manage.ManageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".main.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".auth.AuthActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service android:name=".services.OrderService" />
+    </application>
+
+</manifest>

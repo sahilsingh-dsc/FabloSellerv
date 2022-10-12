@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Fablo Seller</string>
+    <string name="str_error_email_required">Email id required</string>
+    <string name="str_error_password_required">Password id required</string>
+    <string name="str_status_active">Active</string>
+    <string name="str_status_inactive">Inactive</string>
+    <string name="str_error_category_name_required">Category name is required</string>
+</resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    android:id="@+id/tvSubCategory"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_8sdp"
+    android:layout_marginTop="@dimen/_4sdp"
+    android:layout_marginBottom="@dimen/_4sdp"
+    android:text="Sub Category"
+    android:paddingStart="@dimen/_8sdp"
+    android:paddingEnd="@dimen/_8sdp"
+    android:paddingTop="@dimen/_4sdp"
+    android:paddingBottom="@dimen/_4sdp"
+    android:textSize="@dimen/_16sdp"
+    android:textColor="@color/color_text_description"
+    android:fontFamily="@font/google_sans_medium"
+    android:background="@drawable/bg_select_un_focused"
+    android:orientation="vertical"/>

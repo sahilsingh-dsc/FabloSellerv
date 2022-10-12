@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="black_alpha_55">#8B000000</color>
+    <color name="white">#FFFFFF</color>
+    
+    <color name="color_separator_light">#E9ECEF</color>
+    <color name="color_text_box_border">#E9ECEF</color>
+    <color name="color_button">#00C49D</color>
+
+    <color name="color_text_title">#141414</color>
+    <color name="color_text_head">#121212</color>
+    <color name="color_text_sub_head">#3E3E3E</color>
+    <color name="color_text_description">#7E8387</color>
+    <color name="color_text_version">#B4B8BC</color>
+    <color name="color_text_for_bg">#FFFFFF</color>
+
+    <color name="color_primary">#00C49D</color>
+    <color name="color_error">#E61038</color>
+
+    <color name="color_blue">#388BF2</color>
+    <color name="color_red">#E52A34</color>
+    <color name="color_yellow">#FBAF18</color>
+    <color name="color_yellow_alpha">#2FFBAF18</color>
+    <color name="color_orange">#FC8338</color>
+    <color name="color_purple">#93328E</color>
+    <color name="color_pink">#DF1995</color>
+    <color name="color_teal">#009688</color>
+    <color name="color_green">#4CAF50</color>
+
+    <color name="color_bg_card_section">#EAE5E5</color>
+    <color name="color_bg_un_focused">#F6F2F2</color>
+    <color name="color_bg_focused">#00C49D</color>
+
+</resources>

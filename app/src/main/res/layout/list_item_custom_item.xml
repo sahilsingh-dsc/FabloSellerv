@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    android:orientation="horizontal"
+    android:id="@+id/lhCustomItem"
+    android:background="?android:selectableItemBackground"
+    android:clickable="true">
+
+    <ImageView
+        android:id="@+id/ivServingType"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/ic_food_type_veg" />
+
+    <TextView
+        android:id="@+id/tvItemName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/google_sans_regular"
+        android:text="250 gms"
+        android:textColor="@color/color_text_sub_head"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvItemPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/google_sans_regular"
+        android:text="₹0"
+        android:textColor="@color/color_text_sub_head"
+        android:textSize="16sp" />
+
+</LinearLayout>
