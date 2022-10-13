@@ -1,5 +1,7 @@
 package com.myfablo.seller.manage.menu;
 
+import static androidx.fragment.app.DialogFragment.STYLE_NORMAL;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,18 +9,25 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.animation.Animator;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
+import com.myfablo.seller.R;
+import com.myfablo.seller.common.BasicResponse;
 import com.myfablo.seller.databinding.ActivityMenuBinding;
 import com.myfablo.seller.interfaces.MenuInterface;
 import com.myfablo.seller.manage.menu.adapters.FoodMenuCategoryRecyclerAdapter;
-import com.myfablo.seller.manage.menu.models.CategoryResponse;
+import com.myfablo.seller.manage.menu.add.fragments.AddCategoryBottomSheet;
+import com.myfablo.seller.manage.menu.add.models.AddCategoryRequest;
 import com.myfablo.seller.manage.menu.models.FoodMenuResponse;
 import com.myfablo.seller.preference.OutletPref;
 import com.myfablo.seller.retrofit.RestClient;
 import com.myfablo.seller.utils.Constant;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -105,6 +114,32 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    private void addCategory(AddCategoryRequest addCategoryRequest) {
+        loadData();
+        MenuInterface menuInterface = RestClient.getRetrofitFabloInventoryService(context).create(MenuInterface.class);
+        Call<BasicResponse> call = menuInterface.addCategory(addCategoryRequest);
+        call.enqueue(new Callback<BasicResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<BasicResponse> call, @NonNull Response<BasicResponse> response) {
+                if (response.code() == Constant.HTTP_RESPONSE_SUCCESS) {
+                    if (response.body() != null) {
+                        if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_SUCCESS) {
+                            getFullMenu();
+                        } else {
+                            Toast.makeText(context, "Something went wrong...", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<BasicResponse> call, @NonNull Throwable t) {
+                Log.d(TAG, "onFailure: "+t.getMessage());
+                Toast.makeText(context, "Something went wrong...", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     private void loadData() {
         binding.recyclerMenu.setVisibility(View.GONE);
         binding.lvNoData.setVisibility(View.GONE);
@@ -141,12 +176,41 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         getFullMenu();
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(AddCategoryRequest addCategoryRequest) {
+        if (addCategoryRequest != null) {
+            addCategory(addCategoryRequest);
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
     @Override
     public void onClick(View view) {
         if (view == binding.ivGoBack) {
             onBackPressed();
         } else if (view == binding.cardAddMenu) {
-
+            Bundle bundle = new Bundle();
+            bundle.putBoolean("subCategory", false);
+            AddCategoryBottomSheet addCategoryBottomSheet = new AddCategoryBottomSheet();
+            addCategoryBottomSheet.setStyle(STYLE_NORMAL, R.style.DialogStyle);
+            addCategoryBottomSheet.setArguments(bundle);
+            addCategoryBottomSheet.show(getSupportFragmentManager(), "addCategory");
         }
     }
 }

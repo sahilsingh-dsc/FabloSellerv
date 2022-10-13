@@ -1,6 +1,9 @@
 package com.myfablo.seller.manage.menu.adapters;
 
+import static androidx.fragment.app.DialogFragment.STYLE_NORMAL;
+
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.myfablo.seller.R;
+import com.myfablo.seller.manage.menu.MenuActivity;
+import com.myfablo.seller.manage.menu.add.fragments.AddCategoryBottomSheet;
 import com.myfablo.seller.manage.menu.models.Menu;
 
 import java.util.List;
@@ -63,6 +68,19 @@ public class FoodMenuCategoryRecyclerAdapter extends RecyclerView.Adapter<FoodMe
                 });
             }
 
+            holder.tvAdd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Bundle bundle = new Bundle();
+                    bundle.putBoolean("subCategory", true);
+                    bundle.putString("categoryId", menu.getCategoryId());
+                    AddCategoryBottomSheet addCategoryBottomSheet = new AddCategoryBottomSheet();
+                    addCategoryBottomSheet.setStyle(STYLE_NORMAL, R.style.DialogStyle);
+                    addCategoryBottomSheet.setArguments(bundle);
+                    addCategoryBottomSheet.show(((MenuActivity)context).getSupportFragmentManager(), "addCategory");
+                }
+            });
+
         }
     }
 
@@ -74,6 +92,7 @@ public class FoodMenuCategoryRecyclerAdapter extends RecyclerView.Adapter<FoodMe
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tvCategoryName;
+        private TextView tvAdd;
         private RecyclerView recyclerSubCategory;
         private RecyclerView recyclerProduct;
         private ImageView ivShowHideProducts;
@@ -81,6 +100,7 @@ public class FoodMenuCategoryRecyclerAdapter extends RecyclerView.Adapter<FoodMe
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvCategoryName = itemView.findViewById(R.id.tvCategoryName);
+            tvAdd = itemView.findViewById(R.id.tvAdd);
             recyclerSubCategory = itemView.findViewById(R.id.recyclerSubCategory);
             recyclerProduct = itemView.findViewById(R.id.recyclerProduct);
             ivShowHideProducts = itemView.findViewById(R.id.ivShowHideProducts);
