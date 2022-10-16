@@ -20,7 +20,8 @@
     <color name="color_text_version">#B4B8BC</color>
     <color name="color_text_for_bg">#FFFFFF</color>
 
-    <color name="color_primary">#00C49D</color>
+    <color name="color_primary">#06AA89</color>
+    <color name="color_primary_alpha">#2706AA89</color>
     <color name="color_error">#E61038</color>
 
     <color name="color_blue">#388BF2</color>

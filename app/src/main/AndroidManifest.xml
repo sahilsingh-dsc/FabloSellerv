@@ -21,6 +21,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".auth.AuthActivity"
+            android:exported="false" />
+        <activity
             android:name=".manage.menu.add.AddProductActivity"
             android:exported="false">
             <meta-data
@@ -80,7 +83,7 @@
             android:name=".main.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".auth.AuthActivity"
+            android:name=".auth.WelcomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

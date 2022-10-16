@@ -48,6 +48,16 @@ public class AuthActivity extends AppCompatActivity implements View.OnClickListe
         fabLoading = FabLoading.getInstance();
         binding.btnSendOtp.setOnClickListener(this);
         checkLoginStatus();
+        getLoginType();
+    }
+
+    private void getLoginType() {
+        String type = getIntent().getStringExtra("type");
+        if (type.equals(Constant.LOGIN_TYPE_OUTLET)) {
+            binding.tvLoginTitle.setText("Outlet Login");
+        } else if (type.equals(Constant.LOGIN_TYPE_SELLER)) {
+            binding.tvLoginTitle.setText("Seller Login");
+        }
     }
 
     private void checkLoginStatus() {
@@ -58,7 +68,11 @@ public class AuthActivity extends AppCompatActivity implements View.OnClickListe
                 fabLoading.hideProgress();
                 AuthPref authPref = new AuthPref(context);
                 if (!authPref.getAuthToken().equals("none")) {
-                    gotoHomeScreen();
+                    if (authPref.getOnboardStatus()) {
+                        gotoHomeScreen();
+                    } else {
+                        gotoOnboardScreen();
+                    }
                 }
             }
         }, 1500);
@@ -96,6 +110,8 @@ public class AuthActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void gotoVerifyOtpScreen(String reqId, String phone, Boolean isOnboarded) {
+        AuthPref authPref = new AuthPref(context);
+        authPref.setOnboardStatus(isOnboarded);
         Intent intent = new Intent(context, OtpActivity.class);
         intent.putExtra(UserLoginResponse.RES_AUTH_REQUEST_ID, reqId);
         intent.putExtra(UserLoginResponse.RES_AUTH_PHONE, phone);
@@ -115,8 +131,14 @@ public class AuthActivity extends AppCompatActivity implements View.OnClickListe
         finish();
     }
 
-    private void H() {
-        Intent intent = new Intent(context, MainActivity.class);
+    private void gotoWelcomeScreen() {
+        Intent intent = new Intent(context, WelcomeActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void gotoOnboardScreen() {
+        Intent intent = new Intent(context, OnboardActivity.class);
         startActivity(intent);
         finish();
     }

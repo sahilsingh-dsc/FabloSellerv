@@ -17,7 +17,7 @@
             android:layout_marginTop="18dp"
             android:layout_marginBottom="18dp"
             android:layout_gravity="center"
-            android:text="Seller Onboard"
+            android:text="Seller Onboarding"
             android:fontFamily="@font/google_sans_medium"
             android:textColor="@color/color_text_title"
             android:textSize="18sp"/>
@@ -30,48 +30,75 @@
 
     </FrameLayout>
 
-    <LinearLayout
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/bg_alpha_primary_color"
+        android:layout_gravity="center">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_margin="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="5dp"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/ivOnboardingQr"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </FrameLayout>
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/google_sans_bold"
+        android:textSize="24sp"
+        android:textColor="@color/color_text_head"
+        android:gravity="center"
+        android:text="Welcome QR"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Your Name"
-            android:fontFamily="@font/google_sans_regular"
-            android:textSize="14sp"
-            android:layout_marginTop="24dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginBottom="4dp"
-            android:textColor="@color/color_text_sub_head"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/google_sans_medium"
+        android:textSize="18sp"
+        android:textColor="@color/color_text_sub_head"
+        android:gravity="center"
+        android:text="Show this QR to Fablo Marketing Agent and get yourself onboarded."/>
 
-        <EditText
-            android:id="@+id/etOtp"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/border_text_box"
-            android:inputType="number"
-            android:maxLength="4"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:hint="Ex. Vijay Sharma"
-            android:fontFamily="@font/google_sans_regular"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
-        <TextView
-            android:id="@+id/tvEmailError"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:textColor="@color/color_error"
-            android:fontFamily="@font/google_sans_regular"
-            android:visibility="visible"
-            android:text="This is some issue with this box"/>
-
-    </LinearLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCheckStatus"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="36dp"
+        app:cornerRadius="8dp"
+        android:insetTop="0dp"
+        android:textAllCaps="false"
+        android:insetBottom="0dp"
+        android:insetLeft="0dp"
+        android:insetRight="0dp"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Check Status"/>
 
 </LinearLayout>

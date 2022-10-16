@@ -12,6 +12,7 @@ import android.view.View;
 import com.myfablo.seller.auth.model.VerifyOtpRequest;
 import com.myfablo.seller.auth.model.VerifyOtpResponse;
 import com.myfablo.seller.databinding.ActivityOtpBinding;
+import com.myfablo.seller.home.HomeActivity;
 import com.myfablo.seller.interfaces.AuthInterface;
 import com.myfablo.seller.preference.AuthPref;
 import com.myfablo.seller.retrofit.RestClient;
@@ -68,7 +69,7 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
                             AuthPref authPref = new AuthPref(context);
                             authPref.setUser(response.body().getItems());
                             if (onboard) {
-                                gotoInitScreen();
+                                gotoHomeScreen();
                             } else {
                                 gotoOnboardScreen();
                             }
@@ -90,6 +91,12 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
         if (otp.length() == 4 && TextUtils.isDigitsOnly(otp)) {
             doVerifyOtp(otp);
         }
+    }
+
+    private void gotoHomeScreen() {
+        Intent intent = new Intent(context, HomeActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void gotoInitScreen() {

@@ -15,6 +15,9 @@ public class Constant {
     public static final String PREF_ORDER_SERVICE = "orderService";
     public static final String PREF_SELECTED_OPTION = "selectedOption";
 
+    public static final String LOGIN_TYPE_SELLER = "seller";
+    public static final String LOGIN_TYPE_OUTLET = "outlet";
+
     public static final int OUTLET_STATUS_MODE_OFFLINE = 0;
     public static final int OUTLET_STATUS_MODE_ONLINE = 1;
     public static final int OUTLET_STATUS_MODE_ALL = 2;
