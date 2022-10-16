@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".manage.payout.PayoutActivity">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ivGoBack"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="10dp"
+                android:background="?android:selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_fab_go_back"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:text="Payout Statement"
+                android:gravity="center"
+                android:fontFamily="@font/google_sans_medium"
+                android:textColor="@color/color_text_title"
+                android:textSize="20sp"/>
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/lvNoData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:visibility="visible"
+            android:orientation="vertical">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottieNoData"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/lottie_no_data"/>
+
+            <TextView
+                android:id="@+id/tvNoData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:gravity="center"
+                android:fontFamily="@font/google_sans_regular"
+                android:textColor="@color/color_text_description"
+                android:text="Payout statement details will be available once you start getting orders."
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

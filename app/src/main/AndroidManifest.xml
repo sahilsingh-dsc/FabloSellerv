@@ -21,6 +21,20 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".manage.payout.PayoutActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".auth.WelcomeActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".auth.AuthActivity"
             android:exported="false" />
         <activity
@@ -83,8 +97,9 @@
             android:name=".main.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".auth.WelcomeActivity"
-            android:exported="true">
+            android:name=".auth.LaunchActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

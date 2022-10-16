@@ -67,7 +67,7 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
                     if (response.body() != null) {
                         if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_SUCCESS) {
                             AuthPref authPref = new AuthPref(context);
-                            authPref.setUser(response.body().getItems());
+                            authPref.setUser(response.body().getItems().getToken());
                             if (onboard) {
                                 gotoHomeScreen();
                             } else {

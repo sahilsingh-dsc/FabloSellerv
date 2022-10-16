@@ -51,248 +51,284 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <ScrollView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none">
+        android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/lvNoData"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:visibility="visible"
             android:orientation="vertical">
 
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottieNoData"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/lottie_no_data"/>
+
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginStart="16dp"
-                android:text="BANK DETAILS"
-                android:fontFamily="@font/google_sans_medium"
-                android:textSize="18sp"
-                android:textColor="@color/color_text_title"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/line_dashed"/>
-
-
-            <LinearLayout
+                android:id="@+id/tvNoData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/google_sans_regular"
-                    android:textColor="@color/color_text_description"
-                    android:textSize="16sp"
-                    android:text="Bank Name"/>
-
-                <TextView
-                    android:id="@+id/tvBankName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/google_sans_regular"
-                    android:textColor="@color/color_text_sub_head"
-                    android:textSize="18sp"
-                    android:text="State Bank of India"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/google_sans_regular"
-                    android:textColor="@color/color_text_description"
-                    android:textSize="16sp"
-                    android:text="Bank Branch"/>
-
-                <TextView
-                    android:id="@+id/tvBankBranch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/google_sans_regular"
-                    android:textColor="@color/color_text_sub_head"
-                    android:textSize="18sp"
-                    android:text="Vijay Nagar"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/google_sans_regular"
-                    android:textColor="@color/color_text_description"
-                    android:textSize="16sp"
-                    android:text="Bank Address"/>
-
-                <TextView
-                    android:id="@+id/tvBankAddress"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/google_sans_regular"
-                    android:textColor="@color/color_text_sub_head"
-                    android:textSize="18sp"
-                    android:text="Ground Floor, 27, Scheme-54 PU3, Vijay Nagar, AB Road, Indore, Madhya Pradesh, 452010"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/google_sans_regular"
-                    android:textColor="@color/color_text_description"
-                    android:textSize="16sp"
-                    android:text="Beneificary Name"/>
-
-                <TextView
-                    android:id="@+id/tvBeneficiaryName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/google_sans_regular"
-                    android:textColor="@color/color_text_sub_head"
-                    android:textSize="18sp"
-                    android:text="Sahil Singh"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/google_sans_regular"
-                    android:textColor="@color/color_text_description"
-                    android:textSize="16sp"
-                    android:text="Account Number"/>
-
-                <TextView
-                    android:id="@+id/tvAccountNumber"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/google_sans_regular"
-                    android:textColor="@color/color_text_sub_head"
-                    android:textSize="18sp"
-                    android:text="10002546456678"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/google_sans_regular"
-                    android:textColor="@color/color_text_description"
-                    android:textSize="16sp"
-                    android:text="IFSC Code"/>
-
-                <TextView
-                    android:id="@+id/tvIfscCode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/google_sans_regular"
-                    android:textColor="@color/color_text_sub_head"
-                    android:textSize="18sp"
-                    android:text="SBIN0001002"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/google_sans_regular"
-                    android:textColor="@color/color_text_description"
-                    android:textSize="16sp"
-                    android:text="Last Updated"/>
-
-                <TextView
-                    android:id="@+id/tvLastUpdated"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/google_sans_regular"
-                    android:textColor="@color/color_text_sub_head"
-                    android:textSize="18sp"
-                    android:text="21f394ec01a1"/>
-
-            </LinearLayout>
-
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:gravity="center"
+                android:fontFamily="@font/google_sans_regular"
+                android:textColor="@color/color_text_description"
+                android:text="Settlement bank details will be available once you start getting orders."
+                android:textSize="16sp"/>
 
         </LinearLayout>
 
-    </ScrollView>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginStart="16dp"
+                    android:text="BANK DETAILS"
+                    android:fontFamily="@font/google_sans_medium"
+                    android:textSize="18sp"
+                    android:textColor="@color/color_text_title"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/line_dashed"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/google_sans_regular"
+                        android:textColor="@color/color_text_description"
+                        android:textSize="16sp"
+                        android:text="Bank Name"/>
+
+                    <TextView
+                        android:id="@+id/tvBankName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/google_sans_regular"
+                        android:textColor="@color/color_text_sub_head"
+                        android:textSize="18sp"
+                        android:text="State Bank of India"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/google_sans_regular"
+                        android:textColor="@color/color_text_description"
+                        android:textSize="16sp"
+                        android:text="Bank Branch"/>
+
+                    <TextView
+                        android:id="@+id/tvBankBranch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/google_sans_regular"
+                        android:textColor="@color/color_text_sub_head"
+                        android:textSize="18sp"
+                        android:text="Vijay Nagar"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/google_sans_regular"
+                        android:textColor="@color/color_text_description"
+                        android:textSize="16sp"
+                        android:text="Bank Address"/>
+
+                    <TextView
+                        android:id="@+id/tvBankAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/google_sans_regular"
+                        android:textColor="@color/color_text_sub_head"
+                        android:textSize="18sp"
+                        android:text="Ground Floor, 27, Scheme-54 PU3, Vijay Nagar, AB Road, Indore, Madhya Pradesh, 452010"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/google_sans_regular"
+                        android:textColor="@color/color_text_description"
+                        android:textSize="16sp"
+                        android:text="Beneificary Name"/>
+
+                    <TextView
+                        android:id="@+id/tvBeneficiaryName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/google_sans_regular"
+                        android:textColor="@color/color_text_sub_head"
+                        android:textSize="18sp"
+                        android:text="Sahil Singh"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/google_sans_regular"
+                        android:textColor="@color/color_text_description"
+                        android:textSize="16sp"
+                        android:text="Account Number"/>
+
+                    <TextView
+                        android:id="@+id/tvAccountNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/google_sans_regular"
+                        android:textColor="@color/color_text_sub_head"
+                        android:textSize="18sp"
+                        android:text="10002546456678"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/google_sans_regular"
+                        android:textColor="@color/color_text_description"
+                        android:textSize="16sp"
+                        android:text="IFSC Code"/>
+
+                    <TextView
+                        android:id="@+id/tvIfscCode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/google_sans_regular"
+                        android:textColor="@color/color_text_sub_head"
+                        android:textSize="18sp"
+                        android:text="SBIN0001002"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/google_sans_regular"
+                        android:textColor="@color/color_text_description"
+                        android:textSize="16sp"
+                        android:text="Last Updated"/>
+
+                    <TextView
+                        android:id="@+id/tvLastUpdated"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/google_sans_regular"
+                        android:textColor="@color/color_text_sub_head"
+                        android:textSize="18sp"
+                        android:text="21f394ec01a1"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+    </FrameLayout>
 
 </LinearLayout>

@@ -19,7 +19,7 @@ public class VerifyOtpResponse {
     private String error;
     @SerializedName("items")
     @Expose
-    private String items;
+    private VerifyOtpResponseItems items;
 
     /**
      * No args constructor for use in serialization
@@ -34,7 +34,7 @@ public class VerifyOtpResponse {
      * @param items
      * @param status
      */
-    public VerifyOtpResponse(Boolean status, Integer subCode, String message, String error, String items) {
+    public VerifyOtpResponse(Boolean status, Integer subCode, String message, String error, VerifyOtpResponseItems items) {
         super();
         this.status = status;
         this.subCode = subCode;
@@ -75,11 +75,11 @@ public class VerifyOtpResponse {
         this.error = error;
     }
 
-    public String getItems() {
+    public VerifyOtpResponseItems getItems() {
         return items;
     }
 
-    public void setItems(String items) {
+    public void setItems(VerifyOtpResponseItems items) {
         this.items = items;
     }
 

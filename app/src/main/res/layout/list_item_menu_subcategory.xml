@@ -28,7 +28,7 @@
             android:layout_marginBottom="16dp"
             android:textSize="18sp"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:textColor="@color/color_text_title"
             android:fontFamily="@font/google_sans_medium"
             android:text="Sub Category"/>
@@ -41,6 +41,7 @@
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/google_sans_bold"
             android:textSize="18sp"
+            android:visibility="gone"
             android:textColor="@color/color_primary"/>
 
     </LinearLayout>
