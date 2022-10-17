@@ -19,6 +19,7 @@ import com.myfablo.seller.home.outlets.models.single.OutletDetailsResponse;
 import com.myfablo.seller.interfaces.OrdersInterface;
 import com.myfablo.seller.interfaces.OutletInterface;
 import com.myfablo.seller.manage.ManageActivity;
+import com.myfablo.seller.manage.orders.PendingOrdersActivity;
 import com.myfablo.seller.manage.orders.model.OrderResponse;
 import com.myfablo.seller.manage.orders.model.OrderStatusChangeRequest;
 import com.myfablo.seller.orders.OrderRecyclerAdapter;
@@ -28,6 +29,7 @@ import com.myfablo.seller.preference.SelectedOptionPref;
 import com.myfablo.seller.retrofit.RestClient;
 import com.myfablo.seller.utils.Constant;
 import com.myfablo.seller.utils.alerts.FabLoading;
+import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -339,6 +341,14 @@ public class OutletActivity extends AppCompatActivity implements View.OnClickLis
     public void onMessageEvent(OrderStatusChangeRequest orderStatusChangeRequest) {
         if (orderStatusChangeRequest != null) {
             changeOrderStatus(orderStatusChangeRequest);
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(PNMessageResult messageResult) {
+        if (messageResult != null) {
+            Intent intent = new Intent(context, PendingOrdersActivity.class);
+            startActivity(intent);
         }
     }
 

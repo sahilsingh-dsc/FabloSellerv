@@ -21,6 +21,7 @@ import com.myfablo.seller.home.outlets.models.OutletItem;
 import com.myfablo.seller.home.outlets.models.OutletsResponse;
 import com.myfablo.seller.interfaces.OutletInterface;
 import com.myfablo.seller.manage.orders.NewOrderBottomSheet;
+import com.myfablo.seller.manage.orders.PendingOrdersActivity;
 import com.myfablo.seller.preference.AuthPref;
 import com.myfablo.seller.preference.OrderServicePref;
 import com.myfablo.seller.preference.OutletPref;
@@ -231,13 +232,8 @@ public class HomeActivity extends AppCompatActivity implements SwitchButton.OnCh
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(PNMessageResult messageResult) {
         if (messageResult != null) {
-            NewOrderBottomSheet newOrderBottomSheet = new NewOrderBottomSheet();
-            newOrderBottomSheet.setStyle(DialogFragment.STYLE_NORMAL, R.style.FullScreenBottomSheet);
-            newOrderBottomSheet.setCancelable(false);
-            Bundle bundle = new Bundle();
-            bundle.putString("orderId", messageResult.getMessage().getAsString());
-            newOrderBottomSheet.setArguments(bundle);
-            newOrderBottomSheet.show(getSupportFragmentManager(), "newOrder");
+            Intent intent = new Intent(context, PendingOrdersActivity.class);
+            startActivity(intent);
         }
     }
 

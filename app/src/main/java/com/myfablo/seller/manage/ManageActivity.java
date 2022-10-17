@@ -19,6 +19,7 @@ import com.myfablo.seller.manage.discount.DiscountPromotionActivity;
 import com.myfablo.seller.manage.kyc.SellerKycActivity;
 import com.myfablo.seller.manage.menu.MenuActivity;
 import com.myfablo.seller.manage.orders.NewOrderBottomSheet;
+import com.myfablo.seller.manage.orders.PendingOrdersActivity;
 import com.myfablo.seller.manage.outlet.OutletDetailsActivity;
 import com.myfablo.seller.manage.payout.PayoutActivity;
 import com.myfablo.seller.preference.AuthPref;
@@ -136,13 +137,8 @@ public class ManageActivity extends AppCompatActivity implements View.OnClickLis
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(PNMessageResult messageResult) {
         if (messageResult != null) {
-            NewOrderBottomSheet newOrderBottomSheet = new NewOrderBottomSheet();
-            newOrderBottomSheet.setStyle(DialogFragment.STYLE_NORMAL, R.style.FullScreenBottomSheet);
-            newOrderBottomSheet.setCancelable(false);
-            Bundle bundle = new Bundle();
-            bundle.putString("orderId", messageResult.getMessage().getAsString());
-            newOrderBottomSheet.setArguments(bundle);
-            newOrderBottomSheet.show(getSupportFragmentManager(), "newOrder");
+            Intent intent = new Intent(context, PendingOrdersActivity.class);
+            startActivity(intent);
 
         }
     }
