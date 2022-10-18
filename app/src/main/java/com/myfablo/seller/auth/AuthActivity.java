@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -26,7 +28,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AuthActivity extends AppCompatActivity implements View.OnClickListener {
+public class AuthActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
 
     private ActivityAuthBinding binding;
     private Context context;
@@ -47,7 +49,7 @@ public class AuthActivity extends AppCompatActivity implements View.OnClickListe
     private void initView() {
         fabLoading = FabLoading.getInstance();
         binding.btnSendOtp.setOnClickListener(this);
-        checkLoginStatus();
+        binding.etPhone.addTextChangedListener(this);
         getLoginType();
     }
 
@@ -58,25 +60,6 @@ public class AuthActivity extends AppCompatActivity implements View.OnClickListe
         } else if (type.equals(Constant.LOGIN_TYPE_SELLER)) {
             binding.tvLoginTitle.setText("Seller Login");
         }
-    }
-
-    private void checkLoginStatus() {
-        fabLoading.showProgress(context);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                fabLoading.hideProgress();
-                AuthPref authPref = new AuthPref(context);
-                if (!authPref.getAuthToken().equals("none")) {
-                    if (authPref.getOnboardStatus()) {
-                        gotoHomeScreen();
-                    } else {
-                        gotoOnboardScreen();
-                    }
-                }
-            }
-        }, 1500);
-
     }
 
     private void doSellerLogin(String phone) {
@@ -104,7 +87,7 @@ public class AuthActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onFailure(Call<UserLoginResponse> call, Throwable t) {
                 fabLoading.hideProgress();
-                Log.e(TAG, "onFailure: "+t.getMessage());
+                Log.e(TAG, "onFailure: " + t.getMessage());
             }
         });
     }
@@ -119,36 +102,13 @@ public class AuthActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
-    private void gotoInitScreen() {
-        Intent intent = new Intent(context, InitActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    private void gotoHomeScreen() {
-        Intent intent = new Intent(context, HomeActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    private void gotoWelcomeScreen() {
-        Intent intent = new Intent(context, WelcomeActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    private void gotoOnboardScreen() {
-        Intent intent = new Intent(context, OnboardActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
     private void validateInput() {
         String phone = binding.etPhone.getText().toString();
         if (phone.length() == 10 && TextUtils.isDigitsOnly(phone)) {
             doSellerLogin(phone);
         } else {
-            Toast.makeText(context, "Invalid phone number", Toast.LENGTH_SHORT).show();
+            binding.tvPhoneError.setText("Please provide valid phone number");
+            binding.tvPhoneError.setVisibility(View.VISIBLE);
         }
     }
 
@@ -157,5 +117,20 @@ public class AuthActivity extends AppCompatActivity implements View.OnClickListe
         if (view == binding.btnSendOtp) {
             validateInput();
         }
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        binding.tvPhoneError.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+
     }
 }

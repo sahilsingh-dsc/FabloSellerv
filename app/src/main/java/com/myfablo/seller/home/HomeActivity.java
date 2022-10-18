@@ -19,9 +19,12 @@ import com.myfablo.seller.databinding.ActivityHomeBinding;
 import com.myfablo.seller.home.outlets.adapters.OutletsRecyclerAdapter;
 import com.myfablo.seller.home.outlets.models.OutletItem;
 import com.myfablo.seller.home.outlets.models.OutletsResponse;
+import com.myfablo.seller.interfaces.OrdersInterface;
 import com.myfablo.seller.interfaces.OutletInterface;
 import com.myfablo.seller.manage.orders.NewOrderBottomSheet;
 import com.myfablo.seller.manage.orders.PendingOrdersActivity;
+import com.myfablo.seller.manage.orders.model.OrderResponse;
+import com.myfablo.seller.orders.OrderRecyclerAdapter;
 import com.myfablo.seller.preference.AuthPref;
 import com.myfablo.seller.preference.OrderServicePref;
 import com.myfablo.seller.preference.OutletPref;
@@ -66,6 +69,7 @@ public class HomeActivity extends AppCompatActivity implements SwitchButton.OnCh
         binding.lvOfflineOutlet.setOnClickListener(this);
         binding.lvOnlineOutlet.setOnClickListener(this);
         binding.viewNotificationAlert.setOnClickListener(this);
+        binding.cardPendingOrders.setOnClickListener(this);
     }
 
     private void initOrderService() {
@@ -228,6 +232,31 @@ public class HomeActivity extends AppCompatActivity implements SwitchButton.OnCh
         });
     }
 
+    private void getOrder() {
+        OrdersInterface ordersInterface = RestClient.getRetrofitFabloOrderService(context).create(OrdersInterface.class);
+        Call<OrderResponse> call = ordersInterface.getOrders("cfc7876424a1", Constant.ORDER_STATUS_PENDING);
+        call.enqueue(new Callback<OrderResponse>() {
+            @Override
+            public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
+                if (response.code() == Constant.HTTP_RESPONSE_SUCCESS) {
+                    if (response.body() != null) {
+                        if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_SUCCESS) {
+                            binding.cardPendingOrders.setVisibility(View.VISIBLE);
+                        } else if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_NO_DATA) {
+                            binding.cardPendingOrders.setVisibility(View.GONE);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OrderResponse> call, Throwable t) {
+                Log.e(TAG, "onFailure: "+t.getMessage());
+                showError();
+            }
+        });
+    }
+
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(PNMessageResult messageResult) {
@@ -277,6 +306,7 @@ public class HomeActivity extends AppCompatActivity implements SwitchButton.OnCh
     protected void onResume() {
         super.onResume();
         initOrderService();
+        getOrder();
     }
 
     @Override
@@ -305,6 +335,9 @@ public class HomeActivity extends AppCompatActivity implements SwitchButton.OnCh
             OrderServicePref orderServicePref = new OrderServicePref(context);
             OrderNotificationAlert orderNotificationAlert = OrderNotificationAlert.getInstance();
             orderNotificationAlert.showAlert(context, orderServicePref.getServiceStatus());
+        } else if (view == binding.cardPendingOrders) {
+            Intent intent = new Intent(context, PendingOrdersActivity.class);
+            startActivity(intent);
         }
     }
 }

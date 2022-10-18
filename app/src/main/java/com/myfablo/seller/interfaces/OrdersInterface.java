@@ -11,6 +11,7 @@ import com.myfablo.seller.orders.model.AllOrderResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -24,7 +25,7 @@ public interface OrdersInterface {
     Call<OrderResponse> getOrders(@Path("outletId") String outletId, @Query("status") String status);
 
     @POST("order/status")
-    Call<BasicResponse> changeOrderStatus(@Body OrderStatusChangeRequest orderStatusChangeRequest);
+    Call<BasicResponse> changeOrderStatus(@Header("Authorization") String token, @Body OrderStatusChangeRequest orderStatusChangeRequest);
 
     @GET("order/details/{orderId}")
     Call<OrderDetailsResponse> getOrderDetails(@Path("orderId") String orderId);

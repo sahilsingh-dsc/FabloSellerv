@@ -52,7 +52,7 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
 
             holder.tvOrderTime.setText(item.getTiming().get(0).getTime());
 
-            if (item.getStatus().equals(Constant.ORDER_STATUS_INIT)) {
+            if (item.getStatus().equals(Constant.ORDER_STATUS_PENDING)) {
                 holder.tvOrderStatus.setText("PENDING");
                 holder.tvOrderStatus.setBackground(context.getResources().getDrawable(R.drawable.bg_status_pending));
             } else if (item.getStatus().equals(Constant.ORDER_STATUS_PREPARING)) {
@@ -72,7 +72,7 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
                 holder.tvOrderStatus.setBackground(context.getResources().getDrawable(R.drawable.bg_status_cancelled));
             }
 
-            if (item.getStatus().equals(Constant.ORDER_STATUS_INIT)) {
+            if (item.getStatus().equals(Constant.ORDER_STATUS_PENDING)) {
                 holder.lhAcceptRejectOrder.setVisibility(View.VISIBLE);
             } else {
                 holder.lhAcceptRejectOrder.setVisibility(View.GONE);
