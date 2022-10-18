@@ -69,6 +69,9 @@ public class Constant {
 
     public static final String ONESIGNAL_APP_ID = "73beb105-9dca-45eb-8f7c-479ddc15cb43";
 
+    public static final String PUBNUB_PUBLISHER_KEY = "pub-c-40e1c3cd-397d-449b-9a06-2e0505653027";
+    public static final String PUBNUB_SUBSCRIBER_KEY = "sub-c-e240b078-b657-4d79-84e1-0504adfe3cf8";
+
 
 
 }

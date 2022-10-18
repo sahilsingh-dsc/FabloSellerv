@@ -167,5 +167,12 @@ public class OutletPref {
         return preferences.getFloat("outletLng", 0);
     }
 
+    public void clearData() {
+        SharedPreferences preferences = context.getSharedPreferences(Constant.PREF_OUTLET, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.apply();
+    }
+
 
 }

@@ -38,4 +38,11 @@ public class AuthPref {
         return preferences.getBoolean(UserLoginResponse.RES_AUTH_ONBOARD, false);
     }
 
+    public void clearData() {
+        SharedPreferences preferences = context.getSharedPreferences(Constant.PREF_AUTH, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.apply();
+    }
+
 }

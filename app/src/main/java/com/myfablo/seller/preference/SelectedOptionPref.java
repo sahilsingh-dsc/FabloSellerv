@@ -37,4 +37,11 @@ public class SelectedOptionPref {
         return preferences.getString("orderStatus", "preparing");
     }
 
+    public void clearData() {
+        SharedPreferences preferences = context.getSharedPreferences(Constant.PREF_SELECTED_OPTION, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.apply();
+    }
+
 }

@@ -152,7 +152,7 @@ public class OutletActivity extends AppCompatActivity implements View.OnClickLis
         AuthPref authPref = new AuthPref(context);
         fabLoading.showProgress(context);
         OrdersInterface ordersInterface = RestClient.getRetrofitFabloOrderService(context).create(OrdersInterface.class);
-        Call<BasicResponse> call = ordersInterface.changeOrderStatus(authPref.getAuthToken(), orderStatusChangeRequest);
+        Call<BasicResponse> call = ordersInterface.changeOrderStatus("Bearer "+authPref.getAuthToken(), orderStatusChangeRequest);
         call.enqueue(new Callback<BasicResponse>() {
             @Override
             public void onResponse(Call<BasicResponse> call, Response<BasicResponse> response) {

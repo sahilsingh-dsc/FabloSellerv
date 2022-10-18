@@ -101,6 +101,9 @@ dependencies {
     implementation 'androidmads.library.qrgenearator:QRGenearator:1.0.4'
     implementation 'com.google.zxing:core:3.3.3'
 
+    // sliding button
+    implementation 'com.github.MAXDeliveryNG:slideview:1.1.0'
+
     // android junit test
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

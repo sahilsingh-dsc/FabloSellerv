@@ -263,6 +263,7 @@ public class HomeActivity extends AppCompatActivity implements SwitchButton.OnCh
         if (messageResult != null) {
             Intent intent = new Intent(context, PendingOrdersActivity.class);
             startActivity(intent);
+            Toast.makeText(context, messageResult.getMessage().getAsString(), Toast.LENGTH_SHORT).show();
         }
     }
 

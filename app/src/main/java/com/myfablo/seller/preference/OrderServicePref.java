@@ -25,4 +25,11 @@ public class OrderServicePref {
         return preferences.getBoolean("status", false);
     }
 
+    public void clearData() {
+        SharedPreferences preferences = context.getSharedPreferences(Constant.PREF_ORDER_SERVICE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.apply();
+    }
+
 }

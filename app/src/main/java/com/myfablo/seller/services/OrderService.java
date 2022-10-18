@@ -17,6 +17,7 @@ import androidx.core.app.NotificationCompat;
 import com.myfablo.seller.R;
 import com.myfablo.seller.home.HomeActivity;
 import com.myfablo.seller.preference.OutletPref;
+import com.myfablo.seller.pubnub.OrderSubscriber;
 import com.myfablo.seller.utils.Constant;
 import com.pubnub.api.PNConfiguration;
 import com.pubnub.api.PubNub;
@@ -37,10 +38,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 
-public class OrderService extends Service implements View.OnClickListener {
+public class OrderService extends Service {
 
-    private WindowManager wm;
-    private Button button;
+    private OrderSubscriber orderSubscriber;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -66,10 +66,10 @@ public class OrderService extends Service implements View.OnClickListener {
         if (status.equals("start")) {
             startForeground(1, notification);
         } else if (status.equals("stop")) {
+            orderSubscriber.unSubscribeOrder();
             stopForeground(true);
             stopSelf();
         }
-
 
         return START_NOT_STICKY;
     }
@@ -78,83 +78,19 @@ public class OrderService extends Service implements View.OnClickListener {
     @Override
     public void onCreate() {
         super.onCreate();
-        OutletPref outletPref = new OutletPref(getApplicationContext());
-        PNConfiguration pnConfiguration = null;
+        orderSubscriber = new OrderSubscriber();
         try {
-            pnConfiguration = new PNConfiguration(outletPref.getSellerId());
+            orderSubscriber.initPubNubConfig();
+            orderSubscriber.subscribeOrder();
         } catch (PubNubException e) {
             e.printStackTrace();
         }
-        pnConfiguration.setPublishKey("pub-c-40e1c3cd-397d-449b-9a06-2e0505653027");
-        pnConfiguration.setSubscribeKey("sub-c-e240b078-b657-4d79-84e1-0504adfe3cf8");
-        pnConfiguration.setSecure(false);
-        try {
-            pnConfiguration.setUuid(outletPref.getSellerId());
-        } catch (PubNubException e) {
-            e.printStackTrace();
-        }
-        PubNub pubnub = new PubNub(pnConfiguration);
-        pubnub.addListener(new SubscribeCallback() {
-            @Override
-            public void status(@NotNull PubNub pubnub, @NotNull PNStatus pnStatus) {
-
-            }
-
-            @Override
-            public void message(@NotNull PubNub pubnub, @NotNull PNMessageResult message) {
-                String messagePublisher = message.getPublisher();
-                System.out.println("Message publisher: " + messagePublisher);
-                System.out.println("Message Payload: " + message.getMessage());
-                EventBus.getDefault().post(message);
-                final MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.notification);
-                mp.start();
-                System.out.println("Message Subscription: " + message.getSubscription());
-                System.out.println("Message Channel: " + message.getChannel());
-                System.out.println("Message timetoken: " + message.getTimetoken());
-            }
-
-            @Override
-            public void presence(@NotNull PubNub pubnub, @NotNull PNPresenceEventResult pnPresenceEventResult) {
-
-            }
-
-            @Override
-            public void signal(@NotNull PubNub pubnub, @NotNull PNSignalResult pnSignalResult) {
-
-            }
-
-            @Override
-            public void uuid(@NotNull PubNub pubnub, @NotNull PNUUIDMetadataResult pnUUIDMetadataResult) {
-
-            }
-
-            @Override
-            public void channel(@NotNull PubNub pubnub, @NotNull PNChannelMetadataResult pnChannelMetadataResult) {
-
-            }
-
-            @Override
-            public void membership(@NotNull PubNub pubnub, @NotNull PNMembershipResult pnMembershipResult) {
-
-            }
-
-            @Override
-            public void messageAction(@NotNull PubNub pubnub, @NotNull PNMessageActionResult pnMessageActionResult) {
-
-            }
-
-            @Override
-            public void file(@NotNull PubNub pubnub, @NotNull PNFileEventResult pnFileEventResult) {
-
-            }
-        });
-
-        pubnub.subscribe().channels(Arrays.asList("order")).execute();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        orderSubscriber.unSubscribeOrder();
     }
 
     @Nullable
@@ -163,8 +99,4 @@ public class OrderService extends Service implements View.OnClickListener {
         return null;
     }
 
-    @Override
-    public void onClick(View view) {
-        Log.e("OrderService", "onClick: ");
-    }
 }

@@ -201,6 +201,15 @@
 
         </LinearLayout>
 
+<!--        <ng.max.slideview.SlideView-->
+<!--            android:id="@+id/slideView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:sv_buttonBackgroundColor="@color/color_primary"-->
+<!--            app:sv_slideBackgroundColor="@color/white"-->
+<!--            app:sv_slideText="Order Ready"-->
+<!--            app:sv_slideTextColor="@color/white" />-->
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnOrderReady"
             android:layout_width="match_parent"

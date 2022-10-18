@@ -551,6 +551,46 @@
                 android:layout_height="2dp"
                 android:background="@drawable/line_dashed"/>
 
+            <LinearLayout
+                android:id="@+id/lhLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/ic_fab_logout"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:textSize="16sp"
+                    android:text="Logout"
+                    android:fontFamily="@font/google_sans_medium"
+                    android:textColor="@color/color_text_sub_head"/>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="16dp"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_fab_nav_right_arrow"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/line_dashed"/>
+
 
             <ImageView
                 android:layout_width="200dp"
