@@ -21,6 +21,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".manage.orders.OrderHistoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".manage.orders.PendingOrdersActivity"
             android:exported="false">
             <meta-data

@@ -28,6 +28,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:padding="10dp"
+                android:rotation="180"
                 android:background="?android:selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_fab_go_back"/>
 

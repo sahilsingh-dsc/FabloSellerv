@@ -1,5 +1,9 @@
 package com.myfablo.seller.pubnub;
 
+import android.content.Context;
+import android.media.MediaPlayer;
+
+import com.myfablo.seller.R;
 import com.myfablo.seller.utils.Constant;
 import com.pubnub.api.PNConfiguration;
 import com.pubnub.api.PubNub;
@@ -23,6 +27,12 @@ import java.util.Arrays;
 
 public class OrderSubscriber extends SubscribeCallback {
 
+    private Context context;
+
+    public OrderSubscriber(Context context) {
+        this.context = context;
+    }
+
     private PubNub pubnubClient;
 
     public void initPubNubConfig() throws PubNubException {
@@ -36,13 +46,13 @@ public class OrderSubscriber extends SubscribeCallback {
 
     public void subscribeOrder() {
         pubnubClient.subscribe()
-                .channels(Arrays.asList("order")) // subscribe to channels
+                .channels(Arrays.asList("order-a4e639bb")) // subscribe to channels
                 .execute();
     }
 
     public void unSubscribeOrder() {
         pubnubClient.unsubscribe()
-                .channels(Arrays.asList("order"))
+                .channels(Arrays.asList("order-a4e639bb"))
                 .execute();
     }
 
@@ -59,6 +69,8 @@ public class OrderSubscriber extends SubscribeCallback {
         System.out.println("Message Subscription: " + message.getSubscription());
         System.out.println("Message Channel: " + message.getChannel());
         System.out.println("Message timeToken: " + message.getTimetoken());
+        MediaPlayer mp = MediaPlayer.create(context, R.raw.notification);
+        mp.start();
         EventBus.getDefault().post(message);
     }
 

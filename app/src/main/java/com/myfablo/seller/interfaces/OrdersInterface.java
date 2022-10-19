@@ -30,4 +30,7 @@ public interface OrdersInterface {
     @GET("order/details/{orderId}")
     Call<OrderDetailsResponse> getOrderDetails(@Path("orderId") String orderId);
 
+    @GET("order/outlet/{outletId}")
+    Call<OrderResponse> getOrderByDate(@Path("outletId") String outletId, @Query("status") String status, @Query("from") String from, @Query("to") String to);
+
 }

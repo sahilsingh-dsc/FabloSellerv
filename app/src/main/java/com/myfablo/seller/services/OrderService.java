@@ -57,8 +57,8 @@ public class OrderService extends Service {
         }
 
         Notification notification = new NotificationCompat.Builder(this, Constant.NOTIFICATION_CHANNEL_ID)
-                .setContentTitle("Looking Order")
-                .setContentText(sellerId)
+                .setContentTitle("Looking for orders")
+                .setContentText("You will receive notification for new orders")
                 .setSmallIcon(R.drawable.ic_baseline_notifications_24)
                 .setContentIntent(pendingIntent)
                 .build();
@@ -78,7 +78,7 @@ public class OrderService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        orderSubscriber = new OrderSubscriber();
+        orderSubscriber = new OrderSubscriber(getApplicationContext());
         try {
             orderSubscriber.initPubNubConfig();
             orderSubscriber.subscribeOrder();

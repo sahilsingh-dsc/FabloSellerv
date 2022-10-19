@@ -19,6 +19,8 @@ import com.myfablo.seller.manage.orders.model.Item;
 import com.myfablo.seller.manage.orders.model.OrderStatusChangeRequest;
 import com.myfablo.seller.orders.model.OrderItemRecyclerAdapter;
 import com.myfablo.seller.utils.Constant;
+import com.myfablo.seller.utils.alerts.RejectOrderAlert;
+import com.ncorti.slidetoact.SlideToActView;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -79,9 +81,9 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
             }
 
             if (item.getStatus().equals(Constant.ORDER_STATUS_PREPARING)) {
-                holder.btnOrderReady.setVisibility(View.VISIBLE);
+                holder.sliderOrderReady.setVisibility(View.VISIBLE);
             } else {
-                holder.btnOrderReady.setVisibility(View.GONE);
+                holder.sliderOrderReady.setVisibility(View.GONE);
             }
 
             holder.tvOrderTotal.setText(getPriceWithSymbol(item.getAmount().getTotalAmount()));
@@ -104,21 +106,29 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
             holder.btnReject.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    OrderStatusChangeRequest orderStatusChangeRequest = new OrderStatusChangeRequest();
-                    orderStatusChangeRequest.setOrderId(item.getOrderId());
-                    orderStatusChangeRequest.setOrderStatus(Constant.ORDER_STATUS_CANCELLED);
-                    EventBus.getDefault().post(orderStatusChangeRequest);
+                    RejectOrderAlert rejectOrderAlert = RejectOrderAlert.getInstance();
+                    rejectOrderAlert.showAlert(context, item.getOrderId());
                 }
             });
 
-            holder.btnOrderReady.setOnLongClickListener(new View.OnLongClickListener() {
+//            holder.btnOrderReady.setOnLongClickListener(new View.OnLongClickListener() {
+//                @Override
+//                public boolean onLongClick(View view) {
+//                    OrderStatusChangeRequest orderStatusChangeRequest = new OrderStatusChangeRequest();
+//                    orderStatusChangeRequest.setOrderId(item.getOrderId());
+//                    orderStatusChangeRequest.setOrderStatus(Constant.ORDER_STATUS_READY);
+//                    EventBus.getDefault().post(orderStatusChangeRequest);
+//                    return true;
+//                }
+//            });
+
+            holder.sliderOrderReady.setOnSlideCompleteListener(new SlideToActView.OnSlideCompleteListener() {
                 @Override
-                public boolean onLongClick(View view) {
+                public void onSlideComplete(@NonNull SlideToActView slideToActView) {
                     OrderStatusChangeRequest orderStatusChangeRequest = new OrderStatusChangeRequest();
                     orderStatusChangeRequest.setOrderId(item.getOrderId());
                     orderStatusChangeRequest.setOrderStatus(Constant.ORDER_STATUS_READY);
                     EventBus.getDefault().post(orderStatusChangeRequest);
-                    return true;
                 }
             });
 
@@ -126,7 +136,7 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
     }
 
     private String getPriceWithSymbol(int amount) {
-        return "₹"+amount;
+        return "₹" + amount;
     }
 
     @Override
@@ -146,6 +156,7 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
         private MaterialButton btnAccept;
         private MaterialButton btnOrderReady;
         private LinearLayout lhAcceptRejectOrder;
+        private SlideToActView sliderOrderReady;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -158,7 +169,7 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
             recyclerOrderItem = itemView.findViewById(R.id.recyclerOrderItem);
             btnReject = itemView.findViewById(R.id.btnReject);
             btnAccept = itemView.findViewById(R.id.btnAccept);
-            btnOrderReady = itemView.findViewById(R.id.btnOrderReady);
+            sliderOrderReady = itemView.findViewById(R.id.sliderOrderReady);
             lhAcceptRejectOrder = itemView.findViewById(R.id.lhAcceptRejectOrder);
 
         }

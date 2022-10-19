@@ -66,4 +66,9 @@
         <item name="android:windowBackground">@drawable/bg_splash</item>
     </style>
 
+    <style name="SliderButtonTextAppearance" parent="@android:style/TextAppearance">
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="android:textColor">@color/color_text_for_bg</item>
+    </style>
+
 </resources>

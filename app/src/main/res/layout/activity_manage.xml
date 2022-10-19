@@ -28,7 +28,7 @@
                 android:id="@+id/ivGoBack"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:padding="10dp"
+                android:padding="8dp"
                 android:background="?android:selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_fab_go_back"/>
 
@@ -234,6 +234,7 @@
                 android:background="@drawable/line_dashed"/>
 
             <LinearLayout
+                android:id="@+id/lhOrderHistory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -254,7 +255,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:textSize="16sp"
-                    android:text="Orders"
+                    android:text="Order History"
                     android:fontFamily="@font/google_sans_medium"
                     android:textColor="@color/color_text_sub_head"/>
 
