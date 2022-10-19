@@ -140,11 +140,13 @@ public class OrderHistoryActivity extends AppCompatActivity implements View.OnCl
         materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
             @Override
             public void onPositiveButtonClick(Object selection) {
-                Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("IST"));
-                calendar.setTimeInMillis((Long) selection);
-                SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
-                String formattedDate  = format.format(calendar.getTime());
-                Toast.makeText(context, ""+formattedDate, Toast.LENGTH_SHORT).show();
+                String dateRange = materialDatePicker.getHeaderText();
+                String[] dateRangeSplit = dateRange.split(" – ");
+                String startDate = dateRangeSplit[0]+" 2022";
+                String endDate = dateRangeSplit[1]+" 2022";
+                Toast.makeText(context, startDate+" - "+endDate, Toast.LENGTH_SHORT).show();
+
+                getOrderHistory(startDate, endDate);
             }
         });
     }
