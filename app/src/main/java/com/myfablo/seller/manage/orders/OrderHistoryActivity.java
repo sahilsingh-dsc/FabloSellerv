@@ -24,7 +24,6 @@ import com.myfablo.seller.utils.Constant;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.TimeZone;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,7 +33,10 @@ public class OrderHistoryActivity extends AppCompatActivity implements View.OnCl
 
     private ActivityOrderHistoryBinding binding;
     private Context context;
-
+    private String noDataMessage;
+    private String startDate;
+    private String endDate;
+    private String orderStatus;
     private static final String TAG = "OrderHistoryActivity";
 
     @Override
@@ -50,19 +52,25 @@ public class OrderHistoryActivity extends AppCompatActivity implements View.OnCl
     private void initView() {
         binding.ivGoBack.setOnClickListener(this);
         binding.recyclerOrders.setLayoutManager(new LinearLayoutManager(context));
-
+        binding.tvPreparingOrders.setOnClickListener(this);
+        binding.tvAllOrders.setOnClickListener(this);
+        binding.tvReadyOrders.setOnClickListener(this);
+        binding.tvDispatchedOrders.setOnClickListener(this);
+        binding.tvDeliveredOrders.setOnClickListener(this);
+        binding.tvCancelledOrders.setOnClickListener(this);
         binding.tvTodayOrders.setOnClickListener(this);
         binding.tvYesterdayOrders.setOnClickListener(this);
         binding.tvCustomDateOrders.setOnClickListener(this);
 
+        selectAllOrders();
         selectTodayOrders();
     }
 
-    private void getOrderHistory(String startDate, String endDate) {
+    private void getOrderHistory() {
         loadData();
         OutletPref outletPref = new OutletPref(context);
         OrdersInterface ordersInterface = RestClient.getRetrofitFabloOrderService(context).create(OrdersInterface.class);
-        Call<OrderResponse> orderResponseCall = ordersInterface.getOrderByDate(outletPref.getOutletId(), Constant.ORDER_STATUS_READY, startDate, endDate);
+        Call<OrderResponse> orderResponseCall = ordersInterface.getOrderByDate(outletPref.getOutletId(), orderStatus, startDate, endDate);
         orderResponseCall.enqueue(new Callback<OrderResponse>() {
             @Override
             public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
@@ -87,7 +95,128 @@ public class OrderHistoryActivity extends AppCompatActivity implements View.OnCl
         });
     }
 
+    private void selectAllOrders() {
+        binding.tvAllOrders.setTextColor(getResources().getColor(R.color.color_text_for_bg));
+        binding.tvPreparingOrders.setTextColor(getResources().getColor(R.color.color_text_description));
+        binding.tvReadyOrders.setTextColor(getResources().getColor(R.color.color_text_description));
+        binding.tvDispatchedOrders.setTextColor(getResources().getColor(R.color.color_text_description));
+        binding.tvDeliveredOrders.setTextColor(getResources().getColor(R.color.color_text_description));
+        binding.tvCancelledOrders.setTextColor(getResources().getColor(R.color.color_text_description));
+
+        binding.tvAllOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_focused, null));
+        binding.tvPreparingOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
+        binding.tvReadyOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
+        binding.tvDispatchedOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
+        binding.tvDeliveredOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
+        binding.tvCancelledOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
+
+        noDataMessage = "You have no orders";
+        orderStatus = Constant.ORDER_STATUS_ALL;
+        getOrderHistory();
+    }
+
+    private void selectPreparingOrders() {
+        binding.tvAllOrders.setTextColor(getResources().getColor(R.color.color_text_description));
+        binding.tvPreparingOrders.setTextColor(getResources().getColor(R.color.color_text_for_bg));
+        binding.tvReadyOrders.setTextColor(getResources().getColor(R.color.color_text_description));
+        binding.tvDispatchedOrders.setTextColor(getResources().getColor(R.color.color_text_description));
+        binding.tvDeliveredOrders.setTextColor(getResources().getColor(R.color.color_text_description));
+        binding.tvCancelledOrders.setTextColor(getResources().getColor(R.color.color_text_description));
+
+        binding.tvAllOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
+        binding.tvPreparingOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_focused, null));
+        binding.tvReadyOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
+        binding.tvDispatchedOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
+        binding.tvDeliveredOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
+        binding.tvCancelledOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
+
+        noDataMessage = "You have no preparing orders";
+        orderStatus = Constant.ORDER_STATUS_PREPARING;
+        getOrderHistory();
+    }
+
+    private void selectReadyOrders() {
+        binding.tvAllOrders.setTextColor(getResources().getColor(R.color.color_text_description));
+        binding.tvReadyOrders.setTextColor(getResources().getColor(R.color.color_text_for_bg));
+        binding.tvPreparingOrders.setTextColor(getResources().getColor(R.color.color_text_description));
+        binding.tvDispatchedOrders.setTextColor(getResources().getColor(R.color.color_text_description));
+        binding.tvDeliveredOrders.setTextColor(getResources().getColor(R.color.color_text_description));
+        binding.tvCancelledOrders.setTextColor(getResources().getColor(R.color.color_text_description));
+
+        binding.tvAllOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
+        binding.tvReadyOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_focused, null));
+        binding.tvPreparingOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
+        binding.tvDispatchedOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
+        binding.tvDeliveredOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
+        binding.tvCancelledOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
+
+        noDataMessage = "You have no ready orders";
+        orderStatus = Constant.ORDER_STATUS_READY;
+        getOrderHistory();
+    }
+
+    private void selectDispatchedOrders() {
+        binding.tvAllOrders.setTextColor(getResources().getColor(R.color.color_text_description));
+        binding.tvDispatchedOrders.setTextColor(getResources().getColor(R.color.color_text_for_bg));
+        binding.tvReadyOrders.setTextColor(getResources().getColor(R.color.color_text_description));
+        binding.tvPreparingOrders.setTextColor(getResources().getColor(R.color.color_text_description));
+        binding.tvDeliveredOrders.setTextColor(getResources().getColor(R.color.color_text_description));
+        binding.tvCancelledOrders.setTextColor(getResources().getColor(R.color.color_text_description));
+
+        binding.tvAllOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
+        binding.tvDispatchedOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_focused, null));
+        binding.tvReadyOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
+        binding.tvPreparingOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
+        binding.tvDeliveredOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
+        binding.tvCancelledOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
+
+        noDataMessage = "You have no dispatched orders";
+        orderStatus = Constant.ORDER_STATUS_DISPATCHED;
+        getOrderHistory();
+    }
+
+    private void selectDeliveredOrders() {
+        binding.tvAllOrders.setTextColor(getResources().getColor(R.color.color_text_description));
+        binding.tvDeliveredOrders.setTextColor(getResources().getColor(R.color.color_text_for_bg));
+        binding.tvReadyOrders.setTextColor(getResources().getColor(R.color.color_text_description));
+        binding.tvPreparingOrders.setTextColor(getResources().getColor(R.color.color_text_description));
+        binding.tvDispatchedOrders.setTextColor(getResources().getColor(R.color.color_text_description));
+        binding.tvCancelledOrders.setTextColor(getResources().getColor(R.color.color_text_description));
+
+        binding.tvAllOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
+        binding.tvDeliveredOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_focused, null));
+        binding.tvReadyOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
+        binding.tvPreparingOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
+        binding.tvDispatchedOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
+        binding.tvCancelledOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
+
+        noDataMessage = "You have no delivered orders";
+        orderStatus = Constant.ORDER_STATUS_DELIVERED;
+        getOrderHistory();
+    }
+
+    private void selectCancelledOrders() {
+        binding.tvAllOrders.setTextColor(getResources().getColor(R.color.color_text_description));
+        binding.tvCancelledOrders.setTextColor(getResources().getColor(R.color.color_text_for_bg));
+        binding.tvReadyOrders.setTextColor(getResources().getColor(R.color.color_text_description));
+        binding.tvPreparingOrders.setTextColor(getResources().getColor(R.color.color_text_description));
+        binding.tvDispatchedOrders.setTextColor(getResources().getColor(R.color.color_text_description));
+        binding.tvDeliveredOrders.setTextColor(getResources().getColor(R.color.color_text_description));
+
+        binding.tvAllOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
+        binding.tvCancelledOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_focused, null));
+        binding.tvReadyOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
+        binding.tvPreparingOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
+        binding.tvDispatchedOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
+        binding.tvDeliveredOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
+
+        noDataMessage = "You have no cancelled orders";
+        orderStatus = Constant.ORDER_STATUS_CANCELLED;
+        getOrderHistory();
+    }
+
     private void selectTodayOrders() {
+        binding.tvCustomDateOrders.setText("Date Range");
         binding.tvTodayOrders.setTextColor(getResources().getColor(R.color.color_text_for_bg));
         binding.tvYesterdayOrders.setTextColor(getResources().getColor(R.color.color_text_description));
         binding.tvCustomDateOrders.setTextColor(getResources().getColor(R.color.color_text_description));
@@ -98,14 +227,15 @@ public class OrderHistoryActivity extends AppCompatActivity implements View.OnCl
 
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         Calendar cal = Calendar.getInstance();
-        String endDate = dateFormat.format(cal.getTime());
-        cal.add(Calendar.DATE, -1);
-        String startDate = dateFormat.format(cal.getTime());
+        startDate = dateFormat.format(cal.getTime());
+        cal.add(Calendar.DATE, 1);
+        endDate = dateFormat.format(cal.getTime());
 
-        getOrderHistory(startDate, endDate);
+        getOrderHistory();
     }
 
     private void selectYesterdayOrders() {
+        binding.tvCustomDateOrders.setText("Date Range");
         binding.tvYesterdayOrders.setTextColor(getResources().getColor(R.color.color_text_for_bg));
         binding.tvTodayOrders.setTextColor(getResources().getColor(R.color.color_text_description));
         binding.tvCustomDateOrders.setTextColor(getResources().getColor(R.color.color_text_description));
@@ -117,11 +247,11 @@ public class OrderHistoryActivity extends AppCompatActivity implements View.OnCl
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, -1);
-        String endDate = dateFormat.format(cal.getTime());
+        endDate = dateFormat.format(cal.getTime());
         cal.add(Calendar.DATE, -1);
-        String startDate = dateFormat.format(cal.getTime());
+        startDate = dateFormat.format(cal.getTime());
 
-        getOrderHistory(startDate, endDate);
+        getOrderHistory();
     }
 
     private void selectCustomDate() {
@@ -142,11 +272,10 @@ public class OrderHistoryActivity extends AppCompatActivity implements View.OnCl
             public void onPositiveButtonClick(Object selection) {
                 String dateRange = materialDatePicker.getHeaderText();
                 String[] dateRangeSplit = dateRange.split(" – ");
-                String startDate = dateRangeSplit[0]+" 2022";
-                String endDate = dateRangeSplit[1]+" 2022";
-                Toast.makeText(context, startDate+" - "+endDate, Toast.LENGTH_SHORT).show();
-
-                getOrderHistory(startDate, endDate);
+                startDate = dateRangeSplit[0]+" 2022";
+                endDate = dateRangeSplit[1]+" 2022";
+                binding.tvCustomDateOrders.setText(materialDatePicker.getHeaderText());
+                getOrderHistory();
             }
         });
     }
@@ -193,6 +322,18 @@ public class OrderHistoryActivity extends AppCompatActivity implements View.OnCl
             selectYesterdayOrders();
         } else if (view == binding.tvCustomDateOrders) {
             selectCustomDate();
+        } else if (view == binding.tvPreparingOrders) {
+            selectPreparingOrders();
+        } else if (view == binding.tvReadyOrders) {
+            selectReadyOrders();
+        } else if (view == binding.tvDispatchedOrders) {
+            selectDispatchedOrders();
+        } else if (view == binding.tvDeliveredOrders) {
+            selectDeliveredOrders();
+        } else if (view == binding.tvCancelledOrders) {
+            selectCancelledOrders();
+        } else if (view == binding.tvAllOrders) {
+            selectAllOrders();
         }
     }
 }

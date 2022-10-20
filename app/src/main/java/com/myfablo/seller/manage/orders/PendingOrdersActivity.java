@@ -68,6 +68,7 @@ public class PendingOrdersActivity extends AppCompatActivity {
                             showData();
                         } else if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_NO_DATA) {
                             noData();
+                            onBackPressed();
                         }
                     }
                 }

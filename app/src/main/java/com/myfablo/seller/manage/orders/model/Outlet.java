@@ -11,6 +11,9 @@ public class Outlet {
     @SerializedName("outletName")
     @Expose
     private String outletName;
+    @SerializedName("outletArea")
+    @Expose
+    private String outletArea;
     @SerializedName("outletAddress")
     @Expose
     private String outletAddress;
@@ -34,10 +37,11 @@ public class Outlet {
      * @param outletLongitude
      * @param outletId
      */
-    public Outlet(String outletId, String outletName, String outletAddress, Float outletLongitude, Float outletLatitude) {
+    public Outlet(String outletId, String outletName, String outletArea, String outletAddress, Float outletLongitude, Float outletLatitude) {
         super();
         this.outletId = outletId;
         this.outletName = outletName;
+        this.outletArea = outletArea;
         this.outletAddress = outletAddress;
         this.outletLongitude = outletLongitude;
         this.outletLatitude = outletLatitude;
@@ -57,6 +61,14 @@ public class Outlet {
 
     public void setOutletName(String outletName) {
         this.outletName = outletName;
+    }
+
+    public String getOutletArea() {
+        return outletArea;
+    }
+
+    public void setOutletArea(String outletArea) {
+        this.outletArea = outletArea;
     }
 
     public String getOutletAddress() {

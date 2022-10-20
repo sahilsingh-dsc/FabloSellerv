@@ -26,6 +26,7 @@ import com.myfablo.seller.manage.orders.OrderHistoryActivity;
 import com.myfablo.seller.manage.orders.PendingOrdersActivity;
 import com.myfablo.seller.manage.outlet.OutletDetailsActivity;
 import com.myfablo.seller.manage.payout.PayoutActivity;
+import com.myfablo.seller.manage.support.SupportActivity;
 import com.myfablo.seller.preference.AuthPref;
 import com.myfablo.seller.preference.OrderServicePref;
 import com.myfablo.seller.preference.OutletPref;
@@ -76,6 +77,7 @@ public class ManageActivity extends AppCompatActivity implements View.OnClickLis
         binding.lhPayout.setOnClickListener(this);
         binding.lhOrderHistory.setOnClickListener(this);
         binding.lhLogout.setOnClickListener(this);
+        binding.lhHelpSupport.setOnClickListener(this);
         binding.switchOutletStatus.setOnCheckedChangeListener(this);
         getDefaultOutletData();
     }
@@ -185,6 +187,9 @@ public class ManageActivity extends AppCompatActivity implements View.OnClickLis
             logoutAlert.showAlert(context);
         } else if (view == binding.lhOrderHistory) {
             Intent intent = new Intent(context, OrderHistoryActivity.class);
+            startActivity(intent);
+        } else if (view == binding.lhHelpSupport) {
+            Intent intent = new Intent(context, SupportActivity.class);
             startActivity(intent);
         }
     }

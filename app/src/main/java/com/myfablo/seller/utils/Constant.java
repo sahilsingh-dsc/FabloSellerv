@@ -34,6 +34,7 @@ public class Constant {
     public static final int SERVICE_RESPONSE_CODE_NO_DATA = 400;
 
     public static final String ORDER_STATUS_INIT = "init";
+    public static final String ORDER_STATUS_ALL = "all";
     public static final String ORDER_STATUS_PENDING = "pending";
     public static final String ORDER_STATUS_ACCEPTED = "accepted";
     public static final String ORDER_STATUS_CANCELLED = "cancelled";

@@ -67,8 +67,6 @@ public class OutletActivity extends AppCompatActivity implements View.OnClickLis
         binding.tvPreparingOrders.setOnClickListener(this);
         binding.tvReadyOrders.setOnClickListener(this);
         binding.tvDispatchedOrders.setOnClickListener(this);
-        binding.tvDeliveredOrders.setOnClickListener(this);
-        binding.tvCancelledOrders.setOnClickListener(this);
         binding.ivOutletImage.setOnClickListener(this);
 
         binding.recyclerOrders.setLayoutManager(new LinearLayoutManager(context));
@@ -179,14 +177,10 @@ public class OutletActivity extends AppCompatActivity implements View.OnClickLis
         binding.tvPreparingOrders.setTextColor(getResources().getColor(R.color.color_text_for_bg));
         binding.tvReadyOrders.setTextColor(getResources().getColor(R.color.color_text_description));
         binding.tvDispatchedOrders.setTextColor(getResources().getColor(R.color.color_text_description));
-        binding.tvDeliveredOrders.setTextColor(getResources().getColor(R.color.color_text_description));
-        binding.tvCancelledOrders.setTextColor(getResources().getColor(R.color.color_text_description));
 
         binding.tvPreparingOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_focused, null));
         binding.tvReadyOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
         binding.tvDispatchedOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
-        binding.tvDeliveredOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
-        binding.tvCancelledOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
 
         noDataMessage = "You have no preparing orders";
 
@@ -198,14 +192,10 @@ public class OutletActivity extends AppCompatActivity implements View.OnClickLis
         binding.tvReadyOrders.setTextColor(getResources().getColor(R.color.color_text_for_bg));
         binding.tvPreparingOrders.setTextColor(getResources().getColor(R.color.color_text_description));
         binding.tvDispatchedOrders.setTextColor(getResources().getColor(R.color.color_text_description));
-        binding.tvDeliveredOrders.setTextColor(getResources().getColor(R.color.color_text_description));
-        binding.tvCancelledOrders.setTextColor(getResources().getColor(R.color.color_text_description));
 
         binding.tvReadyOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_focused, null));
         binding.tvPreparingOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
         binding.tvDispatchedOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
-        binding.tvDeliveredOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
-        binding.tvCancelledOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
 
         noDataMessage = "You have no ready orders";
 
@@ -217,14 +207,10 @@ public class OutletActivity extends AppCompatActivity implements View.OnClickLis
         binding.tvDispatchedOrders.setTextColor(getResources().getColor(R.color.color_text_for_bg));
         binding.tvReadyOrders.setTextColor(getResources().getColor(R.color.color_text_description));
         binding.tvPreparingOrders.setTextColor(getResources().getColor(R.color.color_text_description));
-        binding.tvDeliveredOrders.setTextColor(getResources().getColor(R.color.color_text_description));
-        binding.tvCancelledOrders.setTextColor(getResources().getColor(R.color.color_text_description));
 
         binding.tvDispatchedOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_focused, null));
         binding.tvReadyOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
         binding.tvPreparingOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
-        binding.tvDeliveredOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
-        binding.tvCancelledOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
 
         noDataMessage = "You have no dispatched orders";
 
@@ -233,17 +219,13 @@ public class OutletActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void selectDeliveredOrders() {
-        binding.tvDeliveredOrders.setTextColor(getResources().getColor(R.color.color_text_for_bg));
         binding.tvReadyOrders.setTextColor(getResources().getColor(R.color.color_text_description));
         binding.tvPreparingOrders.setTextColor(getResources().getColor(R.color.color_text_description));
         binding.tvDispatchedOrders.setTextColor(getResources().getColor(R.color.color_text_description));
-        binding.tvCancelledOrders.setTextColor(getResources().getColor(R.color.color_text_description));
 
-        binding.tvDeliveredOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_focused, null));
         binding.tvReadyOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
         binding.tvPreparingOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
         binding.tvDispatchedOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
-        binding.tvCancelledOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
 
         noDataMessage = "You have no delivered orders";
 
@@ -252,17 +234,13 @@ public class OutletActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void selectCancelledOrders() {
-        binding.tvCancelledOrders.setTextColor(getResources().getColor(R.color.color_text_for_bg));
         binding.tvReadyOrders.setTextColor(getResources().getColor(R.color.color_text_description));
         binding.tvPreparingOrders.setTextColor(getResources().getColor(R.color.color_text_description));
         binding.tvDispatchedOrders.setTextColor(getResources().getColor(R.color.color_text_description));
-        binding.tvDeliveredOrders.setTextColor(getResources().getColor(R.color.color_text_description));
 
-        binding.tvCancelledOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_focused, null));
         binding.tvReadyOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
         binding.tvPreparingOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
         binding.tvDispatchedOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
-        binding.tvDeliveredOrders.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_select_un_focused, null));
 
         noDataMessage = "You have no cancelled orders";
 
@@ -331,10 +309,6 @@ public class OutletActivity extends AppCompatActivity implements View.OnClickLis
             selectReadyOrders();
         } else if (view == binding.tvDispatchedOrders) {
             selectDispatchedOrders();
-        } else if (view == binding.tvDeliveredOrders) {
-            selectDeliveredOrders();
-        } else if (view == binding.tvCancelledOrders) {
-            selectCancelledOrders();
         }
     }
 

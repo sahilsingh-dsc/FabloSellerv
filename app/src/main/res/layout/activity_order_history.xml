@@ -51,6 +51,18 @@
 
     </com.google.android.material.card.MaterialCardView>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="Status Filter"
+        android:fontFamily="@font/google_sans_medium"
+        android:textSize="16sp"
+        android:textColor="@color/color_text_title"/>
+
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,7 +71,142 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:visibility="visible"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvAllOrders"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/bg_select_un_focused"
+                android:fontFamily="@font/google_sans_medium"
+                android:paddingStart="8dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="5dp"
+                android:text="All"
+                android:textColor="@color/color_text_description"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvPreparingOrders"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/bg_select_un_focused"
+                android:fontFamily="@font/google_sans_medium"
+                android:paddingStart="8dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="5dp"
+                android:text="Preparing"
+                android:textColor="@color/color_text_description"
+                android:textSize="18sp" />
+
+
+            <TextView
+                android:id="@+id/tvReadyOrders"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/bg_select_un_focused"
+                android:fontFamily="@font/google_sans_medium"
+                android:paddingStart="8dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="5dp"
+                android:text="Ready"
+                android:textColor="@color/color_text_description"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvDispatchedOrders"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/bg_select_un_focused"
+                android:fontFamily="@font/google_sans_medium"
+                android:paddingStart="8dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="5dp"
+                android:text="Dispatched"
+                android:textColor="@color/color_text_description"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvDeliveredOrders"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/bg_select_un_focused"
+                android:fontFamily="@font/google_sans_medium"
+                android:paddingStart="8dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="5dp"
+                android:text="Delivered"
+                android:textColor="@color/color_text_description"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvCancelledOrders"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/bg_select_un_focused"
+                android:fontFamily="@font/google_sans_medium"
+                android:paddingStart="8dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="5dp"
+                android:text="Cancelled"
+                android:textColor="@color/color_text_description"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="Date Filter"
+        android:fontFamily="@font/google_sans_medium"
+        android:textSize="16sp"
+        android:textColor="@color/color_text_title"/>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:visibility="visible"
             android:orientation="horizontal">
@@ -114,7 +261,7 @@
                 android:paddingTop="4dp"
                 android:paddingEnd="8dp"
                 android:paddingBottom="5dp"
-                android:text="Custom Date"
+                android:text="Date Range"
                 android:textColor="@color/color_text_description"
                 android:textSize="18sp" />
 
@@ -129,7 +276,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerOrders"
             android:layout_marginTop="12dp"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -155,6 +302,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/google_sans_regular"
                 android:textColor="@color/color_text_description"
+                android:text="There are no orders"
                 android:textSize="16sp"/>
 
         </LinearLayout>
@@ -176,26 +324,6 @@
             android:visibility="gone"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/lottie_error"/>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardFilter"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:cardElevation="5dp"
-            android:layout_gravity="bottom|end"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="32dp"
-            app:cardBackgroundColor="@color/color_primary"
-            android:visibility="visible"
-            app:shapeAppearance="@style/circle">
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_fab_filter_order_history"/>
-
-        </com.google.android.material.card.MaterialCardView>
 
     </FrameLayout>
 

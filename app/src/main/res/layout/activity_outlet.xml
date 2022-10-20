@@ -159,42 +159,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="4dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="4dp"
-                android:background="@drawable/bg_select_un_focused"
-                android:fontFamily="@font/google_sans_medium"
-                android:paddingStart="8dp"
-                android:paddingTop="4dp"
-                android:paddingEnd="8dp"
-                android:paddingBottom="5dp"
-                android:text="Dispatched"
-                android:textColor="@color/color_text_description"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/tvDeliveredOrders"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="4dp"
-                android:background="@drawable/bg_select_un_focused"
-                android:fontFamily="@font/google_sans_medium"
-                android:paddingStart="8dp"
-                android:paddingTop="4dp"
-                android:paddingEnd="8dp"
-                android:paddingBottom="5dp"
-                android:text="Delivered"
-                android:textColor="@color/color_text_description"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/tvCancelledOrders"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="4dp"
                 android:background="@drawable/bg_select_un_focused"
@@ -203,7 +167,7 @@
                 android:paddingTop="4dp"
                 android:paddingEnd="8dp"
                 android:paddingBottom="5dp"
-                android:text="Cancelled"
+                android:text="Dispatched"
                 android:textColor="@color/color_text_description"
                 android:textSize="18sp" />
 

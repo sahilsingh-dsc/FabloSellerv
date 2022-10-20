@@ -475,6 +475,7 @@
                 android:background="@drawable/line_dashed"/>
 
             <LinearLayout
+                android:id="@+id/lhHelpSupport"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"

@@ -52,7 +52,7 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
         if (item != null) {
             holder.tvOrderId.setText(item.getOrderId());
 
-            holder.tvOrderTime.setText(item.getTiming().get(0).getTime());
+            holder.tvOrderTime.setText(item.getTiming().get(0).getDate()+", "+item.getTiming().get(0).getTime());
 
             if (item.getStatus().equals(Constant.ORDER_STATUS_PENDING)) {
                 holder.tvOrderStatus.setText("PENDING");
@@ -84,6 +84,14 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
                 holder.sliderOrderReady.setVisibility(View.VISIBLE);
             } else {
                 holder.sliderOrderReady.setVisibility(View.GONE);
+            }
+
+            if (item.getStatus().equals(Constant.ORDER_STATUS_PENDING)) {
+                holder.lhOutletSelector.setVisibility(View.VISIBLE);
+                holder.tvOutletName.setText(item.getOutlet().getOutletName());
+                holder.tvOutletArea.setText(item.getOutlet().getOutletArea());
+            } else {
+                holder.lhOutletSelector.setVisibility(View.GONE);
             }
 
             holder.tvOrderTotal.setText(getPriceWithSymbol(item.getAmount().getTotalAmount()));
@@ -151,11 +159,14 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
         private TextView tvOrderTime;
         private TextView tvCustomerName;
         private TextView tvOrderTotal;
+        private TextView tvOutletName;
+        private TextView tvOutletArea;
         private RecyclerView recyclerOrderItem;
         private MaterialButton btnReject;
         private MaterialButton btnAccept;
         private MaterialButton btnOrderReady;
         private LinearLayout lhAcceptRejectOrder;
+        private LinearLayout lhOutletSelector;
         private SlideToActView sliderOrderReady;
 
         public ViewHolder(@NonNull View itemView) {
@@ -166,11 +177,14 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
             tvOrderTime = itemView.findViewById(R.id.tvOrderTime);
             tvCustomerName = itemView.findViewById(R.id.tvCustomerName);
             tvOrderTotal = itemView.findViewById(R.id.tvOrderTotal);
+            tvOutletName = itemView.findViewById(R.id.tvOutletName);
+            tvOutletArea = itemView.findViewById(R.id.tvOutletArea);
             recyclerOrderItem = itemView.findViewById(R.id.recyclerOrderItem);
             btnReject = itemView.findViewById(R.id.btnReject);
             btnAccept = itemView.findViewById(R.id.btnAccept);
             sliderOrderReady = itemView.findViewById(R.id.sliderOrderReady);
             lhAcceptRejectOrder = itemView.findViewById(R.id.lhAcceptRejectOrder);
+            lhOutletSelector = itemView.findViewById(R.id.lhOutletSelector);
 
         }
     }

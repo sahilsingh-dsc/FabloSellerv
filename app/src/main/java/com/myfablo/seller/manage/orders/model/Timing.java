@@ -11,6 +11,9 @@ public class Timing {
     @SerializedName("time")
     @Expose
     private String time;
+    @SerializedName("date")
+    @Expose
+    private String date;
 
     /**
      * No args constructor for use in serialization
@@ -22,10 +25,12 @@ public class Timing {
      * @param time
      * @param status
      */
-    public Timing(String status, String time) {
-        super();
+
+
+    public Timing(String status, String time, String date) {
         this.status = status;
         this.time = time;
+        this.date = date;
     }
 
     public String getStatus() {
@@ -44,4 +49,11 @@ public class Timing {
         this.time = time;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 }
