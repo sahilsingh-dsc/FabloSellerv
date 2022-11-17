@@ -14,10 +14,9 @@
         app:cardCornerRadius="0dp"
         app:cardElevation="8dp">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:orientation="vertical">
 
             <ImageView
@@ -25,9 +24,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_gravity="center"
                 android:src="@drawable/fablo_logo"/>
 
-        </LinearLayout>
+            <ImageView
+                android:id="@+id/ivManageAccount"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end|center"
+                android:layout_marginEnd="12dp"
+                android:padding="6dp"
+                android:clickable="true"
+                android:background="?android:selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_fab_menu"/>
+
+        </FrameLayout>
 
     </com.google.android.material.card.MaterialCardView>
 

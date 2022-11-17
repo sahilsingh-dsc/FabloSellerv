@@ -18,6 +18,7 @@ import com.google.android.material.card.MaterialCardView;
 import com.myfablo.seller.R;
 import com.myfablo.seller.common.BasicResponse;
 import com.myfablo.seller.databinding.ActivityHomeBinding;
+import com.myfablo.seller.home.account.SellerAccountActivity;
 import com.myfablo.seller.home.outlets.adapters.OutletsRecyclerAdapter;
 import com.myfablo.seller.home.outlets.models.OutletItem;
 import com.myfablo.seller.home.outlets.models.OutletsResponse;
@@ -72,6 +73,7 @@ public class HomeActivity extends AppCompatActivity implements SwitchButton.OnCh
         binding.lvOnlineOutlet.setOnClickListener(this);
         binding.viewNotificationAlert.setOnClickListener(this);
         binding.cardPendingOrders.setOnClickListener(this);
+        binding.ivManageAccount.setOnClickListener(this);
     }
 
     private void initOrderService() {
@@ -340,6 +342,9 @@ public class HomeActivity extends AppCompatActivity implements SwitchButton.OnCh
             orderNotificationAlert.showAlert(context, orderServicePref.getServiceStatus());
         } else if (view == binding.cardPendingOrders) {
             Intent intent = new Intent(context, PendingOrdersActivity.class);
+            startActivity(intent);
+        } else if (view == binding.ivManageAccount) {
+            Intent intent = new Intent(context, SellerAccountActivity.class);
             startActivity(intent);
         }
     }

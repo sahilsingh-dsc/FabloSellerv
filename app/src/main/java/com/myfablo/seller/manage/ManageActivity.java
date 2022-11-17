@@ -70,14 +70,8 @@ public class ManageActivity extends AppCompatActivity implements View.OnClickLis
         fabLoading = FabLoading.getInstance();
         binding.ivGoBack.setOnClickListener(this);
         binding.lhOutletDetails.setOnClickListener(this);
-        binding.lhBank.setOnClickListener(this);
         binding.lhMenu.setOnClickListener(this);
-        binding.lhSellerKys.setOnClickListener(this);
-        binding.lhDiscount.setOnClickListener(this);
-        binding.lhPayout.setOnClickListener(this);
         binding.lhOrderHistory.setOnClickListener(this);
-        binding.lhLogout.setOnClickListener(this);
-        binding.lhHelpSupport.setOnClickListener(this);
         binding.switchOutletStatus.setOnCheckedChangeListener(this);
         getDefaultOutletData();
     }
@@ -121,45 +115,6 @@ public class ManageActivity extends AppCompatActivity implements View.OnClickLis
         });
     }
 
-    private void doLogout() {
-        SelectedOptionPref selectedOptionPref = new SelectedOptionPref(context);
-        OutletPref outletPref = new OutletPref(context);
-        OrderServicePref orderServicePref = new OrderServicePref(context);
-        AuthPref authPref = new AuthPref(context);
-
-        if (isMyServiceRunning(OrderService.class)) {
-            stopOrderService();
-        }
-
-        selectedOptionPref.clearData();
-        outletPref.clearData();
-        orderServicePref.clearData();
-        authPref.clearData();
-
-        Intent intent = new Intent(context, WelcomeActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
-    }
-
-    private void stopOrderService() {
-        OutletPref outletPref = new OutletPref(getApplicationContext());
-        Intent serviceIntent = new Intent(context, OrderService.class);
-        serviceIntent.putExtra("sellerId", outletPref.getSellerId());
-        serviceIntent.putExtra("status", "stop");
-        ContextCompat.startForegroundService(context, serviceIntent);
-    }
-
-    private boolean isMyServiceRunning(Class<?> serviceClass) {
-        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-            if (serviceClass.getName().equals(service.service.getClassName())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     @Override
     public void onClick(View view) {
         if (view == binding.ivGoBack) {
@@ -167,29 +122,11 @@ public class ManageActivity extends AppCompatActivity implements View.OnClickLis
         } else if (view == binding.lhOutletDetails) {
             Intent intent = new Intent(context, OutletDetailsActivity.class);
             startActivity(intent);
-        } else if (view == binding.lhBank) {
-            Intent intent = new Intent(context, BankActivity.class);
-            startActivity(intent);
         } else if (view == binding.lhMenu) {
             Intent intent = new Intent(context, MenuActivity.class);
             startActivity(intent);
-        } else if (view == binding.lhSellerKys) {
-            Intent intent = new Intent(context, SellerKycActivity.class);
-            startActivity(intent);
-        } else if (view == binding.lhDiscount) {
-            Intent intent = new Intent(context, DiscountPromotionActivity.class);
-            startActivity(intent);
-        } else if (view == binding.lhPayout) {
-            Intent intent = new Intent(context, PayoutActivity.class);
-            startActivity(intent);
-        } else if (view == binding.lhLogout) {
-            LogoutAlert logoutAlert = LogoutAlert.getInstance();
-            logoutAlert.showAlert(context);
-        } else if (view == binding.lhOrderHistory) {
+        }  else if (view == binding.lhOrderHistory) {
             Intent intent = new Intent(context, OrderHistoryActivity.class);
-            startActivity(intent);
-        } else if (view == binding.lhHelpSupport) {
-            Intent intent = new Intent(context, SupportActivity.class);
             startActivity(intent);
         }
     }
@@ -199,13 +136,6 @@ public class ManageActivity extends AppCompatActivity implements View.OnClickLis
         if (messageResult != null) {
             Intent intent = new Intent(context, PendingOrdersActivity.class);
             startActivity(intent);
-        }
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(String data) {
-        if (data.equals("logout")) {
-            doLogout();
         }
     }
 
