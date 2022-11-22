@@ -9,8 +9,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
-import com.myfablo.seller.auth.model.VerifyOtpRequest;
-import com.myfablo.seller.auth.model.VerifyOtpResponse;
+import com.myfablo.seller.auth.models.VerifyOtpRequest;
+import com.myfablo.seller.auth.models.VerifyOtpResponse;
 import com.myfablo.seller.databinding.ActivityOtpBinding;
 import com.myfablo.seller.home.HomeActivity;
 import com.myfablo.seller.interfaces.AuthInterface;
@@ -67,7 +67,7 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
                     if (response.body() != null) {
                         if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_SUCCESS) {
                             AuthPref authPref = new AuthPref(context);
-                            authPref.setUser(response.body().getItems().getToken());
+                            authPref.setUser(response.body().getItems().getToken(), response.body().getItems().getSellerId());
                             if (onboard) {
                                 gotoHomeScreen();
                             } else {

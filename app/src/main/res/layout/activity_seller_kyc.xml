@@ -105,7 +105,7 @@
                     android:fontFamily="@font/google_sans_regular"
                     android:textColor="@color/color_text_sub_head"
                     android:textSize="18sp"
-                    android:text="21f394ec01a1"/>
+                    android:text="..."/>
 
             </LinearLayout>
 
@@ -135,7 +135,7 @@
                     android:fontFamily="@font/google_sans_regular"
                     android:textColor="@color/color_text_sub_head"
                     android:textSize="18sp"
-                    android:text="Enterprise"/>
+                    android:text="..."/>
 
             </LinearLayout>
 
@@ -165,7 +165,7 @@
                     android:fontFamily="@font/google_sans_regular"
                     android:textColor="@color/color_text_sub_head"
                     android:textSize="18sp"
-                    android:text="99 Rotiwala"/>
+                    android:text="..."/>
 
             </LinearLayout>
 
@@ -195,10 +195,99 @@
                     android:fontFamily="@font/google_sans_regular"
                     android:textColor="@color/color_text_sub_head"
                     android:textSize="18sp"
-                    android:text="99 Rotiwala"/>
+                    android:text="..."/>
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/google_sans_regular"
+                    android:textColor="@color/color_text_description"
+                    android:textSize="16sp"
+                    android:text="PAN Number"/>
+
+                <TextView
+                    android:id="@+id/tvSellerPanNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/google_sans_regular"
+                    android:textColor="@color/color_text_sub_head"
+                    android:textSize="18sp"
+                    android:text="..."/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/google_sans_regular"
+                    android:textColor="@color/color_text_description"
+                    android:textSize="16sp"
+                    android:text="GST Status"/>
+
+                <TextView
+                    android:id="@+id/tvGstStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/google_sans_regular"
+                    android:textColor="@color/color_text_sub_head"
+                    android:textSize="18sp"
+                    android:text="..."/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/google_sans_regular"
+                    android:textColor="@color/color_text_description"
+                    android:textSize="16sp"
+                    android:text="GST Number"/>
+
+                <TextView
+                    android:id="@+id/tvGstNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/google_sans_regular"
+                    android:textColor="@color/color_text_sub_head"
+                    android:textSize="18sp"
+                    android:text="..."/>
+
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -244,7 +333,7 @@
                     android:fontFamily="@font/google_sans_regular"
                     android:textColor="@color/color_text_sub_head"
                     android:textSize="18sp"
-                    android:text="FSSAI"/>
+                    android:text="..."/>
 
             </LinearLayout>
 
@@ -274,7 +363,7 @@
                     android:fontFamily="@font/google_sans_regular"
                     android:textColor="@color/color_text_sub_head"
                     android:textSize="18sp"
-                    android:text="21422850006951"/>
+                    android:text="..."/>
 
             </LinearLayout>
 
@@ -292,10 +381,10 @@
                     android:fontFamily="@font/google_sans_regular"
                     android:textColor="@color/color_text_description"
                     android:textSize="16sp"
-                    android:text="Authorised Person"/>
+                    android:text="Name on Licence"/>
 
                 <TextView
-                    android:id="@+id/tvLicenceAuthPerson"
+                    android:id="@+id/tvNameOnLicence"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
@@ -304,7 +393,7 @@
                     android:fontFamily="@font/google_sans_regular"
                     android:textColor="@color/color_text_sub_head"
                     android:textSize="18sp"
-                    android:text="Sahil Singh"/>
+                    android:text="..."/>
 
             </LinearLayout>
 
@@ -334,7 +423,7 @@
                     android:fontFamily="@font/google_sans_regular"
                     android:textColor="@color/color_text_sub_head"
                     android:textSize="18sp"
-                    android:text="03-10-2022"/>
+                    android:text="..."/>
 
             </LinearLayout>
 
@@ -352,10 +441,10 @@
                     android:fontFamily="@font/google_sans_regular"
                     android:textColor="@color/color_text_description"
                     android:textSize="16sp"
-                    android:text="Valid Upto"/>
+                    android:text="Licence Tenure"/>
 
                 <TextView
-                    android:id="@+id/tvLicenceValid"
+                    android:id="@+id/tvLicenceTenure"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
@@ -364,37 +453,7 @@
                     android:fontFamily="@font/google_sans_regular"
                     android:textColor="@color/color_text_sub_head"
                     android:textSize="18sp"
-                    android:text="02-10-2025"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/google_sans_regular"
-                    android:textColor="@color/color_text_description"
-                    android:textSize="16sp"
-                    android:text="Current Status"/>
-
-                <TextView
-                    android:id="@+id/tvLicenceStatus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/google_sans_regular"
-                    android:textColor="@color/color_text_sub_head"
-                    android:textSize="18sp"
-                    android:text="Issued &amp; New"/>
+                    android:text="..."/>
 
             </LinearLayout>
 
@@ -442,7 +501,7 @@
                     android:fontFamily="@font/google_sans_regular"
                     android:textColor="@color/color_text_sub_head"
                     android:textSize="18sp"
-                    android:text="Sahil Singh"/>
+                    android:text="..."/>
 
             </LinearLayout>
 
@@ -472,7 +531,7 @@
                     android:fontFamily="@font/google_sans_regular"
                     android:textColor="@color/color_text_sub_head"
                     android:textSize="18sp"
-                    android:text="HCGPS3573F"/>
+                    android:text="..."/>
 
             </LinearLayout>
 
@@ -502,7 +561,7 @@
                     android:fontFamily="@font/google_sans_regular"
                     android:textColor="@color/color_text_sub_head"
                     android:textSize="18sp"
-                    android:text="8770664141"/>
+                    android:text="..."/>
 
             </LinearLayout>
 
@@ -533,7 +592,7 @@
                     android:fontFamily="@font/google_sans_regular"
                     android:textColor="@color/color_text_sub_head"
                     android:textSize="18sp"
-                    android:text="sahilsingh.dsc@gmail.com"/>
+                    android:text="..."/>
 
             </LinearLayout>
 

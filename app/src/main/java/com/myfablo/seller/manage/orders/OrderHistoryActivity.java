@@ -95,6 +95,10 @@ public class OrderHistoryActivity extends AppCompatActivity implements View.OnCl
         });
     }
 
+    private void getT() {
+
+    }
+
     private void selectAllOrders() {
         binding.tvAllOrders.setTextColor(getResources().getColor(R.color.color_text_for_bg));
         binding.tvPreparingOrders.setTextColor(getResources().getColor(R.color.color_text_description));
@@ -246,7 +250,6 @@ public class OrderHistoryActivity extends AppCompatActivity implements View.OnCl
 
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DATE, -1);
         endDate = dateFormat.format(cal.getTime());
         cal.add(Calendar.DATE, -1);
         startDate = dateFormat.format(cal.getTime());

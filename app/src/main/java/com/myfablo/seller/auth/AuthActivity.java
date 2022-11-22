@@ -3,22 +3,18 @@ package com.myfablo.seller.auth;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.myfablo.seller.auth.model.UserLoginRequest;
-import com.myfablo.seller.auth.model.UserLoginResponse;
+import com.myfablo.seller.auth.models.UserLoginRequest;
+import com.myfablo.seller.auth.models.UserLoginResponse;
 import com.myfablo.seller.databinding.ActivityAuthBinding;
-import com.myfablo.seller.home.HomeActivity;
 import com.myfablo.seller.interfaces.AuthInterface;
-import com.myfablo.seller.main.MainActivity;
 import com.myfablo.seller.preference.AuthPref;
 import com.myfablo.seller.retrofit.RestClient;
 import com.myfablo.seller.utils.Constant;

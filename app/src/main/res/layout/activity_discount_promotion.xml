@@ -397,7 +397,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerRunningOffers"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
 
         <LinearLayout
             android:id="@+id/lvNoData"
@@ -427,6 +428,25 @@
                 android:textColor="@color/color_text_description"
                 android:text="There are not any running discounts or promotions in this outlet."
                 android:textSize="16sp" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottieLoading"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                app:lottie_loop="true"
+                app:lottie_autoPlay="true"
+                app:lottie_rawRes="@raw/lottie_loading" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottieError"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/lottie_error" />
 
         </LinearLayout>
 

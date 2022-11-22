@@ -2,6 +2,7 @@ package com.myfablo.seller.interfaces;
 
 import com.myfablo.seller.common.BasicResponse;
 import com.myfablo.seller.common.CommonResponse;
+import com.myfablo.seller.home.account.insights.models.SellerProfitResponse;
 import com.myfablo.seller.manage.orders.model.OrderDetailsResponse;
 import com.myfablo.seller.manage.orders.model.OrderResponse;
 import com.myfablo.seller.manage.orders.model.OrderStatusChangeRequest;
@@ -32,5 +33,14 @@ public interface OrdersInterface {
 
     @GET("order/outlet/{outletId}")
     Call<OrderResponse> getOrderByDate(@Path("outletId") String outletId, @Query("status") String status, @Query("from") String from, @Query("to") String to);
+
+    @GET("order/seller")
+    Call<OrderResponse> getOrderBySeller(@Header("Authorization") String token);
+
+    @GET("order/seller/profit")
+    Call<SellerProfitResponse> getSellerProfit(@Header("Authorization") String token, @Query("from") String from, @Query("to") String to);
+
+    @GET("order/outlet/{outletId}/profit")
+    Call<SellerProfitResponse> getOutletProfit(@Header("Authorization") String token, @Path("outletId") String outletId, @Query("from") String from, @Query("to") String to);
 
 }

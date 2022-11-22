@@ -100,7 +100,7 @@
                 android:fontFamily="@font/google_sans_regular"
                 android:textColor="@color/color_text_sub_head"
                 android:textSize="18sp"
-                android:text="21f394ec01a1"/>
+                android:text="..."/>
 
         </LinearLayout>
 
@@ -130,7 +130,7 @@
                 android:fontFamily="@font/google_sans_regular"
                 android:textColor="@color/color_text_sub_head"
                 android:textSize="18sp"
-                android:text="21f394ec01a1"/>
+                android:text="..."/>
 
         </LinearLayout>
 
@@ -160,7 +160,7 @@
                 android:fontFamily="@font/google_sans_regular"
                 android:textColor="@color/color_text_sub_head"
                 android:textSize="18sp"
-                android:text="21f394ec01a1"/>
+                android:text="..."/>
 
         </LinearLayout>
 

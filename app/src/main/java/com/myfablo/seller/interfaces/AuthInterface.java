@@ -1,9 +1,9 @@
 package com.myfablo.seller.interfaces;
 
-import com.myfablo.seller.auth.model.UserLoginRequest;
-import com.myfablo.seller.auth.model.UserLoginResponse;
-import com.myfablo.seller.auth.model.VerifyOtpRequest;
-import com.myfablo.seller.auth.model.VerifyOtpResponse;
+import com.myfablo.seller.auth.models.UserLoginRequest;
+import com.myfablo.seller.auth.models.UserLoginResponse;
+import com.myfablo.seller.auth.models.VerifyOtpRequest;
+import com.myfablo.seller.auth.models.VerifyOtpResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

@@ -212,7 +212,7 @@ public class HomeActivity extends AppCompatActivity implements SwitchButton.OnCh
     private void updateOutletStatus(OutletItem outletItem) {
         AuthPref authPref = new AuthPref(context);
         OutletInterface outletInterface = RestClient.getRetrofitFabloInventoryService(context).create(OutletInterface.class);
-        Call<BasicResponse> call = outletInterface.updateOutletStatus("Bearer "+authPref.getAuthToken(), outletItem.getOutletId());
+        Call<BasicResponse> call = outletInterface.updateOutletStatus("Bearer " + authPref.getAuthToken(), outletItem.getOutletId());
         call.enqueue(new Callback<BasicResponse>() {
             @Override
             public void onResponse(Call<BasicResponse> call, Response<BasicResponse> response) {
@@ -231,14 +231,15 @@ public class HomeActivity extends AppCompatActivity implements SwitchButton.OnCh
 
             @Override
             public void onFailure(Call<BasicResponse> call, Throwable t) {
-                Log.e(TAG, "onFailure: "+t.getMessage());
+                Log.e(TAG, "onFailure: " + t.getMessage());
             }
         });
     }
 
     private void getOrder() {
+        AuthPref authPref = new AuthPref(context);
         OrdersInterface ordersInterface = RestClient.getRetrofitFabloOrderService(context).create(OrdersInterface.class);
-        Call<OrderResponse> call = ordersInterface.getOrders("3c8a3e2f240a", Constant.ORDER_STATUS_PENDING);
+        Call<OrderResponse> call = ordersInterface.getOrderBySeller(authPref.getBearerToken());
         call.enqueue(new Callback<OrderResponse>() {
             @Override
             public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
@@ -255,7 +256,7 @@ public class HomeActivity extends AppCompatActivity implements SwitchButton.OnCh
 
             @Override
             public void onFailure(Call<OrderResponse> call, Throwable t) {
-                Log.e(TAG, "onFailure: "+t.getMessage());
+                Log.e(TAG, "onFailure: " + t.getMessage());
                 showError();
             }
         });

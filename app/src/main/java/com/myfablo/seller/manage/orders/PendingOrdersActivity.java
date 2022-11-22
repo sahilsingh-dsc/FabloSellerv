@@ -54,9 +54,9 @@ public class PendingOrdersActivity extends AppCompatActivity {
 
     private void getOrder() {
         loadData();
-        OutletPref outletPref = new OutletPref(context);
+        AuthPref authPref = new AuthPref(context);
         OrdersInterface ordersInterface = RestClient.getRetrofitFabloOrderService(context).create(OrdersInterface.class);
-        Call<OrderResponse> call = ordersInterface.getOrders("3c8a3e2f240a", Constant.ORDER_STATUS_PENDING);
+        Call<OrderResponse> call = ordersInterface.getOrderBySeller(authPref.getBearerToken());
         call.enqueue(new Callback<OrderResponse>() {
             @Override
             public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
@@ -76,7 +76,7 @@ public class PendingOrdersActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<OrderResponse> call, Throwable t) {
-                Log.e(TAG, "onFailure: "+t.getMessage());
+                Log.e(TAG, "onFailure: " + t.getMessage());
                 showError();
             }
         });
@@ -86,7 +86,7 @@ public class PendingOrdersActivity extends AppCompatActivity {
         AuthPref authPref = new AuthPref(context);
         fabLoading.showProgress(context);
         OrdersInterface ordersInterface = RestClient.getRetrofitFabloOrderService(context).create(OrdersInterface.class);
-        Call<BasicResponse> call = ordersInterface.changeOrderStatus("Bearer "+authPref.getAuthToken(), orderStatusChangeRequest);
+        Call<BasicResponse> call = ordersInterface.changeOrderStatus("Bearer " + authPref.getAuthToken(), orderStatusChangeRequest);
         call.enqueue(new Callback<BasicResponse>() {
             @Override
             public void onResponse(Call<BasicResponse> call, Response<BasicResponse> response) {

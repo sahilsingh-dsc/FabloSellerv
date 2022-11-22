@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.myfablo.seller.auth.WelcomeActivity;
 import com.myfablo.seller.databinding.ActivitySellerAccountBinding;
+import com.myfablo.seller.home.account.insights.SellerInsightsActivity;
 import com.myfablo.seller.manage.bank.BankActivity;
 import com.myfablo.seller.manage.discount.DiscountPromotionActivity;
 import com.myfablo.seller.manage.kyc.SellerKycActivity;
@@ -49,6 +50,7 @@ public class SellerAccountActivity extends AppCompatActivity implements View.OnC
         binding.lhDiscount.setOnClickListener(this);
         binding.lhPayout.setOnClickListener(this);
         binding.lhSellerKys.setOnClickListener(this);
+        binding.lhSellerInsights.setOnClickListener(this);
         binding.lhBank.setOnClickListener(this);
     }
 
@@ -136,6 +138,9 @@ public class SellerAccountActivity extends AppCompatActivity implements View.OnC
             startActivity(intent);
         } else if (view == binding.lhBank) {
             Intent intent = new Intent(context, BankActivity.class);
+            startActivity(intent);
+        } else if (view == binding.lhSellerInsights) {
+            Intent intent = new Intent(context, SellerInsightsActivity.class);
             startActivity(intent);
         }
     }

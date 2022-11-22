@@ -4,6 +4,7 @@ import android.content.Context;
 import android.media.MediaPlayer;
 
 import com.myfablo.seller.R;
+import com.myfablo.seller.preference.AuthPref;
 import com.myfablo.seller.utils.Constant;
 import com.pubnub.api.PNConfiguration;
 import com.pubnub.api.PubNub;
@@ -28,6 +29,7 @@ import java.util.Arrays;
 public class OrderSubscriber extends SubscribeCallback {
 
     private Context context;
+    private AuthPref authPref;
 
     public OrderSubscriber(Context context) {
         this.context = context;
@@ -36,7 +38,8 @@ public class OrderSubscriber extends SubscribeCallback {
     private PubNub pubnubClient;
 
     public void initPubNubConfig() throws PubNubException {
-        PNConfiguration pnConfiguration = new PNConfiguration(new UserId("a4e639bb"));
+        authPref = new AuthPref(context);
+        PNConfiguration pnConfiguration = new PNConfiguration(new UserId(authPref.getSellerId()));
         pnConfiguration.setPublishKey(Constant.PUBNUB_PUBLISHER_KEY);
         pnConfiguration.setSubscribeKey(Constant.PUBNUB_SUBSCRIBER_KEY);
 
@@ -46,13 +49,13 @@ public class OrderSubscriber extends SubscribeCallback {
 
     public void subscribeOrder() {
         pubnubClient.subscribe()
-                .channels(Arrays.asList("order-a4e639bb")) // subscribe to channels
+                .channels(Arrays.asList("order-"+authPref.getSellerId())) // subscribe to channels
                 .execute();
     }
 
     public void unSubscribeOrder() {
         pubnubClient.unsubscribe()
-                .channels(Arrays.asList("order-a4e639bb"))
+                .channels(Arrays.asList("order-"+authPref.getSellerId()))
                 .execute();
     }
 

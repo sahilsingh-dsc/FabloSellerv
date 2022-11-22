@@ -19,6 +19,8 @@ import com.myfablo.seller.databinding.ActivityManageBinding;
 import com.myfablo.seller.interfaces.OutletInterface;
 import com.myfablo.seller.manage.bank.BankActivity;
 import com.myfablo.seller.manage.discount.DiscountPromotionActivity;
+import com.myfablo.seller.manage.discount.OutletDiscountActivity;
+import com.myfablo.seller.manage.insights.OutletInsightsActivity;
 import com.myfablo.seller.manage.kyc.SellerKycActivity;
 import com.myfablo.seller.manage.menu.MenuActivity;
 import com.myfablo.seller.manage.orders.NewOrderBottomSheet;
@@ -72,6 +74,8 @@ public class ManageActivity extends AppCompatActivity implements View.OnClickLis
         binding.lhOutletDetails.setOnClickListener(this);
         binding.lhMenu.setOnClickListener(this);
         binding.lhOrderHistory.setOnClickListener(this);
+        binding.lhDiscount.setOnClickListener(this);
+        binding.lhOutletInsights.setOnClickListener(this);
         binding.switchOutletStatus.setOnCheckedChangeListener(this);
         getDefaultOutletData();
     }
@@ -127,6 +131,12 @@ public class ManageActivity extends AppCompatActivity implements View.OnClickLis
             startActivity(intent);
         }  else if (view == binding.lhOrderHistory) {
             Intent intent = new Intent(context, OrderHistoryActivity.class);
+            startActivity(intent);
+        } else if (view == binding.lhDiscount) {
+            Intent intent = new Intent(context, OutletDiscountActivity.class);
+            startActivity(intent);
+        } else if (view == binding.lhOutletInsights) {
+            Intent intent = new Intent(context, OutletInsightsActivity.class);
             startActivity(intent);
         }
     }
