@@ -72,8 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:padding="2dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_fab_nav_right_arrow" />
+                android:layout_gravity="center" />
 
             <View
                 android:id="@+id/viewNotificationAlert"

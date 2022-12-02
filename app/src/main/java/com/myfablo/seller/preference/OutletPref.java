@@ -3,7 +3,6 @@ package com.myfablo.seller.preference;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.myfablo.seller.home.outlets.models.OutletItem;
 import com.myfablo.seller.home.outlets.models.single.OutletDetailsItem;
 import com.myfablo.seller.utils.Constant;
 
@@ -21,7 +20,7 @@ public class OutletPref {
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString("outletId", outletDetails.getOutletId());
             editor.putString("outletName", outletDetails.getOutletName());
-            editor.putString("outletImage", outletDetails.getOutletImage());
+            editor.putString("outletImage", outletDetails.getOutletImage().get(0));
             editor.putString("type", outletDetails.getType());
             editor.putString("preparationTime", outletDetails.getPreparationTime());
             editor.putString("area", outletDetails.getArea());

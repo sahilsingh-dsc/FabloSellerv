@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Items {
 
-    @SerializedName("name")
+    @SerializedName("username")
     @Expose
     private String name;
     @SerializedName("email")

@@ -3,6 +3,8 @@ package com.myfablo.seller.home.outlets.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class OutletItem {
 
     @SerializedName("outletId")
@@ -13,7 +15,7 @@ public class OutletItem {
     private String outletName;
     @SerializedName("outletImage")
     @Expose
-    private String outletImage;
+    private List<String> outletImage;
     @SerializedName("area")
     @Expose
     private String area;
@@ -77,7 +79,7 @@ public class OutletItem {
      * @param longitude
      */
 
-    public OutletItem(String outletId, String outletName, String outletImage, String area, String shopAddress, Float longitude, Float latitude, Boolean isClosed, Integer initCount, Integer pendingCount, Integer preperingCount, Integer readyCount, Integer dispatchedCount, Integer deliveredCount, Integer cancelledCount) {
+    public OutletItem(String outletId, String outletName, List<String> outletImage, String area, String shopAddress, Float longitude, Float latitude, Boolean isClosed, Integer initCount, Integer pendingCount, Integer preperingCount, Integer readyCount, Integer dispatchedCount, Integer deliveredCount, Integer cancelledCount) {
         this.outletId = outletId;
         this.outletName = outletName;
         this.outletImage = outletImage;
@@ -111,11 +113,11 @@ public class OutletItem {
         this.outletName = outletName;
     }
 
-    public String getOutletImage() {
+    public List<String> getOutletImage() {
         return outletImage;
     }
 
-    public void setOutletImage(String outletImage) {
+    public void setOutletImage(List<String> outletImage) {
         this.outletImage = outletImage;
     }
 

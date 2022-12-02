@@ -1,6 +1,5 @@
 package com.myfablo.seller.home.outlets.adapters;
 
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -19,13 +18,8 @@ import com.google.android.material.card.MaterialCardView;
 import com.myfablo.seller.R;
 import com.myfablo.seller.home.outlets.OutletActivity;
 import com.myfablo.seller.home.outlets.models.OutletItem;
-import com.myfablo.seller.home.outlets.models.OutletsResponse;
-import com.myfablo.seller.preference.InitPref;
-import com.myfablo.seller.preference.OutletPref;
 import com.myfablo.seller.utils.alerts.OutletStatusAlert;
 import com.suke.widget.SwitchButton;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -50,7 +44,7 @@ public class OutletsRecyclerAdapter extends RecyclerView.Adapter<OutletsRecycler
     public void onBindViewHolder(@NonNull OutletsRecyclerAdapter.ViewHolder holder, int position) {
         OutletItem outletItem = outletItemList.get(position);
         if (outletItem != null) {
-            Glide.with(context).load(outletItem.getOutletImage()).into(holder.ivOutletImage);
+            Glide.with(context).load(outletItem.getOutletImage().get(0)).into(holder.ivOutletImage);
             if (outletItem.getClosed()) {
                 holder.ivOutletImage.setBackground(context.getResources().getDrawable(R.drawable.ring_outlet_offline));
                 holder.lottieLive.setVisibility(View.GONE);

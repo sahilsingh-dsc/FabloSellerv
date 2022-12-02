@@ -1,7 +1,5 @@
 package com.myfablo.seller.home.outlets.models.single;
 
-import android.location.Location;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -20,7 +18,7 @@ public class OutletDetailsItem {
     private String outletName;
     @SerializedName("outletImage")
     @Expose
-    private String outletImage;
+    private List<String> outletImage;
     @SerializedName("type")
     @Expose
     private String type;
@@ -106,7 +104,7 @@ public class OutletDetailsItem {
      * @param tag
      * @param isFeatured
      */
-    public OutletDetailsItem(LocationPoint location, String outletId, String outletName, String outletImage, String type, String preparationTime, String area, Boolean isPureVeg, Boolean isDiscounted, List<String> discountArray, List<String> tag, Boolean isFood, List<String> cuisine, String shopAddress, String sellerId, List<Object> subSellerId, OpeningHours openingHours, Boolean isClosed, Boolean isVerified, Boolean isVisible, Object rating, Boolean isFeatured) {
+    public OutletDetailsItem(LocationPoint location, String outletId, String outletName, List<String> outletImage, String type, String preparationTime, String area, Boolean isPureVeg, Boolean isDiscounted, List<String> discountArray, List<String> tag, Boolean isFood, List<String> cuisine, String shopAddress, String sellerId, List<Object> subSellerId, OpeningHours openingHours, Boolean isClosed, Boolean isVerified, Boolean isVisible, Object rating, Boolean isFeatured) {
         super();
         this.location = location;
         this.outletId = outletId;
@@ -156,11 +154,11 @@ public class OutletDetailsItem {
         this.outletName = outletName;
     }
 
-    public String getOutletImage() {
+    public List<String> getOutletImage() {
         return outletImage;
     }
 
-    public void setOutletImage(String outletImage) {
+    public void setOutletImage(List<String> outletImage) {
         this.outletImage = outletImage;
     }
 

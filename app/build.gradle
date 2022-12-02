@@ -85,9 +85,6 @@ dependencies {
     // custom switch
     implementation 'com.github.zcweng:switch-button:0.0.3@aar'
 
-    // lottie animation
-    implementation 'com.airbnb.android:lottie:5.2.0'
-
     // one signal
     implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
 
