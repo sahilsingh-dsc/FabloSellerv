@@ -18,7 +18,7 @@
             android:layout_marginTop="18dp"
             android:layout_marginBottom="18dp"
             android:layout_gravity="center"
-            android:text="Seller Login"
+            android:text="Delivery Partner"
             android:fontFamily="@font/google_sans_medium"
             android:textColor="@color/color_text_title"
             android:textSize="18sp"/>

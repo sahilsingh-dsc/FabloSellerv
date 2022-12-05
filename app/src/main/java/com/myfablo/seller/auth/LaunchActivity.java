@@ -1,15 +1,13 @@
 package com.myfablo.seller.auth;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
-import com.bumptech.glide.Glide;
-import com.myfablo.seller.R;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.myfablo.seller.databinding.ActivityLaunchBinding;
 import com.myfablo.seller.home.HomeActivity;
 import com.myfablo.seller.preference.AuthPref;
