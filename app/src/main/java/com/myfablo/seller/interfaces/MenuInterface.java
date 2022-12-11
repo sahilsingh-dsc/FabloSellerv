@@ -26,4 +26,7 @@ public interface MenuInterface {
     @POST("menu/category")
     Call<BasicResponse> addCategory(@Body AddCategoryRequest addCategoryRequest);
 
+    @GET("menu/stock/{productId}")
+    Call<BasicResponse> changeProductStock(@Path("productId") String productId);
+
 }

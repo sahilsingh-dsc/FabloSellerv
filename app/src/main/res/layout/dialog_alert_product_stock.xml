@@ -18,9 +18,8 @@
             android:background="@color/color_separator_light">
 
             <com.airbnb.lottie.LottieAnimationView
-                android:layout_width="150dp"
+                android:layout_width="200dp"
                 android:layout_height="160dp"
-                android:layout_marginStart="8dp"
                 android:layout_gravity="center"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="false"
@@ -29,7 +28,7 @@
         </FrameLayout>
 
         <TextView
-            android:id="@+id/tvOutletName"
+            android:id="@+id/tvProductName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

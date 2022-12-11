@@ -31,6 +31,12 @@ public class Product {
     @SerializedName("customization")
     @Expose
     private List<Customization> customization = null;
+    @SerializedName("inStock")
+    @Expose
+    private boolean inStock;
+    @SerializedName("isVeg")
+    @Expose
+    private boolean isVeg;
 
     /**
      * No args constructor for use in serialization
@@ -47,9 +53,11 @@ public class Product {
      * @param customization
      * @param productName
      * @param productPrice
+     * @param inStock
+     * @param isVeg
      */
-    public Product(String productId, String productName, String productDesc, String productImage, Float productPrice, Float displayPrice, Boolean hasCustomization, List<Customization> customization) {
-        super();
+
+    public Product(String productId, String productName, String productDesc, String productImage, Float productPrice, Float displayPrice, Boolean hasCustomization, List<Customization> customization, boolean inStock, boolean isVeg) {
         this.productId = productId;
         this.productName = productName;
         this.productDesc = productDesc;
@@ -58,6 +66,8 @@ public class Product {
         this.displayPrice = displayPrice;
         this.hasCustomization = hasCustomization;
         this.customization = customization;
+        this.inStock = inStock;
+        this.isVeg = isVeg;
     }
 
     public String getProductId() {
@@ -124,4 +134,19 @@ public class Product {
         this.customization = customization;
     }
 
+    public boolean isInStock() {
+        return inStock;
+    }
+
+    public void setInStock(boolean inStock) {
+        this.inStock = inStock;
+    }
+
+    public boolean isVeg() {
+        return isVeg;
+    }
+
+    public void setVeg(boolean veg) {
+        isVeg = veg;
+    }
 }

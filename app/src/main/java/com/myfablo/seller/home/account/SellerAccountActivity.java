@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.myfablo.seller.BuildConfig;
+import com.myfablo.seller.R;
 import com.myfablo.seller.auth.WelcomeActivity;
 import com.myfablo.seller.databinding.ActivitySellerAccountBinding;
 import com.myfablo.seller.home.account.insights.SellerInsightsActivity;
@@ -52,6 +54,8 @@ public class SellerAccountActivity extends AppCompatActivity implements View.OnC
         binding.lhSellerKys.setOnClickListener(this);
         binding.lhSellerInsights.setOnClickListener(this);
         binding.lhBank.setOnClickListener(this);
+
+        getAppVersion();
     }
 
     private void doLogout() {
@@ -91,6 +95,13 @@ public class SellerAccountActivity extends AppCompatActivity implements View.OnC
             }
         }
         return false;
+    }
+
+    private void getAppVersion() {
+        float versionCode = BuildConfig.VERSION_CODE;
+        String versionName = BuildConfig.VERSION_NAME;
+        String buildVersionCode = getString(R.string.app_name)+" v"+versionCode+" & Build "+versionName;
+        binding.tvAppVersion.setText(buildVersionCode);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

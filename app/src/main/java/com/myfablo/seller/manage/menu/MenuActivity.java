@@ -21,9 +21,11 @@ import com.myfablo.seller.manage.menu.adapters.FoodMenuCategoryRecyclerAdapter;
 import com.myfablo.seller.manage.menu.add.fragments.AddCategoryBottomSheet;
 import com.myfablo.seller.manage.menu.add.models.AddCategoryRequest;
 import com.myfablo.seller.manage.menu.models.FoodMenuResponse;
+import com.myfablo.seller.manage.menu.models.StockUpdate;
 import com.myfablo.seller.preference.OutletPref;
 import com.myfablo.seller.retrofit.RestClient;
 import com.myfablo.seller.utils.Constant;
+import com.myfablo.seller.utils.alerts.OhSnapErrorAlert;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -176,10 +178,47 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         getFullMenu();
     }
 
+    private void updateProductStock(StockUpdate stockUpdate) {
+        MenuInterface menuInterface = RestClient.getRetrofitFabloInventoryService(context).create(MenuInterface.class);
+        Call<BasicResponse> call = menuInterface.changeProductStock(stockUpdate.getProductId());
+        call.enqueue(new Callback<BasicResponse>() {
+            @Override
+            public void onResponse(Call<BasicResponse> call, Response<BasicResponse> response) {
+                if (response.code() == Constant.HTTP_RESPONSE_SUCCESS) {
+                    if (response.body() != null) {
+                        if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_SUCCESS) {
+                            retryService();
+                        } else if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_NO_DATA) {
+                            OhSnapErrorAlert ohSnapErrorAlert = OhSnapErrorAlert.getInstance();
+                            ohSnapErrorAlert.showAlert(context, "Stock update can't be performed, Please contact your dedicated manager.");
+                        }
+                    }
+                } else if (response.code() == Constant.HTTP_CLIENT_ERROR) {
+                    showError();
+                } else if (response.code() == Constant.HTTP_SERVER_ERROR) {
+                    showError();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BasicResponse> call, Throwable t) {
+                showError();
+                Log.e(TAG, "onFailure: "+t.getMessage());
+            }
+        });
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(AddCategoryRequest addCategoryRequest) {
         if (addCategoryRequest != null) {
             addCategory(addCategoryRequest);
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(StockUpdate stockUpdate) {
+        if (stockUpdate != null) {
+            updateProductStock(stockUpdate);
         }
     }
 

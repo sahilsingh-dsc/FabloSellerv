@@ -9,19 +9,23 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.card.MaterialCardView;
+import com.myfablo.seller.BuildConfig;
 import com.myfablo.seller.R;
+import com.myfablo.seller.common.AppVersionResponse;
 import com.myfablo.seller.common.BasicResponse;
 import com.myfablo.seller.databinding.ActivityHomeBinding;
 import com.myfablo.seller.home.account.SellerAccountActivity;
 import com.myfablo.seller.home.outlets.adapters.OutletsRecyclerAdapter;
 import com.myfablo.seller.home.outlets.models.OutletItem;
 import com.myfablo.seller.home.outlets.models.OutletsResponse;
+import com.myfablo.seller.interfaces.ConfigInterface;
 import com.myfablo.seller.interfaces.OrdersInterface;
 import com.myfablo.seller.interfaces.OutletInterface;
 import com.myfablo.seller.manage.orders.NewOrderBottomSheet;
@@ -35,7 +39,9 @@ import com.myfablo.seller.preference.SelectedOptionPref;
 import com.myfablo.seller.retrofit.RestClient;
 import com.myfablo.seller.services.OrderService;
 import com.myfablo.seller.utils.Constant;
+import com.myfablo.seller.utils.alerts.OhSnapErrorAlert;
 import com.myfablo.seller.utils.alerts.OrderNotificationAlert;
+import com.myfablo.seller.utils.alerts.UpdateAppAlert;
 import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
 import com.suke.widget.SwitchButton;
 
@@ -74,6 +80,7 @@ public class HomeActivity extends AppCompatActivity implements SwitchButton.OnCh
         binding.viewNotificationAlert.setOnClickListener(this);
         binding.cardPendingOrders.setOnClickListener(this);
         binding.ivManageAccount.setOnClickListener(this);
+        checkAppUpdate();
     }
 
     private void initOrderService() {
@@ -262,6 +269,36 @@ public class HomeActivity extends AppCompatActivity implements SwitchButton.OnCh
         });
     }
 
+    private void checkAppUpdate() {
+        ConfigInterface configInterface = RestClient.getRetrofitFabloAdminService(context).create(ConfigInterface.class);
+        Call<AppVersionResponse> call = configInterface.getAppVersion();
+        call.enqueue(new Callback<AppVersionResponse>() {
+            @Override
+            public void onResponse(Call<AppVersionResponse> call, Response<AppVersionResponse> response) {
+                if (response.code() == Constant.HTTP_RESPONSE_SUCCESS) {
+                    if (response.body() != null) {
+                        if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_SUCCESS) {
+                            float versionCode = BuildConfig.VERSION_CODE;
+                            if (versionCode < response.body().getItems()) {
+                                UpdateAppAlert updateAppAlert = UpdateAppAlert.getInstance();
+                                updateAppAlert.showAlert(context);
+                            } else {
+                                Log.e(TAG, "onResponse: App update not available right now");
+                            }
+                        } else if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_NO_DATA){
+                            OhSnapErrorAlert ohSnapErrorAlert = OhSnapErrorAlert.getInstance();
+                            ohSnapErrorAlert.showAlert(context, "Critical app version check failed");
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AppVersionResponse> call, Throwable t) {
+                Log.e(TAG, "onFailure: "+t.getMessage());
+            }
+        });
+    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(PNMessageResult messageResult) {
@@ -288,6 +325,8 @@ public class HomeActivity extends AppCompatActivity implements SwitchButton.OnCh
             } else {
                 binding.startOrderService.setChecked(true);
             }
+        } else if (data.equals("updateDismiss")) {
+            onBackPressed();
         }
     }
 

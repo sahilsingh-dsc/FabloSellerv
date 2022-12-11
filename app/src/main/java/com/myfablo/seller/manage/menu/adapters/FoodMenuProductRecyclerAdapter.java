@@ -20,6 +20,8 @@ import com.google.android.material.card.MaterialCardView;
 import com.myfablo.seller.R;
 import com.myfablo.seller.manage.menu.fragments.CustomizationBottomSheet;
 import com.myfablo.seller.manage.menu.models.Product;
+import com.myfablo.seller.utils.alerts.ProductStockAlert;
+import com.suke.widget.SwitchButton;
 
 import java.util.List;
 
@@ -60,11 +62,37 @@ public class FoodMenuProductRecyclerAdapter extends RecyclerView.Adapter<FoodMen
                 Glide.with(context).load(product.getProductImage()).into(holder.ivProductImage);
             }
 
+            if (product.isVeg()) {
+                holder.ivServingType.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_food_type_veg));
+            } else {
+                holder.ivServingType.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_food_type_non_veg));
+            }
+
+            if (product.isInStock()) {
+                holder.tvStockStatus.setText("In Stock");
+                holder.tvStockStatus.setTextColor(context.getResources().getColor(R.color.color_text_title));
+                holder.switchStock.setChecked(true);
+                holder.lhProduct.setBackgroundColor(context.getResources().getColor(R.color.white));
+            } else {
+                holder.tvStockStatus.setText("Out of Stock");
+                holder.tvStockStatus.setTextColor(context.getResources().getColor(R.color.color_error));
+                holder.switchStock.setChecked(false);
+                holder.lhProduct.setBackgroundColor(context.getResources().getColor(R.color.color_separator_light));
+            }
+
             if (product.getHasCustomization()) {
                 holder.tvCustomization.setVisibility(View.VISIBLE);
             } else {
                 holder.tvCustomization.setVisibility(View.GONE);
             }
+
+            holder.viewStock.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ProductStockAlert productStockAlert = ProductStockAlert.getInstance();
+                    productStockAlert.showAlert(context, product.isInStock(), product.getProductId(), product.getProductName());
+                }
+            });
 
             holder.tvCustomization.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -96,6 +124,10 @@ public class FoodMenuProductRecyclerAdapter extends RecyclerView.Adapter<FoodMen
         private TextView tvProductDescription;
         private MaterialCardView cardImage;
         private TextView tvCustomization;
+        private View viewStock;
+        private SwitchButton switchStock;
+        private TextView tvStockStatus;
+        private LinearLayout lhProduct;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -107,6 +139,10 @@ public class FoodMenuProductRecyclerAdapter extends RecyclerView.Adapter<FoodMen
             tvProductDescription = itemView.findViewById(R.id.tvProductDescription);
             tvCustomization = itemView.findViewById(R.id.tvCustomization);
             cardImage = itemView.findViewById(R.id.cardImage);
+            viewStock = itemView.findViewById(R.id.viewStock);
+            switchStock = itemView.findViewById(R.id.switchStock);
+            tvStockStatus = itemView.findViewById(R.id.tvStockStatus);
+            lhProduct = itemView.findViewById(R.id.lhProduct);
 
         }
     }
