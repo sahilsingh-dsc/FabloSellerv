@@ -3,6 +3,7 @@ package com.myfablo.seller.auth;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,11 +11,20 @@ import android.view.View;
 
 import com.myfablo.seller.databinding.ActivityOnboardBinding;
 import com.myfablo.seller.preference.AuthPref;
+import com.myfablo.seller.preference.OrderServicePref;
+import com.myfablo.seller.preference.OutletPref;
+import com.myfablo.seller.preference.SelectedOptionPref;
+import com.myfablo.seller.services.OrderService;
+import com.myfablo.seller.utils.alerts.LogoutAlert;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
 
-public class OnboardActivity extends AppCompatActivity {
+public class OnboardActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ActivityOnboardBinding binding;
     private Context context;
@@ -30,7 +40,12 @@ public class OnboardActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        initClickListener();
         generateAuthTokenQR();
+    }
+
+    private void initClickListener() {
+        binding.btnLogout.setOnClickListener(this);
     }
 
     private void generateAuthTokenQR() {
@@ -42,4 +57,56 @@ public class OnboardActivity extends AppCompatActivity {
         binding.ivOnboardingQr.setImageBitmap(bitmap);
     }
 
+    private void showLogoutAlert() {
+        LogoutAlert logoutAlert = LogoutAlert.getInstance();
+        logoutAlert.showAlert(context);
+    }
+
+    private void doLogout() {
+        SelectedOptionPref selectedOptionPref = new SelectedOptionPref(context);
+        OutletPref outletPref = new OutletPref(context);
+        OrderServicePref orderServicePref = new OrderServicePref(context);
+        AuthPref authPref = new AuthPref(context);
+
+        selectedOptionPref.clearData();
+        outletPref.clearData();
+        orderServicePref.clearData();
+        authPref.clearData();
+
+        Intent intent = new Intent(context, WelcomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(String data) {
+        if (data.equals("logout")) {
+            doLogout();
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view == binding.btnLogout) {
+            showLogoutAlert();
+        }
+    }
 }

@@ -19,13 +19,12 @@ public class RestClient {
     private static Retrofit retrofitFabloOrderService;
     private static Retrofit retrofitFabloAdminService;
 
-    String h = "https://user.fablocdn.com/v1/";
     private static final String YELO_PROD_BASE_URL = "https://api.yelo.red/";
     private static final String MP_PROD_BASE_URL = "https://dashboard.myfablo.com/api/";
-    private static final String FABLO_USER_SERVICE_BASE_URL = "http://139.59.60.119:4006/v1/";
-    private static final String FABLO_INVENTORY_SERVICE_BASE_URL = "http://139.59.60.119:9000/v1/";
-    private static final String FABLO_ORDER_SERVICE_BASE_URL = "http://139.59.60.119:4007/v1/";
-    private static final String FABLO_ADMIN_SERVICE_BASE_URL = "http://139.59.60.119:4777/v1/";
+    private static final String FABLO_USER_SERVICE_BASE_URL = "https://user.fablocdn.com/v1/";
+    private static final String FABLO_INVENTORY_SERVICE_BASE_URL = "https://inventory.fablocdn.com/v1/";
+    private static final String FABLO_ORDER_SERVICE_BASE_URL = "https://order.fablocdn.com/v1/";
+    private static final String FABLO_ADMIN_SERVICE_BASE_URL = "https://admin.fablocdn.com/v1/";
 
     public static Retrofit getRetrofitYeloInstance(Context context) {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
