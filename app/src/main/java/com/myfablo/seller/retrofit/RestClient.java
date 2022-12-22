@@ -19,52 +19,21 @@ public class RestClient {
     private static Retrofit retrofitFabloOrderService;
     private static Retrofit retrofitFabloAdminService;
 
-    private static final String YELO_PROD_BASE_URL = "https://api.yelo.red/";
-    private static final String MP_PROD_BASE_URL = "https://dashboard.myfablo.com/api/";
-    private static final String FABLO_USER_SERVICE_BASE_URL = "https://user.fablocdn.com/v1/";
-    private static final String FABLO_INVENTORY_SERVICE_BASE_URL = "https://inventory.fablocdn.com/v1/";
-    private static final String FABLO_ORDER_SERVICE_BASE_URL = "https://order.fablocdn.com/v1/";
-    private static final String FABLO_ADMIN_SERVICE_BASE_URL = "https://admin.fablocdn.com/v1/";
+    private static final String PROD_FABLO_USER_SERVICE_BASE_URL = "https://user.fablocdn.com/v1/";
+    private static final String PROD_FABLO_INVENTORY_SERVICE_BASE_URL = "https://inventory.fablocdn.com/v1/";
+    private static final String PROD_FABLO_ORDER_SERVICE_BASE_URL = "https://order.fablocdn.com/v1/";
+    private static final String PROD_FABLO_ADMIN_SERVICE_BASE_URL = "https://admin.fablocdn.com/v1/";
 
-    public static Retrofit getRetrofitYeloInstance(Context context) {
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+    private static final String STAGE_FABLO_USER_SERVICE_BASE_URL = "https://user.fablocdn.com/v1/";
+    private static final String STAGE_FABLO_INVENTORY_SERVICE_BASE_URL = "https://inventory.fablocdn.com/v1/";
+    private static final String STAGE_FABLO_ORDER_SERVICE_BASE_URL = "https://order.fablocdn.com/v1/";
+    private static final String STAGE_FABLO_ADMIN_SERVICE_BASE_URL = "https://admin.fablocdn.com/v1/";
 
-        OkHttpClient httpClient = new OkHttpClient.Builder()
-                .addInterceptor(interceptor)
-                .connectTimeout(60, TimeUnit.SECONDS)
-                .readTimeout(60, TimeUnit.SECONDS).build();
+    private static final String DEV_FABLO_USER_SERVICE_BASE_URL = "http://139.59.60.119:4006/v1/";
+    private static final String DEV_FABLO_INVENTORY_SERVICE_BASE_URL = "http://139.59.60.119:9000/v1/";
+    private static final String DEV_FABLO_ORDER_SERVICE_BASE_URL = "http://139.59.60.119:4007/v1/";
+    private static final String DEV_FABLO_ADMIN_SERVICE_BASE_URL = "http://139.59.60.119:4777/v1/";
 
-        if (retrofitYelo == null) {
-            retrofitYelo = new Retrofit.Builder()
-                    .baseUrl(YELO_PROD_BASE_URL)
-                    .addConverterFactory(ScalarsConverterFactory.create())
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .client(httpClient)
-                    .build();
-        }
-        return retrofitYelo;
-    }
-
-    public static Retrofit getRetrofitMpInstance(Context context) {
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        OkHttpClient httpClient = new OkHttpClient.Builder()
-                .addInterceptor(interceptor)
-                .connectTimeout(60, TimeUnit.SECONDS)
-                .readTimeout(60, TimeUnit.SECONDS).build();
-
-        if (retrofitMp == null) {
-            retrofitMp = new Retrofit.Builder()
-                    .baseUrl(MP_PROD_BASE_URL)
-                    .addConverterFactory(ScalarsConverterFactory.create())
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .client(httpClient)
-                    .build();
-        }
-        return retrofitMp;
-    }
 
     public static Retrofit getRetrofitFabloUserService(Context context) {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -77,7 +46,7 @@ public class RestClient {
 
         if (retrofitFabloUserService == null) {
             retrofitFabloUserService = new Retrofit.Builder()
-                    .baseUrl(FABLO_USER_SERVICE_BASE_URL)
+                    .baseUrl(DEV_FABLO_USER_SERVICE_BASE_URL)
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient)
@@ -97,7 +66,7 @@ public class RestClient {
 
         if (retrofitFabloInventoryService == null) {
             retrofitFabloInventoryService = new Retrofit.Builder()
-                    .baseUrl(FABLO_INVENTORY_SERVICE_BASE_URL)
+                    .baseUrl(DEV_FABLO_INVENTORY_SERVICE_BASE_URL)
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient)
@@ -117,7 +86,7 @@ public class RestClient {
 
         if (retrofitFabloOrderService == null) {
             retrofitFabloOrderService = new Retrofit.Builder()
-                    .baseUrl(FABLO_ORDER_SERVICE_BASE_URL)
+                    .baseUrl(DEV_FABLO_ORDER_SERVICE_BASE_URL)
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient)
@@ -137,7 +106,7 @@ public class RestClient {
 
         if (retrofitFabloAdminService == null) {
             retrofitFabloAdminService = new Retrofit.Builder()
-                    .baseUrl(FABLO_ADMIN_SERVICE_BASE_URL)
+                    .baseUrl(DEV_FABLO_ADMIN_SERVICE_BASE_URL)
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient)
