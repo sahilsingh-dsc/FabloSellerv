@@ -1,7 +1,6 @@
 package com.myfablo.seller.interfaces;
 
 import com.myfablo.seller.common.BasicResponse;
-import com.myfablo.seller.common.CommonResponse;
 import com.myfablo.seller.home.account.insights.models.SellerProfitResponse;
 import com.myfablo.seller.manage.orders.model.OrderDetailsResponse;
 import com.myfablo.seller.manage.orders.model.OrderResponse;
