@@ -7,19 +7,19 @@ public class Amount {
 
     @SerializedName("totalAmount")
     @Expose
-    private Integer totalAmount;
+    private Float totalAmount;
     @SerializedName("deliveryCharge")
     @Expose
     private Float deliveryCharge;
     @SerializedName("deliveryTip")
     @Expose
-    private Integer deliveryTip;
+    private Float deliveryTip;
     @SerializedName("taxAmount")
     @Expose
     private Float taxAmount;
     @SerializedName("discountedAmount")
     @Expose
-    private Integer discountedAmount;
+    private Float discountedAmount;
 
     /**
      * No args constructor for use in serialization
@@ -34,8 +34,8 @@ public class Amount {
      * @param deliveryCharge
      * @param taxAmount
      */
-    public Amount(Integer totalAmount, Float deliveryCharge, Integer deliveryTip, Float taxAmount, Integer discountedAmount) {
-        super();
+
+    public Amount(Float totalAmount, Float deliveryCharge, Float deliveryTip, Float taxAmount, Float discountedAmount) {
         this.totalAmount = totalAmount;
         this.deliveryCharge = deliveryCharge;
         this.deliveryTip = deliveryTip;
@@ -43,11 +43,11 @@ public class Amount {
         this.discountedAmount = discountedAmount;
     }
 
-    public Integer getTotalAmount() {
+    public Float getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(Integer totalAmount) {
+    public void setTotalAmount(Float totalAmount) {
         this.totalAmount = totalAmount;
     }
 
@@ -59,11 +59,11 @@ public class Amount {
         this.deliveryCharge = deliveryCharge;
     }
 
-    public Integer getDeliveryTip() {
+    public Float getDeliveryTip() {
         return deliveryTip;
     }
 
-    public void setDeliveryTip(Integer deliveryTip) {
+    public void setDeliveryTip(Float deliveryTip) {
         this.deliveryTip = deliveryTip;
     }
 
@@ -75,12 +75,11 @@ public class Amount {
         this.taxAmount = taxAmount;
     }
 
-    public Integer getDiscountedAmount() {
+    public Float getDiscountedAmount() {
         return discountedAmount;
     }
 
-    public void setDiscountedAmount(Integer discountedAmount) {
+    public void setDiscountedAmount(Float discountedAmount) {
         this.discountedAmount = discountedAmount;
     }
-
 }

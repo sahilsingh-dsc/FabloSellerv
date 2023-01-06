@@ -72,7 +72,7 @@ public class OrderHistoryRecyclerAdapter extends RecyclerView.Adapter<OrderHisto
         }
     }
 
-    private String getPriceWithSymbol(int amount) {
+    private String getPriceWithSymbol(Float amount) {
         return "₹" + amount;
     }
 
