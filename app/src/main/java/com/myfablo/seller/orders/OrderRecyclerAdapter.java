@@ -152,7 +152,7 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
         }
     }
 
-    private String getPriceWithSymbol(int amount) {
+    private String getPriceWithSymbol(Float amount) {
         return "₹" + amount;
     }
 
