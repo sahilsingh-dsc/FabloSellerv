@@ -61,8 +61,8 @@ public class RestClient {
 
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
-                .connectTimeout(10, TimeUnit.SECONDS)
-                .readTimeout(10, TimeUnit.SECONDS).build();
+                .connectTimeout(20, TimeUnit.SECONDS)
+                .readTimeout(20, TimeUnit.SECONDS).build();
 
         if (retrofitFabloInventoryService == null) {
             retrofitFabloInventoryService = new Retrofit.Builder()

@@ -18,7 +18,7 @@ public class Product {
     private String productImage;
     @SerializedName("productAmount")
     @Expose
-    private Integer productAmount;
+    private Float productAmount;
     @SerializedName("hasCustomization")
     @Expose
     private Boolean hasCustomization;
@@ -30,7 +30,7 @@ public class Product {
     private Integer quantity;
     @SerializedName("totalPrice")
     @Expose
-    private Integer totalPrice;
+    private Float totalPrice;
 
     /**
      * No args constructor for use in serialization
@@ -48,7 +48,7 @@ public class Product {
      * @param totalPrice
      * @param productName
      */
-    public Product(String productId, String productName, String productImage, Integer productAmount, Boolean hasCustomization, List<Customization> customization, Integer quantity, Integer totalPrice) {
+    public Product(String productId, String productName, String productImage, Float productAmount, Boolean hasCustomization, List<Customization> customization, Integer quantity, Float totalPrice) {
         super();
         this.productId = productId;
         this.productName = productName;
@@ -84,11 +84,11 @@ public class Product {
         this.productImage = productImage;
     }
 
-    public Integer getProductAmount() {
+    public Float getProductAmount() {
         return productAmount;
     }
 
-    public void setProductAmount(Integer productAmount) {
+    public void setProductAmount(Float productAmount) {
         this.productAmount = productAmount;
     }
 
@@ -116,11 +116,11 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public Integer getTotalPrice() {
+    public Float getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(Integer totalPrice) {
+    public void setTotalPrice(Float totalPrice) {
         this.totalPrice = totalPrice;
     }
 
