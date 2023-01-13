@@ -72,6 +72,9 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
             } else if (item.getStatus().equals(Constant.ORDER_STATUS_CANCELLED)) {
                 holder.tvOrderStatus.setText("CANCELLED");
                 holder.tvOrderStatus.setBackground(context.getResources().getDrawable(R.drawable.bg_status_cancelled));
+            } else if (item.getTiming().get(item.getTiming().size()-1).getStatus().equals("preparing") && item.getStatus().equals(Constant.ORDER_STATUS_ASSIGNED)) {
+                holder.tvOrderStatus.setText("PREPARING");
+                holder.tvOrderStatus.setBackground(context.getResources().getDrawable(R.drawable.bg_status_preparing));
             }
 
             if (item.getStatus().equals(Constant.ORDER_STATUS_PENDING)) {
@@ -80,11 +83,17 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
                 holder.lhAcceptRejectOrder.setVisibility(View.GONE);
             }
 
-            if (item.getStatus().equals(Constant.ORDER_STATUS_PREPARING)) {
+            if (item.getStatus().equals(Constant.ORDER_STATUS_PREPARING) ) {
                 holder.sliderOrderReady.setVisibility(View.VISIBLE);
             } else {
-                holder.sliderOrderReady.setVisibility(View.GONE);
+                if (item.getTiming().get(item.getTiming().size()-1).getStatus().equals("preparing") && item.getStatus().equals(Constant.ORDER_STATUS_ASSIGNED)) {
+                    holder.sliderOrderReady.setVisibility(View.VISIBLE);
+                } else {
+                    holder.sliderOrderReady.setVisibility(View.GONE);
+                }
             }
+
+
 
             if (item.getStatus().equals(Constant.ORDER_STATUS_PENDING)) {
                 holder.lhOutletSelector.setVisibility(View.VISIBLE);

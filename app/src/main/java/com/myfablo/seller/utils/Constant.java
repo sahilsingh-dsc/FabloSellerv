@@ -38,6 +38,7 @@ public class Constant {
     public static final String ORDER_STATUS_PENDING = "pending";
     public static final String ORDER_STATUS_ACCEPTED = "accepted";
     public static final String ORDER_STATUS_CANCELLED = "cancelled";
+    public static final String ORDER_STATUS_ASSIGNED = "assigned";
     public static final String ORDER_STATUS_PREPARING = "preparing";
     public static final String ORDER_STATUS_READY = "ready";
     public static final String ORDER_STATUS_DISPATCHED = "dispatched";
