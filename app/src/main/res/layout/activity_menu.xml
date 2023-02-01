@@ -40,7 +40,7 @@
                 android:gravity="center"
                 android:fontFamily="@font/google_sans_medium"
                 android:textColor="@color/color_text_title"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
             <ImageView
                 android:layout_width="50dp"
@@ -50,6 +50,77 @@
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/lvAllItems"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvAllItems"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/google_sans_medium"
+                android:padding="16dp"
+                android:text="All Items"
+                android:textColor="@color/color_text_title"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/viewAllItems"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/color_primary" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="30dp"
+            android:background="@color/color_separator_light" />
+
+        <LinearLayout
+            android:id="@+id/lvAddons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvAddons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/google_sans_medium"
+                android:padding="16dp"
+                android:text="Add-ons"
+                android:textColor="@color/color_text_description"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/viewAddons"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/color_primary"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -73,7 +144,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="100dp"
                     android:layout_gravity="bottom"/>
 
             </LinearLayout>
@@ -97,6 +168,7 @@
                 app:lottie_rawRes="@raw/lottie_no_data"/>
 
             <TextView
+                android:id="@+id/tvNoData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/google_sans_regular"
@@ -140,23 +212,43 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_add"/>
+                android:src="@drawable/ic_add" />
 
         </com.google.android.material.card.MaterialCardView>
 
     </FrameLayout>
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/google_sans_regular"
-        android:textColor="@color/color_text_sub_head"
-        android:layout_gravity="bottom"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:background="@color/color_separator_light"
-        android:text="Menu add, update &amp; delete will be available soon."/>
+        android:background="@color/color_primary_alpha"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/google_sans_medium"
+            android:paddingTop="24dp"
+            android:paddingBottom="24dp"
+            android:text="Access menu tool from here."
+            android:textColor="@color/color_text_sub_head" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnMenuTool"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/google_sans_bold"
+            android:text="Menu Tool"
+            android:textAllCaps="false"
+            app:cornerRadius="8dp" />
+
+    </LinearLayout>
+
 
 </LinearLayout>

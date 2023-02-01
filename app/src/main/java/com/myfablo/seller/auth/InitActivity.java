@@ -6,12 +6,10 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
-import com.google.zxing.WriterException;
 import com.myfablo.seller.databinding.ActivityInitBinding;
-import com.myfablo.seller.preference.AuthPref;
+import com.myfablo.seller.utils.preference.AuthPref;
 
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;

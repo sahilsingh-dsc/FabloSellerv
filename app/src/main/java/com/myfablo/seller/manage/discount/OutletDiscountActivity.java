@@ -1,25 +1,22 @@
 package com.myfablo.seller.manage.discount;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.myfablo.seller.common.BasicResponse;
 import com.myfablo.seller.databinding.ActivityOutletDiscountBinding;
-import com.myfablo.seller.interfaces.DiscountInterface;
+import com.myfablo.seller.utils.interfaces.DiscountInterface;
 import com.myfablo.seller.manage.discount.fragments.DiscountSelectorBottomSheet;
 import com.myfablo.seller.manage.discount.models.outlet.OutletOfferResponse;
-import com.myfablo.seller.manage.discount.models.running.Item;
 import com.myfablo.seller.manage.discount.models.running.SelectOffer;
 import com.myfablo.seller.manage.discount.models.running.SelectOfferRequest;
-import com.myfablo.seller.preference.AuthPref;
-import com.myfablo.seller.preference.OutletPref;
-import com.myfablo.seller.retrofit.RestClient;
+import com.myfablo.seller.utils.preference.AuthPref;
+import com.myfablo.seller.utils.preference.OutletPref;
+import com.myfablo.seller.utils.retrofit.RestClient;
 import com.myfablo.seller.utils.Constant;
 import com.myfablo.seller.utils.alerts.SuccessAlert;
 

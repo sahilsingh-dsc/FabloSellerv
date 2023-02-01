@@ -14,9 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.myfablo.seller.auth.models.UserLoginRequest;
 import com.myfablo.seller.auth.models.UserLoginResponse;
 import com.myfablo.seller.databinding.ActivityAuthBinding;
-import com.myfablo.seller.interfaces.AuthInterface;
-import com.myfablo.seller.preference.AuthPref;
-import com.myfablo.seller.retrofit.RestClient;
+import com.myfablo.seller.utils.interfaces.AuthInterface;
+import com.myfablo.seller.utils.preference.AuthPref;
+import com.myfablo.seller.utils.retrofit.RestClient;
 import com.myfablo.seller.utils.Constant;
 import com.myfablo.seller.utils.alerts.FabLoading;
 

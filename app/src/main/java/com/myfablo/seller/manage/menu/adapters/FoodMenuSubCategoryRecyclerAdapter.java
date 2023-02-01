@@ -1,9 +1,7 @@
 package com.myfablo.seller.manage.menu.adapters;
 
-import static androidx.fragment.app.DialogFragment.STYLE_NORMAL;
-
 import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
+import com.google.android.material.button.MaterialButton;
 import com.myfablo.seller.R;
 import com.myfablo.seller.manage.menu.MenuActivity;
-import com.myfablo.seller.manage.menu.add.AddProductActivity;
-import com.myfablo.seller.manage.menu.add.fragments.AddProductBottomSheet;
+import com.myfablo.seller.manage.menu.fragments.MenuToolBottomSheet;
 import com.myfablo.seller.manage.menu.models.SubCategory;
 
 import java.util.List;
@@ -61,11 +58,16 @@ public class FoodMenuSubCategoryRecyclerAdapter extends RecyclerView.Adapter<Foo
                 }
             });
 
-            holder.tvAdd.setOnClickListener(new View.OnClickListener() {
+            holder.btnAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, AddProductActivity.class);
-                    context.startActivity(intent);
+                    MenuToolBottomSheet bottomSheet = new MenuToolBottomSheet();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("type", "subcategory");
+                    bundle.putString("id", subCategory.getCategoryId());
+                    bundle.putBoolean("hasSubCategory", subCategory.getHasSubCategory());
+                    bottomSheet.setArguments(bundle);
+                    bottomSheet.show(((MenuActivity) context).getSupportFragmentManager(), "menuTool");
                 }
             });
 
@@ -80,17 +82,17 @@ public class FoodMenuSubCategoryRecyclerAdapter extends RecyclerView.Adapter<Foo
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tvSubCategoryName;
-        private TextView tvAdd;
         private RecyclerView recyclerProduct;
         private ImageView ivShowHideProducts;
+        private MaterialButton btnAdd;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvSubCategoryName = itemView.findViewById(R.id.tvSubCategoryName);
-            tvAdd = itemView.findViewById(R.id.tvAdd);
             recyclerProduct = itemView.findViewById(R.id.recyclerProduct);
             ivShowHideProducts = itemView.findViewById(R.id.ivShowHideProducts);
+            btnAdd = itemView.findViewById(R.id.btnAdd);
 
         }
     }

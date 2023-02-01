@@ -12,10 +12,10 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.myfablo.seller.databinding.ActivityOutletInsightsBinding;
 import com.myfablo.seller.home.account.insights.models.SellerProfitResponse;
-import com.myfablo.seller.interfaces.OrdersInterface;
-import com.myfablo.seller.preference.AuthPref;
-import com.myfablo.seller.preference.OutletPref;
-import com.myfablo.seller.retrofit.RestClient;
+import com.myfablo.seller.utils.interfaces.OrdersInterface;
+import com.myfablo.seller.utils.preference.AuthPref;
+import com.myfablo.seller.utils.preference.OutletPref;
+import com.myfablo.seller.utils.retrofit.RestClient;
 import com.myfablo.seller.utils.Constant;
 
 import java.text.DateFormat;

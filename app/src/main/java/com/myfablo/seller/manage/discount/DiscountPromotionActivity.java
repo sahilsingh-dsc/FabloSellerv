@@ -1,21 +1,21 @@
 package com.myfablo.seller.manage.discount;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.myfablo.seller.R;
 import com.myfablo.seller.databinding.ActivityDiscountPromotionBinding;
-import com.myfablo.seller.interfaces.DiscountInterface;
+import com.myfablo.seller.utils.interfaces.DiscountInterface;
 import com.myfablo.seller.manage.discount.adapters.RunningOfferRecyclerAdapter;
 import com.myfablo.seller.manage.discount.models.running.RunningOffersResponse;
-import com.myfablo.seller.preference.AuthPref;
-import com.myfablo.seller.retrofit.RestClient;
+import com.myfablo.seller.utils.preference.AuthPref;
+import com.myfablo.seller.utils.retrofit.RestClient;
 import com.myfablo.seller.utils.Constant;
 import com.myfablo.seller.utils.alerts.OhSnapErrorAlert;
 
@@ -23,7 +23,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DiscountPromotionActivity extends AppCompatActivity implements View.OnClickListener {
+public class
+DiscountPromotionActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ActivityDiscountPromotionBinding binding;
     private Context context;

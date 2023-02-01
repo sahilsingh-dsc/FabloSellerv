@@ -9,16 +9,15 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.myfablo.seller.R;
 import com.myfablo.seller.databinding.ActivityOrderHistoryBinding;
-import com.myfablo.seller.interfaces.OrdersInterface;
+import com.myfablo.seller.utils.interfaces.OrdersInterface;
 import com.myfablo.seller.manage.orders.model.OrderResponse;
-import com.myfablo.seller.preference.OutletPref;
-import com.myfablo.seller.retrofit.RestClient;
+import com.myfablo.seller.utils.preference.OutletPref;
+import com.myfablo.seller.utils.retrofit.RestClient;
 import com.myfablo.seller.utils.Constant;
 
 import java.text.DateFormat;

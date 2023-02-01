@@ -13,10 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.myfablo.seller.databinding.BottomSheetCustomizationBinding;
-import com.myfablo.seller.interfaces.MenuInterface;
+import com.myfablo.seller.utils.interfaces.MenuInterface;
 import com.myfablo.seller.manage.menu.adapters.FoodCustomizationRecyclerAdapter;
 import com.myfablo.seller.manage.menu.models.customization.CustomizationResponse;
-import com.myfablo.seller.retrofit.RestClient;
+import com.myfablo.seller.utils.retrofit.RestClient;
 import com.myfablo.seller.utils.Constant;
 
 import retrofit2.Call;

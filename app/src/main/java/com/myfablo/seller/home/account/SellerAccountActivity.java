@@ -19,11 +19,11 @@ import com.myfablo.seller.manage.discount.DiscountPromotionActivity;
 import com.myfablo.seller.manage.kyc.SellerKycActivity;
 import com.myfablo.seller.manage.payout.PayoutActivity;
 import com.myfablo.seller.manage.support.SupportActivity;
-import com.myfablo.seller.preference.AuthPref;
-import com.myfablo.seller.preference.OrderServicePref;
-import com.myfablo.seller.preference.OutletPref;
-import com.myfablo.seller.preference.SelectedOptionPref;
-import com.myfablo.seller.services.OrderService;
+import com.myfablo.seller.utils.preference.AuthPref;
+import com.myfablo.seller.utils.preference.OrderServicePref;
+import com.myfablo.seller.utils.preference.OutletPref;
+import com.myfablo.seller.utils.preference.SelectedOptionPref;
+import com.myfablo.seller.utils.services.OrderService;
 import com.myfablo.seller.utils.alerts.LogoutAlert;
 
 import org.greenrobot.eventbus.EventBus;

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <LinearLayout
@@ -9,15 +10,6 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/ivShowHideProducts"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:padding="2dp"
-            android:background="?android:selectableItemBackgroundBorderless"
-            android:layout_marginStart="@dimen/_16sdp"
-            android:src="@drawable/ic_menu_arrow_down"/>
 
         <TextView
             android:id="@+id/tvSubCategoryName"
@@ -31,25 +23,44 @@
             android:layout_marginEnd="16dp"
             android:textColor="@color/color_text_title"
             android:fontFamily="@font/google_sans_medium"
-            android:text="Sub Category"/>
+            android:text="Sub Category" />
 
-        <TextView
-            android:id="@+id/tvAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ADD"
-            android:layout_marginEnd="16dp"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAdd"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="70dp"
+            android:layout_height="25dp"
             android:fontFamily="@font/google_sans_bold"
-            android:textSize="18sp"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            android:text="Add"
+            android:textAllCaps="true"
+            android:textSize="14sp"
             android:visibility="gone"
-            android:textColor="@color/color_primary"/>
+            app:cornerRadius="10dp" />
+
+        <ImageView
+            android:id="@+id/ivShowHideProducts"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:padding="2dp"
+            android:src="@drawable/ic_menu_arrow_down" />
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerProduct"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </LinearLayout>

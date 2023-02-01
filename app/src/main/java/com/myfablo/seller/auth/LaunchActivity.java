@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.myfablo.seller.databinding.ActivityLaunchBinding;
 import com.myfablo.seller.home.HomeActivity;
-import com.myfablo.seller.preference.AuthPref;
+import com.myfablo.seller.utils.preference.AuthPref;
 
 public class LaunchActivity extends AppCompatActivity {
 

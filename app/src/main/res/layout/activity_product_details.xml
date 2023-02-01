@@ -1,319 +1,288 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".catalogue.product.ProductDetailsActivity">
+    tools:context=".manage.menu.products.ProductDetailsActivity">
 
-    <FrameLayout
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <ImageView
+                android:id="@+id/ivGoBack"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="?android:selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:src="@drawable/ic_fab_go_back" />
+
+            <TextView
+                android:id="@+id/tvHeaderProductName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:fontFamily="@font/google_sans_medium"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/color_text_title"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/ivGoBack"
-            android:layout_width="@dimen/_28sdp"
-            android:layout_height="@dimen/_28sdp"
-            android:padding="@dimen/_3sdp"
-            android:layout_gravity="start|center_vertical"
-            android:layout_marginStart="@dimen/_16sdp"
-            android:src="@drawable/ic_left_arrow"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_18ssp"
-            android:layout_marginBottom="@dimen/_18ssp"
-            android:layout_gravity="center"
-            android:text="Product Details"
-            android:fontFamily="@font/google_sans_medium"
-            android:textColor="@color/color_text_title"
-            android:textSize="@dimen/_18ssp"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_1sdp"
-            android:layout_gravity="bottom"
-            android:background="@color/color_separator_light"/>
-
-    </FrameLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardImage"
+                android:layout_width="100dp"
+                android:layout_height="120dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:visibility="gone"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp">
 
                 <ImageView
                     android:id="@+id/ivProductImage"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_180sdp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_placeholder"/>
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ivServingType"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/ic_food_type_veg" />
+
+                <TextView
+                    android:id="@+id/tvProductName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/google_sans_bold"
+                    android:text="Aloo Paratha [2 Pcs.] With curd"
+                    android:textColor="@color/color_text_title"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/tvProductPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/google_sans_medium"
+                    android:text="₹100"
+                    android:textColor="@color/color_text_sub_head"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tvProductDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/google_sans_regular"
+                    android:text="Aloo Paratha 2 Pc. + Curd + Achaar + Lachha Salad + Toffee, Aloo Paratha 2 Pc. + Curd + Achaar + Lachha Salad + Toffee, Aloo Paratha 2 Pc. + Curd + Achaar + Lachha Salad + Toffee"
+                    android:textColor="@color/color_text_description"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/color_separator_light" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/lvVariations"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvVariations"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/google_sans_medium"
+                        android:padding="16dp"
+                        android:text="Variations"
+                        android:textColor="@color/color_text_title"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:id="@+id/viewVariations"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@color/color_primary" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="30dp"
+                    android:background="@color/color_separator_light" />
+
+                <LinearLayout
+                    android:id="@+id/lvAddons"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvAddons"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/google_sans_medium"
+                        android:padding="16dp"
+                        android:text="Add-ons"
+                        android:textColor="@color/color_text_description"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:id="@+id/viewAddons"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@color/color_primary"
+                        android:visibility="invisible" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:background="@color/black_alpha_55"
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tvProductName"
+                        android:id="@+id/tvVariationName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:layout_marginEnd="@dimen/_8sdp"
-                        android:text="Some Product"
-                        android:textSize="@dimen/_18ssp"
-                        android:fontFamily="@font/google_sans_bold"
-                        android:textColor="@color/color_text_for_bg"/>
-
-                    <TextView
-                        android:id="@+id/tvProductPrice"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_2sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:layout_marginEnd="@dimen/_8sdp"
-                        android:singleLine="true"
-                        android:text="₹100"
-                        android:textSize="@dimen/_14ssp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
                         android:fontFamily="@font/google_sans_medium"
-                        android:textColor="@color/color_text_for_bg"/>
+                        android:text="Title"
+                        android:textColor="@color/color_text_title"
+                        android:textSize="18sp"
+                        android:visibility="gone" />
 
-                    <LinearLayout
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerItems"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/tvProductStatus"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Active"
-                            android:textSize="@dimen/_12ssp"
-                            android:layout_marginStart="@dimen/_8sdp"
-                            android:layout_marginTop="@dimen/_8sdp"
-                            android:layout_marginBottom="@dimen/_8sdp"
-                            android:fontFamily="@font/google_sans_regular"
-                            android:textColor="@color/color_text_for_bg"
-                            android:background="@drawable/bg_status_delivered"
-                            android:paddingStart="@dimen/_4sdp"
-                            android:paddingEnd="@dimen/_4sdp"
-                            android:paddingTop="@dimen/_2sdp"
-                            android:paddingBottom="@dimen/_2sdp"/>
-
-                        <TextView
-                            android:id="@+id/tvCustomizationStatus"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Customization"
-                            android:textSize="@dimen/_12ssp"
-                            android:visibility="visible"
-                            android:layout_marginStart="@dimen/_8sdp"
-                            android:layout_marginTop="@dimen/_8sdp"
-                            android:layout_marginBottom="@dimen/_8sdp"
-                            android:fontFamily="@font/google_sans_regular"
-                            android:textColor="@color/color_text_for_bg"
-                            android:background="@drawable/bg_status_preparing"
-                            android:paddingStart="@dimen/_4sdp"
-                            android:paddingEnd="@dimen/_4sdp"
-                            android:paddingTop="@dimen/_2sdp"
-                            android:paddingBottom="@dimen/_2sdp"/>
-
-                    </LinearLayout>
-
-
+                        android:visibility="gone" />
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/lvNoData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/lottieNoData"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        app:lottie_loop="true"
+                        app:lottie_rawRes="@raw/lottie_no_data" />
+
+                    <TextView
+                        android:id="@+id/tvNoData"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/google_sans_regular"
+                        android:text="There is no menu in this outlet"
+                        android:textColor="@color/color_text_description"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/lottieLoading"
+                    android:layout_width="300dp"
+                    android:layout_height="300dp"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/lottie_loading" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/lottieError"
+                    android:layout_width="300dp"
+                    android:layout_height="300dp"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/lottie_error" />
+
             </FrameLayout>
 
-            <LinearLayout
-                android:id="@+id/lvCustomization"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Customization"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:fontFamily="@font/google_sans_medium"
-                    android:textColor="@color/color_text_title"
-                    android:textSize="@dimen/_14ssp"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerCustomization"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Description"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:fontFamily="@font/google_sans_medium"
-                    android:textColor="@color/color_text_title"
-                    android:textSize="@dimen/_14ssp"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Description not available"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_marginEnd="@dimen/_8sdp"
-                    android:fontFamily="@font/google_sans_regular"
-                    android:textColor="@color/color_text_description"
-                    android:textSize="@dimen/_12ssp"/>
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Other Information"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:fontFamily="@font/google_sans_medium"
-                android:textColor="@color/color_text_title"
-                android:textSize="@dimen/_14ssp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Inventory"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:fontFamily="@font/google_sans_regular"
-                    android:textColor="@color/color_text_sub_head"
-                    android:textSize="@dimen/_12ssp"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="No"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_marginEnd="@dimen/_8sdp"
-                    android:fontFamily="@font/google_sans_regular"
-                    android:textColor="@color/color_text_description"
-                    android:textSize="@dimen/_10ssp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Quantity Available"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:fontFamily="@font/google_sans_regular"
-                    android:textColor="@color/color_text_sub_head"
-                    android:textSize="@dimen/_12ssp"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="0"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_marginEnd="@dimen/_8sdp"
-                    android:fontFamily="@font/google_sans_regular"
-                    android:textColor="@color/color_text_description"
-                    android:textSize="@dimen/_10ssp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Minimum order quantity"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:fontFamily="@font/google_sans_regular"
-                    android:textColor="@color/color_text_sub_head"
-                    android:textSize="@dimen/_12ssp"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="1"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_marginEnd="@dimen/_8sdp"
-                    android:fontFamily="@font/google_sans_regular"
-                    android:textColor="@color/color_text_description"
-                    android:textSize="@dimen/_10ssp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Maximum quantity per order "
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:fontFamily="@font/google_sans_regular"
-                    android:textColor="@color/color_text_sub_head"
-                    android:textSize="@dimen/_12ssp"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="1"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_marginEnd="@dimen/_8sdp"
-                    android:fontFamily="@font/google_sans_regular"
-                    android:textColor="@color/color_text_description"
-                    android:textSize="@dimen/_10ssp"/>
-
-            </LinearLayout>
-
         </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
-    </ScrollView>
 
 </LinearLayout>

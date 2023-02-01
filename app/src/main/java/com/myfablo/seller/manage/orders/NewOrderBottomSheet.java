@@ -13,12 +13,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.myfablo.seller.databinding.BottomSheetNewOrderBinding;
-import com.myfablo.seller.interfaces.OrdersInterface;
+import com.myfablo.seller.utils.interfaces.OrdersInterface;
 import com.myfablo.seller.manage.orders.model.Item;
 import com.myfablo.seller.manage.orders.model.OrderDetailsResponse;
 import com.myfablo.seller.manage.orders.model.OrderStatusChangeRequest;
 import com.myfablo.seller.orders.model.OrderItemRecyclerAdapter;
-import com.myfablo.seller.retrofit.RestClient;
+import com.myfablo.seller.utils.retrofit.RestClient;
 import com.myfablo.seller.utils.Constant;
 
 import org.greenrobot.eventbus.EventBus;

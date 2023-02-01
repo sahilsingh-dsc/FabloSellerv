@@ -8,10 +8,10 @@ import android.util.Log;
 import android.view.View;
 
 import com.myfablo.seller.databinding.ActivitySupportBinding;
-import com.myfablo.seller.interfaces.SellerInterface;
+import com.myfablo.seller.utils.interfaces.SellerInterface;
 import com.myfablo.seller.manage.support.models.manager.SupportManagerResponse;
-import com.myfablo.seller.preference.AuthPref;
-import com.myfablo.seller.retrofit.RestClient;
+import com.myfablo.seller.utils.preference.AuthPref;
+import com.myfablo.seller.utils.retrofit.RestClient;
 import com.myfablo.seller.utils.Constant;
 
 import retrofit2.Call;

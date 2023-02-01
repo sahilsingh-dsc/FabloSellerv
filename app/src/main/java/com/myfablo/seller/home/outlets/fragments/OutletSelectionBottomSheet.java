@@ -16,9 +16,9 @@ import com.myfablo.seller.databinding.BottomSheetOutletSelectionBinding;
 import com.myfablo.seller.home.outlets.adapters.OutletsRecyclerAdapter;
 import com.myfablo.seller.home.outlets.models.OutletItem;
 import com.myfablo.seller.home.outlets.models.OutletsResponse;
-import com.myfablo.seller.interfaces.OutletInterface;
-import com.myfablo.seller.preference.AuthPref;
-import com.myfablo.seller.retrofit.RestClient;
+import com.myfablo.seller.utils.interfaces.OutletInterface;
+import com.myfablo.seller.utils.preference.AuthPref;
+import com.myfablo.seller.utils.retrofit.RestClient;
 import com.myfablo.seller.utils.Constant;
 
 import org.greenrobot.eventbus.EventBus;

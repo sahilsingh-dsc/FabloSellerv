@@ -1,8 +1,8 @@
 package com.myfablo.seller.manage.menu.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +20,7 @@ import com.google.android.material.card.MaterialCardView;
 import com.myfablo.seller.R;
 import com.myfablo.seller.manage.menu.fragments.CustomizationBottomSheet;
 import com.myfablo.seller.manage.menu.models.Product;
+import com.myfablo.seller.manage.menu.products.ProductDetailsActivity;
 import com.myfablo.seller.utils.alerts.ProductStockAlert;
 import com.suke.widget.SwitchButton;
 
@@ -103,7 +104,16 @@ public class FoodMenuProductRecyclerAdapter extends RecyclerView.Adapter<FoodMen
                     bundle.putString("price", product.getProductId());
                     CustomizationBottomSheet customizationBottomSheet = new CustomizationBottomSheet();
                     customizationBottomSheet.setArguments(bundle);
-                    customizationBottomSheet.show(((AppCompatActivity)context).getSupportFragmentManager(), "custom");
+                    customizationBottomSheet.show(((AppCompatActivity) context).getSupportFragmentManager(), "custom");
+                }
+            });
+
+            holder.btnViewDetails.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, ProductDetailsActivity.class);
+                    intent.putExtra("productId", product.getProductId());
+                    context.startActivity(intent);
                 }
             });
 
@@ -128,6 +138,7 @@ public class FoodMenuProductRecyclerAdapter extends RecyclerView.Adapter<FoodMen
         private SwitchButton switchStock;
         private TextView tvStockStatus;
         private LinearLayout lhProduct;
+        private MaterialButton btnViewDetails;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -143,6 +154,7 @@ public class FoodMenuProductRecyclerAdapter extends RecyclerView.Adapter<FoodMen
             switchStock = itemView.findViewById(R.id.switchStock);
             tvStockStatus = itemView.findViewById(R.id.tvStockStatus);
             lhProduct = itemView.findViewById(R.id.lhProduct);
+            btnViewDetails = itemView.findViewById(R.id.btnViewDetails);
 
         }
     }

@@ -3,10 +3,10 @@ package com.myfablo.seller.utils;
 import android.content.Context;
 
 import com.myfablo.seller.common.BasicResponse;
-import com.myfablo.seller.interfaces.OrdersInterface;
+import com.myfablo.seller.utils.interfaces.OrdersInterface;
 import com.myfablo.seller.manage.orders.model.OrderStatusChangeRequest;
-import com.myfablo.seller.preference.AuthPref;
-import com.myfablo.seller.retrofit.RestClient;
+import com.myfablo.seller.utils.preference.AuthPref;
+import com.myfablo.seller.utils.retrofit.RestClient;
 import com.myfablo.seller.utils.alerts.FabLoading;
 
 import org.greenrobot.eventbus.EventBus;

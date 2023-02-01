@@ -1,10 +1,7 @@
 package com.myfablo.seller.manage;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.DialogFragment;
 
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,32 +9,20 @@ import android.util.Log;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
-import com.myfablo.seller.R;
-import com.myfablo.seller.auth.WelcomeActivity;
 import com.myfablo.seller.common.BasicResponse;
 import com.myfablo.seller.databinding.ActivityManageBinding;
-import com.myfablo.seller.interfaces.OutletInterface;
-import com.myfablo.seller.manage.bank.BankActivity;
-import com.myfablo.seller.manage.discount.DiscountPromotionActivity;
+import com.myfablo.seller.utils.interfaces.OutletInterface;
 import com.myfablo.seller.manage.discount.OutletDiscountActivity;
 import com.myfablo.seller.manage.insights.OutletInsightsActivity;
-import com.myfablo.seller.manage.kyc.SellerKycActivity;
 import com.myfablo.seller.manage.menu.MenuActivity;
-import com.myfablo.seller.manage.orders.NewOrderBottomSheet;
 import com.myfablo.seller.manage.orders.OrderHistoryActivity;
 import com.myfablo.seller.manage.orders.PendingOrdersActivity;
 import com.myfablo.seller.manage.outlet.OutletDetailsActivity;
-import com.myfablo.seller.manage.payout.PayoutActivity;
-import com.myfablo.seller.manage.support.SupportActivity;
-import com.myfablo.seller.preference.AuthPref;
-import com.myfablo.seller.preference.OrderServicePref;
-import com.myfablo.seller.preference.OutletPref;
-import com.myfablo.seller.preference.SelectedOptionPref;
-import com.myfablo.seller.retrofit.RestClient;
-import com.myfablo.seller.services.OrderService;
+import com.myfablo.seller.utils.preference.AuthPref;
+import com.myfablo.seller.utils.preference.OutletPref;
+import com.myfablo.seller.utils.retrofit.RestClient;
 import com.myfablo.seller.utils.Constant;
 import com.myfablo.seller.utils.alerts.FabLoading;
-import com.myfablo.seller.utils.alerts.LogoutAlert;
 import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
 import com.suke.widget.SwitchButton;
 

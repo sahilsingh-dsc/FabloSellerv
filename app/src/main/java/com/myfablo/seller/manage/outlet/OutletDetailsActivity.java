@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.myfablo.seller.databinding.ActivityOutletDetailsBinding;
-import com.myfablo.seller.preference.OutletPref;
+import com.myfablo.seller.utils.preference.OutletPref;
 
 public class OutletDetailsActivity extends AppCompatActivity implements View.OnClickListener {
 

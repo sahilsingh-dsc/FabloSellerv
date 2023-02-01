@@ -13,14 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.myfablo.seller.databinding.BottomSheetDiscountSelectorBinding;
-import com.myfablo.seller.interfaces.DiscountInterface;
+import com.myfablo.seller.utils.interfaces.DiscountInterface;
 import com.myfablo.seller.manage.discount.adapters.SelectOfferRecyclerAdapter;
 import com.myfablo.seller.manage.discount.models.running.Item;
 import com.myfablo.seller.manage.discount.models.running.RunningOffersResponse;
 import com.myfablo.seller.manage.discount.models.running.SelectOffer;
-import com.myfablo.seller.preference.AuthPref;
-import com.myfablo.seller.preference.OutletPref;
-import com.myfablo.seller.retrofit.RestClient;
+import com.myfablo.seller.utils.preference.AuthPref;
+import com.myfablo.seller.utils.preference.OutletPref;
+import com.myfablo.seller.utils.retrofit.RestClient;
 import com.myfablo.seller.utils.Constant;
 
 import org.greenrobot.eventbus.EventBus;

@@ -10,13 +10,12 @@ import android.view.View;
 
 import com.myfablo.seller.common.BasicResponse;
 import com.myfablo.seller.databinding.ActivityPendingOrdersBinding;
-import com.myfablo.seller.interfaces.OrdersInterface;
+import com.myfablo.seller.utils.interfaces.OrdersInterface;
 import com.myfablo.seller.manage.orders.model.OrderResponse;
 import com.myfablo.seller.manage.orders.model.OrderStatusChangeRequest;
 import com.myfablo.seller.orders.OrderRecyclerAdapter;
-import com.myfablo.seller.preference.AuthPref;
-import com.myfablo.seller.preference.OutletPref;
-import com.myfablo.seller.retrofit.RestClient;
+import com.myfablo.seller.utils.preference.AuthPref;
+import com.myfablo.seller.utils.retrofit.RestClient;
 import com.myfablo.seller.utils.Constant;
 import com.myfablo.seller.utils.alerts.FabLoading;
 
