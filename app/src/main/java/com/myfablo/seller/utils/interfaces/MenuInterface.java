@@ -15,11 +15,12 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface MenuInterface {
 
     @GET("menu/{outletId}")
-    Call<FoodMenuResponse> getFullMenu(@Path("outletId") String outletId);
+    Call<FoodMenuResponse> getFullMenu(@Path("outletId") String outletId, @Query("page") Integer page);
 
     @GET("menu/category/{outletId}")
     Call<CategoryResponse> getCategory(@Path("outletId") String outletId);

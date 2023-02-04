@@ -13,4 +13,8 @@ public class ResponseFormatter {
     public String getPriceWithSymbol(Float price) {
         return "₹" + price;
     }
+
+    public String getMinMaxSelection(Integer min, Integer max) {
+        return "Minimum selection "+min+" / Maximum Selection "+max;
+    }
 }

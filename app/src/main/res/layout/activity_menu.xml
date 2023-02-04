@@ -128,6 +128,7 @@
         android:layout_weight="1">
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -142,10 +143,17 @@
                     android:layout_height="wrap_content"
                     android:visibility="gone"/>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_gravity="bottom"/>
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/lottieMenuLoader"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    android:visibility="invisible"
+                    app:lottie_rawRes="@raw/lottie_loading"
+                    android:layout_gravity="center"/>
 
             </LinearLayout>
 
@@ -223,6 +231,7 @@
         android:layout_height="wrap_content"
         android:background="@color/color_primary_alpha"
         android:gravity="center"
+        android:visibility="gone"
         android:orientation="horizontal">
 
         <TextView

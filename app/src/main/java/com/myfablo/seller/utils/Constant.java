@@ -2,12 +2,6 @@ package com.myfablo.seller.utils;
 
 public class Constant {
 
-    public static final String YELO_API_KEY = "a84b3b1809db536e3684b00dc7d26e93";
-    public static final String MP_ACCESS_TOKEN = "abc67e448d6a00ae9d1dabcf55b83509";
-    public static final int MP_USER_ID = 1183512;
-    public static final int MP_USER_ACCESS_TYPE_MERCHANT = 3;
-    public static final int MP_USER_ACCESS_TYPE_ADMIN = 2;
-
     public static final String FABLO_USER_TYPE_SELLER = "seller";
     public static final String PREF_AUTH = "auth";
     public static final String PREF_INIT = "init";
@@ -73,6 +67,25 @@ public class Constant {
 
     public static final String PUBNUB_PUBLISHER_KEY = "pub-c-40e1c3cd-397d-449b-9a06-2e0505653027";
     public static final String PUBNUB_SUBSCRIBER_KEY = "sub-c-e240b078-b657-4d79-84e1-0504adfe3cf8";
+
+    public static final int APP_ENV_DEVELOPMENT = 0;
+    public static final int APP_ENV_STAGING = 1;
+    public static final int APP_ENV_PRODUCTION = 2;
+
+    public static final String PROD_FABLO_USER_SERVICE_BASE_URL = "https://user.fablocdn.com/v1/";
+    public static final String PROD_FABLO_INVENTORY_SERVICE_BASE_URL = "https://inventory.fablocdn.com/v1/";
+    public static final String PROD_FABLO_ORDER_SERVICE_BASE_URL = "https://order.fablocdn.com/v1/";
+    public static final String PROD_FABLO_ADMIN_SERVICE_BASE_URL = "https://admin.fablocdn.com/v1/";
+
+    public static final String STAGE_FABLO_USER_SERVICE_BASE_URL = "https://user.fablocdn.com/v1/";
+    public static final String STAGE_FABLO_INVENTORY_SERVICE_BASE_URL = "https://inventory.fablocdn.com/v1/";
+    public static final String STAGE_FABLO_ORDER_SERVICE_BASE_URL = "https://order.fablocdn.com/v1/";
+    public static final String STAGE_FABLO_ADMIN_SERVICE_BASE_URL = "https://admin.fablocdn.com/v1/";
+
+    public static final String DEV_FABLO_USER_SERVICE_BASE_URL = "http://139.59.60.119:4006/v1/";
+    public static final String DEV_FABLO_INVENTORY_SERVICE_BASE_URL = "http://139.59.60.119:9000/v1/";
+    public static final String DEV_FABLO_ORDER_SERVICE_BASE_URL = "http://139.59.60.119:4007/v1/";
+    public static final String DEV_FABLO_ADMIN_SERVICE_BASE_URL = "http://139.59.60.119:4777/v1/";
 
 
 

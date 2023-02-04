@@ -72,39 +72,19 @@ public class FoodMenuProductRecyclerAdapter extends RecyclerView.Adapter<FoodMen
             if (product.isInStock()) {
                 holder.tvStockStatus.setText("In Stock");
                 holder.tvStockStatus.setTextColor(context.getResources().getColor(R.color.color_text_title));
-                holder.switchStock.setChecked(true);
                 holder.lhProduct.setBackgroundColor(context.getResources().getColor(R.color.white));
             } else {
                 holder.tvStockStatus.setText("Out of Stock");
                 holder.tvStockStatus.setTextColor(context.getResources().getColor(R.color.color_error));
-                holder.switchStock.setChecked(false);
                 holder.lhProduct.setBackgroundColor(context.getResources().getColor(R.color.color_separator_light));
             }
 
-            if (product.getHasCustomization()) {
-                holder.tvCustomization.setVisibility(View.VISIBLE);
-            } else {
-                holder.tvCustomization.setVisibility(View.GONE);
-            }
-
-            holder.viewStock.setOnClickListener(new View.OnClickListener() {
+            holder.lhProduct.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ProductStockAlert productStockAlert = ProductStockAlert.getInstance();
-                    productStockAlert.showAlert(context, product.isInStock(), product.getProductId(), product.getProductName());
-                }
-            });
-
-            holder.tvCustomization.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("product_id", product.getProductId());
-                    bundle.putString("name", product.getProductId());
-                    bundle.putString("price", product.getProductId());
-                    CustomizationBottomSheet customizationBottomSheet = new CustomizationBottomSheet();
-                    customizationBottomSheet.setArguments(bundle);
-                    customizationBottomSheet.show(((AppCompatActivity) context).getSupportFragmentManager(), "custom");
+                    Intent intent = new Intent(context, ProductDetailsActivity.class);
+                    intent.putExtra("productId", product.getProductId());
+                    context.startActivity(intent);
                 }
             });
 
@@ -133,9 +113,6 @@ public class FoodMenuProductRecyclerAdapter extends RecyclerView.Adapter<FoodMen
         private TextView tvProductPrice;
         private TextView tvProductDescription;
         private MaterialCardView cardImage;
-        private TextView tvCustomization;
-        private View viewStock;
-        private SwitchButton switchStock;
         private TextView tvStockStatus;
         private LinearLayout lhProduct;
         private MaterialButton btnViewDetails;
@@ -148,10 +125,7 @@ public class FoodMenuProductRecyclerAdapter extends RecyclerView.Adapter<FoodMen
             tvProductName = itemView.findViewById(R.id.tvProductName);
             tvProductPrice = itemView.findViewById(R.id.tvProductPrice);
             tvProductDescription = itemView.findViewById(R.id.tvProductDescription);
-            tvCustomization = itemView.findViewById(R.id.tvCustomization);
             cardImage = itemView.findViewById(R.id.cardImage);
-            viewStock = itemView.findViewById(R.id.viewStock);
-            switchStock = itemView.findViewById(R.id.switchStock);
             tvStockStatus = itemView.findViewById(R.id.tvStockStatus);
             lhProduct = itemView.findViewById(R.id.lhProduct);
             btnViewDetails = itemView.findViewById(R.id.btnViewDetails);

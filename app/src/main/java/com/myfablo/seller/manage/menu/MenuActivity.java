@@ -11,7 +11,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.myfablo.seller.R;
 import com.myfablo.seller.common.BasicResponse;
@@ -25,22 +27,28 @@ import com.myfablo.seller.manage.menu.addons.OutletAddonsInterface;
 import com.myfablo.seller.manage.menu.addons.models.addons_get.Item;
 import com.myfablo.seller.manage.menu.fragments.MenuToolBottomSheet;
 import com.myfablo.seller.manage.menu.models.FoodMenuResponse;
+import com.myfablo.seller.manage.menu.models.Menu;
 import com.myfablo.seller.manage.menu.models.StockUpdate;
 import com.myfablo.seller.utils.Constant;
+import com.myfablo.seller.utils.CustomLayoutManager;
 import com.myfablo.seller.utils.alerts.OhSnapErrorAlert;
 import com.myfablo.seller.utils.interfaces.MenuInterface;
 import com.myfablo.seller.utils.preference.OutletPref;
 import com.myfablo.seller.utils.retrofit.RestClient;
+import com.softrunapps.paginatedrecyclerview.PaginatedAdapter;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import ru.alexbykov.nopaginate.callback.OnLoadMoreListener;
+import ru.alexbykov.nopaginate.paginate.NoPaginate;
 
 public class MenuActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -49,8 +57,16 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
     private OutletAddOnsContract outletAddOnsContract;
     private String type;
+    private Integer pageIndex = 1;
+    private Integer pageLimit;
+    private FoodMenuCategoryRecyclerAdapter foodMenuCategoryRecyclerAdapter;
+    private List<Menu> menuList;
+    private List<Menu> previousMenuList;
+    private int lastVisibleItemPosition;
 
     private static final String TAG = "MenuActivity";
+    private boolean isLoading;
+    private boolean resume = false;
 
 
     @Override
@@ -68,7 +84,25 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         initAnimation();
         initContract();
         initRecycler();
-        getFullMenu();
+        selectAllItems();
+    }
+
+    private void initAdapter() {
+        menuList = new ArrayList<>();
+        previousMenuList = new ArrayList<>();
+        foodMenuCategoryRecyclerAdapter = new FoodMenuCategoryRecyclerAdapter(context, menuList);
+        binding.recyclerMenu.setAdapter(foodMenuCategoryRecyclerAdapter);
+        showData();
+        binding.nestedScrollMenu.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(@NonNull NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                lastVisibleItemPosition= ((CustomLayoutManager) binding.recyclerMenu.getLayoutManager()).findLastVisibleItemPosition();
+                if (scrollY == v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight()) {
+                    pageIndex++;
+                    getFullMenu();
+                }
+            }
+        });
     }
 
     private void initClick() {
@@ -80,7 +114,8 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initRecycler() {
-        binding.recyclerMenu.setLayoutManager(new LinearLayoutManager(context));
+        binding.recyclerMenu.setLayoutManager(new CustomLayoutManager(context));
+        binding.recyclerMenu.setItemViewCacheSize(100);
     }
 
     private void initAnimation() {
@@ -140,11 +175,12 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void getFullMenu() {
+        binding.lottieMenuLoader.setVisibility(View.VISIBLE);
         type = "items";
-        loadData();
+        isLoading = true;
         OutletPref outletPref = new OutletPref(context);
         MenuInterface menuInterface = RestClient.getRetrofitFabloInventoryService(context).create(MenuInterface.class);
-        Call<FoodMenuResponse> call = menuInterface.getFullMenu(outletPref.getOutletId());
+        Call<FoodMenuResponse> call = menuInterface.getFullMenu(outletPref.getOutletId(), pageIndex);
         call.enqueue(new Callback<FoodMenuResponse>() {
             @Override
             public void onResponse(@NonNull Call<FoodMenuResponse> call, @NonNull Response<FoodMenuResponse> response) {
@@ -152,16 +188,29 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                     if (response.body() != null) {
                         if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_SUCCESS) {
                             if (response.body().getItems().getMenu().size() == 0) {
+                                isLoading = false;
                                 binding.lottieLoading.loop(false);
                             } else {
-                                FoodMenuCategoryRecyclerAdapter foodMenuCategoryRecyclerAdapter = new FoodMenuCategoryRecyclerAdapter(context,
-                                        response.body().getItems().getMenu());
-                                binding.recyclerMenu.setAdapter(foodMenuCategoryRecyclerAdapter);
+                                pageLimit = response.body().getItems().getTotalPage();
+                                if (resume) {
+                                    if (menuList.size() != 0) {
+                                        menuList.remove(lastVisibleItemPosition);
+                                    }
+                                    resume = false;
+                                }
+                                menuList.addAll(response.body().getItems().getMenu());
+                                isLoading = false;
+                                binding.recyclerMenu.getAdapter().notifyDataSetChanged();
+                                binding.recyclerMenu.scrollToPosition(lastVisibleItemPosition);
                                 showData();
+                                binding.lottieMenuLoader.setVisibility(View.INVISIBLE);
                             }
-
+                        } else {
+                            isLoading = false;
                         }
                     }
+                } else {
+                    isLoading = false;
                 }
             }
 
@@ -169,9 +218,16 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
             public void onFailure(@NonNull Call<FoodMenuResponse> call, @NonNull Throwable t) {
                 Log.e(TAG, "onFailure: "+t.getMessage());
                 binding.lottieLoading.loop(false);
+                isLoading = false;
                 showError();
             }
         });
+    }
+
+    private void setRecyclerData() {
+        foodMenuCategoryRecyclerAdapter.notifyDataSetChanged();
+        binding.recyclerMenu.setAdapter(foodMenuCategoryRecyclerAdapter);
+        showData();
     }
 
     private void addCategory(AddCategoryRequest addCategoryRequest) {
@@ -184,7 +240,6 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                 if (response.code() == Constant.HTTP_RESPONSE_SUCCESS) {
                     if (response.body() != null) {
                         if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_SUCCESS) {
-                            getFullMenu();
                         } else {
                             Toast.makeText(context, "Something went wrong...", Toast.LENGTH_SHORT).show();
                         }
@@ -201,6 +256,9 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void selectAllItems() {
+        type = "items";
+        pageIndex = 1;
+        initAdapter();
         binding.viewAllItems.setVisibility(View.VISIBLE);
         binding.viewAddons.setVisibility(View.INVISIBLE);
         binding.tvAllItems.setTextColor(getResources().getColor(R.color.color_text_title));
@@ -257,36 +315,6 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         getFullMenu();
     }
 
-    private void updateProductStock(StockUpdate stockUpdate) {
-        MenuInterface menuInterface = RestClient.getRetrofitFabloInventoryService(context).create(MenuInterface.class);
-        Call<BasicResponse> call = menuInterface.changeProductStock(stockUpdate.getProductId());
-        call.enqueue(new Callback<BasicResponse>() {
-            @Override
-            public void onResponse(Call<BasicResponse> call, Response<BasicResponse> response) {
-                if (response.code() == Constant.HTTP_RESPONSE_SUCCESS) {
-                    if (response.body() != null) {
-                        if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_SUCCESS) {
-                            retryService();
-                        } else if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_NO_DATA) {
-                            OhSnapErrorAlert ohSnapErrorAlert = OhSnapErrorAlert.getInstance();
-                            ohSnapErrorAlert.showAlert(context, "Stock update can't be performed, Please contact your dedicated manager.");
-                        }
-                    }
-                } else if (response.code() == Constant.HTTP_CLIENT_ERROR) {
-                    showError();
-                } else if (response.code() == Constant.HTTP_SERVER_ERROR) {
-                    showError();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<BasicResponse> call, Throwable t) {
-                showError();
-                Log.e(TAG, "onFailure: " + t.getMessage());
-            }
-        });
-    }
-
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(String data) {
         if (data.equals("menuToolReload")) {
@@ -305,17 +333,18 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(StockUpdate stockUpdate) {
-        if (stockUpdate != null) {
-            updateProductStock(stockUpdate);
-        }
-    }
-
     @Override
     public void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        resume = true;
+        previousMenuList = menuList;
+        getFullMenu();
     }
 
     @Override
@@ -327,6 +356,11 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     @Override

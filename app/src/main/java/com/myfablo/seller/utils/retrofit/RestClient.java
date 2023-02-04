@@ -2,6 +2,9 @@ package com.myfablo.seller.utils.retrofit;
 
 import android.content.Context;
 
+import com.myfablo.seller.utils.AppConfig;
+import com.myfablo.seller.utils.Constant;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -12,28 +15,10 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class RestClient {
 
-    private static Retrofit retrofitYelo;
-    private static Retrofit retrofitMp;
     private static Retrofit retrofitFabloUserService;
     private static Retrofit retrofitFabloInventoryService;
     private static Retrofit retrofitFabloOrderService;
     private static Retrofit retrofitFabloAdminService;
-
-    private static final String PROD_FABLO_USER_SERVICE_BASE_URL = "https://user.fablocdn.com/v1/";
-    private static final String PROD_FABLO_INVENTORY_SERVICE_BASE_URL = "https://inventory.fablocdn.com/v1/";
-    private static final String PROD_FABLO_ORDER_SERVICE_BASE_URL = "https://order.fablocdn.com/v1/";
-    private static final String PROD_FABLO_ADMIN_SERVICE_BASE_URL = "https://admin.fablocdn.com/v1/";
-
-    private static final String STAGE_FABLO_USER_SERVICE_BASE_URL = "https://user.fablocdn.com/v1/";
-    private static final String STAGE_FABLO_INVENTORY_SERVICE_BASE_URL = "https://inventory.fablocdn.com/v1/";
-    private static final String STAGE_FABLO_ORDER_SERVICE_BASE_URL = "https://order.fablocdn.com/v1/";
-    private static final String STAGE_FABLO_ADMIN_SERVICE_BASE_URL = "https://admin.fablocdn.com/v1/";
-
-    private static final String DEV_FABLO_USER_SERVICE_BASE_URL = "http://139.59.60.119:4006/v1/";
-    private static final String DEV_FABLO_INVENTORY_SERVICE_BASE_URL = "http://139.59.60.119:9000/v1/";
-    private static final String DEV_FABLO_ORDER_SERVICE_BASE_URL = "http://139.59.60.119:4007/v1/";
-    private static final String DEV_FABLO_ADMIN_SERVICE_BASE_URL = "http://139.59.60.119:4777/v1/";
-
 
     public static Retrofit getRetrofitFabloUserService(Context context) {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -46,7 +31,7 @@ public class RestClient {
 
         if (retrofitFabloUserService == null) {
             retrofitFabloUserService = new Retrofit.Builder()
-                    .baseUrl(DEV_FABLO_USER_SERVICE_BASE_URL)
+                    .baseUrl(new AppConfig().getBaseUrl(Constant.APP_ENV_DEVELOPMENT).getUserBaseUrl())
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient)
@@ -66,7 +51,7 @@ public class RestClient {
 
         if (retrofitFabloInventoryService == null) {
             retrofitFabloInventoryService = new Retrofit.Builder()
-                    .baseUrl(DEV_FABLO_INVENTORY_SERVICE_BASE_URL)
+                    .baseUrl(new AppConfig().getBaseUrl(Constant.APP_ENV_DEVELOPMENT).getInventoryBaseUrl())
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient)
@@ -86,7 +71,7 @@ public class RestClient {
 
         if (retrofitFabloOrderService == null) {
             retrofitFabloOrderService = new Retrofit.Builder()
-                    .baseUrl(DEV_FABLO_ORDER_SERVICE_BASE_URL)
+                    .baseUrl(new AppConfig().getBaseUrl(Constant.APP_ENV_DEVELOPMENT).getOrderBaseUrl())
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient)
@@ -106,7 +91,7 @@ public class RestClient {
 
         if (retrofitFabloAdminService == null) {
             retrofitFabloAdminService = new Retrofit.Builder()
-                    .baseUrl(DEV_FABLO_ADMIN_SERVICE_BASE_URL)
+                    .baseUrl(new AppConfig().getBaseUrl(Constant.APP_ENV_DEVELOPMENT).getAdminBaseUrl())
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient)

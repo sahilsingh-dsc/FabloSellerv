@@ -16,7 +16,7 @@ public class Product {
     private String productName;
     @SerializedName("productPrice")
     @Expose
-    private Integer productPrice;
+    private Float productPrice;
 
     /**
      * No args constructor for use in serialization
@@ -30,7 +30,7 @@ public class Product {
      * @param productName
      * @param productPrice
      */
-    public Product(String addOnCategoryId, String addOnProductId, String productName, Integer productPrice) {
+    public Product(String addOnCategoryId, String addOnProductId, String productName, Float productPrice) {
         super();
         this.addOnCategoryId = addOnCategoryId;
         this.addOnProductId = addOnProductId;
@@ -62,11 +62,11 @@ public class Product {
         this.productName = productName;
     }
 
-    public Integer getProductPrice() {
+    public Float getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(Integer productPrice) {
+    public void setProductPrice(Float productPrice) {
         this.productPrice = productPrice;
     }
 

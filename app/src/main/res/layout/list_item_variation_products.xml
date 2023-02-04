@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lhCustomItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:selectableItemBackground"
+    android:clickable="true"
+    android:gravity="top"
+    android:orientation="horizontal"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp">
+
+    <ImageView
+        android:id="@+id/ivServingType"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="16dp"
+        android:visibility="gone"
+        android:src="@drawable/ic_food_type_veg" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvItemName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/google_sans_medium"
+            android:text="250 gms"
+            android:textColor="@color/color_text_sub_head"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/lhHasSubVariation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:visibility="gone"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/google_sans_bold"
+                android:text="SHOW VARIANT"
+                android:visibility="visible"
+                android:textColor="@color/color_text_description"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/ivShowHideProducts"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="top"
+                android:background="?android:selectableItemBackgroundBorderless"
+                android:padding="2dp"
+                android:src="@drawable/ic_menu_arrow_down_normal" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvItemPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/google_sans_medium"
+        android:text="₹0"
+        android:textColor="@color/color_text_sub_head"
+        android:textSize="16sp" />
+
+</LinearLayout>

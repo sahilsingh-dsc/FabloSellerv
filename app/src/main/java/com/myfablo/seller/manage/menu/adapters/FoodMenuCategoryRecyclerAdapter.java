@@ -17,6 +17,7 @@ import com.myfablo.seller.R;
 import com.myfablo.seller.manage.menu.MenuActivity;
 import com.myfablo.seller.manage.menu.fragments.MenuToolBottomSheet;
 import com.myfablo.seller.manage.menu.models.Menu;
+import com.myfablo.seller.utils.CustomLayoutManager;
 
 import java.util.List;
 
@@ -43,13 +44,15 @@ public class FoodMenuCategoryRecyclerAdapter extends RecyclerView.Adapter<FoodMe
         if (menu != null) {
             holder.tvCategoryName.setText(menu.getCategoryName()+" ("+menu.getItemCount()+")");
             if (menu.getHasSubCategory()) {
-                holder.recyclerSubCategory.setLayoutManager(new LinearLayoutManager(context));
+                holder.recyclerSubCategory.setLayoutManager(new CustomLayoutManager(context));
+                holder.recyclerSubCategory.setItemViewCacheSize(100);
                 FoodMenuSubCategoryRecyclerAdapter foodMenuSubCategoryRecyclerAdapter = new FoodMenuSubCategoryRecyclerAdapter(context,
                         menu.getSubCategoryList());
                 holder.recyclerSubCategory.setAdapter(foodMenuSubCategoryRecyclerAdapter);
                 holder.ivShowHideProducts.setVisibility(View.GONE);
             } else {
-                holder.recyclerProduct.setLayoutManager(new LinearLayoutManager(context));
+                holder.recyclerProduct.setLayoutManager(new CustomLayoutManager(context));
+                holder.recyclerProduct.setItemViewCacheSize(100);
                 FoodMenuProductRecyclerAdapter foodMenuProductRecyclerAdapter = new FoodMenuProductRecyclerAdapter(context, menu.getProductList());
                 holder.recyclerProduct.setAdapter(foodMenuProductRecyclerAdapter);
                 holder.ivShowHideProducts.setVisibility(View.VISIBLE);

@@ -35,11 +35,11 @@ public class OrderItemRecyclerAdapter extends RecyclerView.Adapter<OrderItemRecy
     public void onBindViewHolder(@NonNull OrderItemRecyclerAdapter.ViewHolder holder, int position) {
         Product product = productList.get(position);
         if (product != null) {
-            if (product.getHasCustomization()) {
-                holder.tvItemName.setText(product.getProductName()+" ("+product.getCustomization().get(0).getCustomItemName()+")");
-            } else {
-                holder.tvItemName.setText(product.getProductName());
-            }
+//            if (product.getHasCustomization()) {
+//                holder.tvItemName.setText(product.getProductName()+" ("+product.getCustomization().get(0).getCustomItemName()+")");
+//            } else {
+//                holder.tvItemName.setText(product.getProductName());
+//            }
             holder.tvItemQuantity.setText(product.getQuantity()+"");
 
         }

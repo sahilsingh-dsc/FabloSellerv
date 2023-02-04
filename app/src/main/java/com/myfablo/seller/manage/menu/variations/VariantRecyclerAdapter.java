@@ -25,7 +25,7 @@ public class VariantRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_variants, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_variation_products, parent, false);
         return new VariantViewHolder(view);
     }
 

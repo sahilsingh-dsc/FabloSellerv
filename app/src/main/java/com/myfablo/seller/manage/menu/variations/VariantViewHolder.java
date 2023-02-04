@@ -1,24 +1,27 @@
 package com.myfablo.seller.manage.menu.variations;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
 import com.myfablo.seller.R;
+import com.myfablo.seller.manage.menu.products.ProductDetailsActivity;
 import com.myfablo.seller.utils.ResponseFormatter;
 
-public class VariantViewHolder extends RecyclerView.ViewHolder {
+public class VariantViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     ImageView ivServingType;
     TextView tvItemName;
     TextView tvItemPrice;
-    TextView tvSubVariantName;
-    RecyclerView recyclerSubVariant;
+    LinearLayout lhHasSubVariation;
 
     private Context context;
     private Variant variant;
@@ -28,8 +31,7 @@ public class VariantViewHolder extends RecyclerView.ViewHolder {
         ivServingType = itemView.findViewById(R.id.ivServingType);
         tvItemName = itemView.findViewById(R.id.tvItemName);
         tvItemPrice = itemView.findViewById(R.id.tvItemPrice);
-        tvSubVariantName = itemView.findViewById(R.id.tvSubVariantName);
-        recyclerSubVariant = itemView.findViewById(R.id.recyclerSubVariant);
+        lhHasSubVariation = itemView.findViewById(R.id.lhHasSubVariation);
     }
 
     public void bindData(Context mContext, Variant variantData) {
@@ -40,17 +42,17 @@ public class VariantViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void initView() {
-        initRecycler();
+        initClick();
         showViewData();
+    }
+
+    private void initClick() {
+        lhHasSubVariation.setOnClickListener(this);
     }
 
     private void showViewData() {
         showVariantDetails();
         checkSubVariant();
-    }
-
-    private void initRecycler() {
-        recyclerSubVariant.setLayoutManager(new LinearLayoutManager(context));
     }
 
     private void showVariantDetails() {
@@ -60,19 +62,26 @@ public class VariantViewHolder extends RecyclerView.ViewHolder {
 
     private void checkSubVariant() {
         if (variant.getHasCustomization()) {
-            recyclerSubVariant.setVisibility(View.VISIBLE);
-            tvSubVariantName.setVisibility(View.VISIBLE);
-            tvSubVariantName.setText(variant.getVariantDetail().getVariationName());
-            showSubVariantDetails();
+            lhHasSubVariation.setVisibility(View.VISIBLE);
         } else {
-            recyclerSubVariant.setVisibility(View.GONE);
-            tvSubVariantName.setVisibility(View.GONE);
+            lhHasSubVariation.setVisibility(View.GONE);
         }
     }
 
     private void showSubVariantDetails() {
-        VariantRecyclerAdapter variantRecyclerAdapter = new VariantRecyclerAdapter(context, variant.getVariantDetail().getVariantList());
-        recyclerSubVariant.setAdapter(variantRecyclerAdapter);
+        SubVariantBottomSheet bottomSheet = new SubVariantBottomSheet();
+        Gson gson = new Gson();
+        String variantJson = gson.toJson(variant);
+        Bundle bundle = new Bundle();
+        bundle.putString("variant", variantJson);
+        bottomSheet.setArguments(bundle);
+        bottomSheet.show(((ProductDetailsActivity)context).getSupportFragmentManager(), "subVariant");
     }
 
+    @Override
+    public void onClick(View view) {
+        if (view == lhHasSubVariation) {
+            showSubVariantDetails();
+        }
+    }
 }

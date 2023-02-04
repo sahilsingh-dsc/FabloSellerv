@@ -17,6 +17,7 @@ import com.myfablo.seller.R;
 import com.myfablo.seller.manage.menu.MenuActivity;
 import com.myfablo.seller.manage.menu.fragments.MenuToolBottomSheet;
 import com.myfablo.seller.manage.menu.models.SubCategory;
+import com.myfablo.seller.utils.CustomLayoutManager;
 
 import java.util.List;
 
@@ -42,7 +43,8 @@ public class FoodMenuSubCategoryRecyclerAdapter extends RecyclerView.Adapter<Foo
         SubCategory subCategory = subCategoryList.get(position);
         if (subCategory != null) {
             holder.tvSubCategoryName.setText(subCategory.getCategoryName()+" ("+subCategory.getItemCount()+")");
-            holder.recyclerProduct.setLayoutManager(new LinearLayoutManager(context));
+            holder.recyclerProduct.setLayoutManager(new CustomLayoutManager(context));
+            holder.recyclerProduct.setItemViewCacheSize(100);
             FoodMenuProductRecyclerAdapter foodMenuProductRecyclerAdapter = new FoodMenuProductRecyclerAdapter(context, subCategory.getProductList());
             holder.recyclerProduct.setAdapter(foodMenuProductRecyclerAdapter);
             holder.ivShowHideProducts.setOnClickListener(new View.OnClickListener() {

@@ -5,23 +5,33 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.myfablo.seller.R;
+import com.myfablo.seller.common.BasicResponse;
 import com.myfablo.seller.databinding.ActivityProductDetailsBinding;
 import com.myfablo.seller.manage.menu.addons.AddonsCategoryRecyclerAdapter;
 import com.myfablo.seller.manage.menu.addons.OutletAddOnsContract;
 import com.myfablo.seller.manage.menu.addons.OutletAddonsInterface;
 import com.myfablo.seller.manage.menu.addons.models.addons_get.Item;
+import com.myfablo.seller.manage.menu.models.StockUpdate;
 import com.myfablo.seller.manage.menu.variations.ProductVariationResponse;
 import com.myfablo.seller.manage.menu.variations.Variant;
 import com.myfablo.seller.manage.menu.variations.VariantRecyclerAdapter;
 import com.myfablo.seller.utils.Constant;
 import com.myfablo.seller.utils.ResponseFormatter;
+import com.myfablo.seller.utils.alerts.OhSnapErrorAlert;
+import com.myfablo.seller.utils.alerts.ProductStockAlert;
 import com.myfablo.seller.utils.interfaces.MenuInterface;
 import com.myfablo.seller.utils.retrofit.RestClient;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -38,6 +48,9 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     private Items productDetails;
     private OutletAddOnsContract outletAddOnsContract;
     private String type;
+    private String variationName;
+    private Integer minVariation;
+    private Integer maxVariation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,19 +65,35 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     private void initView() {
         initClick();
         initRecycler();
+        initScroll();
         initContract();
         showViewData();
-        selectVariationsTab();
     }
 
     private void initClick() {
         binding.ivGoBack.setOnClickListener(this);
         binding.lvAddons.setOnClickListener(this);
         binding.lvVariations.setOnClickListener(this);
+        binding.viewStock.setOnClickListener(this);
     }
 
     private void initRecycler() {
         binding.recyclerItems.setLayoutManager(new LinearLayoutManager(context));
+    }
+
+    private void initScroll() {
+        binding.scrollProductDetails.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(@NonNull NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if (scrollY >= 100) {
+                    binding.cardProductDetails.setCardElevation(10);
+                    binding.tvHeaderProductName.setVisibility(View.VISIBLE);
+                } else {
+                    binding.cardProductDetails.setCardElevation(0);
+                    binding.tvHeaderProductName.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
     }
 
     private void initContract() {
@@ -112,6 +141,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
     private void showViewData() {
         productId = getIntent().getStringExtra("productId");
+        selectVariationsTab();
         getProductDetails();
     }
 
@@ -126,6 +156,8 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         showProductServing();
         showProductDesc();
         binding.tvProductName.setText(productDetails.getProductName());
+        binding.tvHeaderProductName.setText(productDetails.getProductName());
+        showStockDetails();
     }
 
     private void showProductPrice() {
@@ -133,6 +165,18 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
             binding.tvProductPrice.setText(new ResponseFormatter(context).getPriceWithSymbol(productDetails.getDisplayPrice()));
         } else {
             binding.tvProductPrice.setText(new ResponseFormatter(context).getPriceWithSymbol(productDetails.getProductPrice()));
+        }
+    }
+
+    private void showStockDetails() {
+        if (productDetails.getInStock()) {
+            binding.tvStockStatus.setText("In Stock");
+            binding.tvStockStatus.setTextColor(context.getResources().getColor(R.color.color_text_title));
+            binding.switchStock.setChecked(true);
+        } else {
+            binding.tvStockStatus.setText("Out of Stock");
+            binding.tvStockStatus.setTextColor(context.getResources().getColor(R.color.color_error));
+            binding.switchStock.setChecked(false);
         }
     }
 
@@ -162,7 +206,38 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         }
     }
 
+    private void updateProductStock(StockUpdate stockUpdate) {
+        MenuInterface menuInterface = RestClient.getRetrofitFabloInventoryService(context).create(MenuInterface.class);
+        Call<BasicResponse> call = menuInterface.changeProductStock(stockUpdate.getProductId());
+        call.enqueue(new Callback<BasicResponse>() {
+            @Override
+            public void onResponse(Call<BasicResponse> call, Response<BasicResponse> response) {
+                if (response.code() == Constant.HTTP_RESPONSE_SUCCESS) {
+                    if (response.body() != null) {
+                        if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_SUCCESS) {
+                            getProductDetails();
+                        } else if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_NO_DATA) {
+                            OhSnapErrorAlert ohSnapErrorAlert = OhSnapErrorAlert.getInstance();
+                            ohSnapErrorAlert.showAlert(context, "Stock update can't be performed, Please contact your dedicated manager.");
+                        }
+                    }
+                } else if (response.code() == Constant.HTTP_CLIENT_ERROR) {
+                    showError();
+                } else if (response.code() == Constant.HTTP_SERVER_ERROR) {
+                    showError();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BasicResponse> call, Throwable t) {
+                showError();
+                Log.e(TAG, "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
     private void getProductDetails() {
+        loadProductDetails();
         MenuInterface menuInterface = RestClient.getRetrofitFabloInventoryService(context).create(MenuInterface.class);
         menuInterface.getProductDetails(productId)
                 .enqueue(new Callback<ProductDetailsResponse>() {
@@ -171,6 +246,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                         if (response.code() == Constant.HTTP_RESPONSE_SUCCESS) {
                             if (response.body() != null) {
                                 if (response.body().getSubcode() == Constant.SERVICE_RESPONSE_CODE_SUCCESS) {
+                                    showProductDetailsData();
                                     productDetails = response.body().getItems();
                                     showProductDetails();
                                 } else if (response.body().getSubcode() == Constant.SERVICE_RESPONSE_CODE_NO_DATA) {
@@ -198,6 +274,9 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                             if (response.body() != null) {
                                 if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_SUCCESS) {
                                     showVariantsList(response.body().getItems().getVariantList());
+                                    variationName = response.body().getItems().getVariationName();
+                                    minVariation = response.body().getItems().getMinSelection();
+                                    maxVariation = response.body().getItems().getMaxSelection();
                                     showData();
                                 } else if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_NO_DATA) {
                                     noData();
@@ -221,12 +300,19 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         binding.recyclerItems.setAdapter(variantRecyclerAdapter);
     }
 
+    private void loadProductDetails() {
+        binding.scrollProductDetails.setVisibility(View.GONE);
+        binding.lottieLoading.setVisibility(View.VISIBLE);
+        binding.lottieLoading.playAnimation();
+    }
+
+    private void showProductDetailsData() {
+        binding.scrollProductDetails.setVisibility(View.VISIBLE);
+        binding.lottieLoading.setVisibility(View.GONE);
+        binding.lottieLoading.cancelAnimation();
+    }
+
     private void loadData() {
-        if (type.equals("items")) {
-            binding.tvVariationName.setVisibility(View.VISIBLE);
-        } else if (type.equals("addons")) {
-            binding.tvVariationName.setVisibility(View.GONE);
-        }
         binding.recyclerItems.setVisibility(View.GONE);
         binding.lvNoData.setVisibility(View.GONE);
         binding.lottieLoading.setVisibility(View.VISIBLE);
@@ -235,10 +321,11 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     }
 
     private void noData() {
-        if (type.equals("items")) {
-            binding.tvVariationName.setVisibility(View.GONE);
+        if (type.equals("variations")) {
+            binding.lhVariation.setVisibility(View.GONE);
             binding.tvNoData.setText("There are no variations in this product");
         } else if (type.equals("addons")) {
+            binding.lhVariation.setVisibility(View.GONE);
             binding.tvNoData.setText("There are no addons in this product");
         }
         binding.lottieNoData.playAnimation();
@@ -249,6 +336,15 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     }
 
     private void showData() {
+        if (type.equals("variations")) {
+            binding.tvVariationName.setText(variationName);
+            binding.tvSelection.setText(new ResponseFormatter(context).getMinMaxSelection(minVariation, maxVariation));
+            binding.lhVariation.setVisibility(View.VISIBLE);
+            binding.viewVariationsLine.setVisibility(View.VISIBLE);
+        } else if (type.equals("addons")) {
+            binding.lhVariation.setVisibility(View.GONE);
+            binding.viewVariationsLine.setVisibility(View.GONE);
+        }
         binding.lottieNoData.cancelAnimation();
         binding.lvNoData.setVisibility(View.GONE);
         binding.recyclerItems.setVisibility(View.VISIBLE);
@@ -264,6 +360,13 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         binding.lottieError.playAnimation();
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(StockUpdate stockUpdate) {
+        if (stockUpdate != null) {
+            updateProductStock(stockUpdate);
+        }
+    }
+
     @Override
     public void onClick(View view) {
         if (view == binding.ivGoBack) {
@@ -272,6 +375,27 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
             selectVariationsTab();
         } else if (view == binding.lvAddons) {
             selectAddOnsTab();
+        } else if (view == binding.viewStock) {
+            ProductStockAlert productStockAlert = ProductStockAlert.getInstance();
+            productStockAlert.showAlert(context, productDetails.getInStock(), productDetails.getProductId(), productDetails.getProductName());
         }
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
 }
