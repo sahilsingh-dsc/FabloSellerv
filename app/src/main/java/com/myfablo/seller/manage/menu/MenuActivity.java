@@ -54,19 +54,13 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
     private ActivityMenuBinding binding;
     private Context context;
-
     private OutletAddOnsContract outletAddOnsContract;
     private String type;
     private Integer pageIndex = 1;
-    private Integer pageLimit;
     private FoodMenuCategoryRecyclerAdapter foodMenuCategoryRecyclerAdapter;
     private List<Menu> menuList;
-    private List<Menu> previousMenuList;
-    private int lastVisibleItemPosition;
 
     private static final String TAG = "MenuActivity";
-    private boolean isLoading;
-    private boolean resume = false;
 
 
     @Override
@@ -89,20 +83,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initAdapter() {
         menuList = new ArrayList<>();
-        previousMenuList = new ArrayList<>();
         foodMenuCategoryRecyclerAdapter = new FoodMenuCategoryRecyclerAdapter(context, menuList);
-        binding.recyclerMenu.setAdapter(foodMenuCategoryRecyclerAdapter);
-        showData();
-        binding.nestedScrollMenu.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(@NonNull NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                lastVisibleItemPosition= ((CustomLayoutManager) binding.recyclerMenu.getLayoutManager()).findLastVisibleItemPosition();
-                if (scrollY == v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight()) {
-                    pageIndex++;
-                    getFullMenu();
-                }
-            }
-        });
     }
 
     private void initClick() {
@@ -177,7 +158,6 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     private void getFullMenu() {
         binding.lottieMenuLoader.setVisibility(View.VISIBLE);
         type = "items";
-        isLoading = true;
         OutletPref outletPref = new OutletPref(context);
         MenuInterface menuInterface = RestClient.getRetrofitFabloInventoryService(context).create(MenuInterface.class);
         Call<FoodMenuResponse> call = menuInterface.getFullMenu(outletPref.getOutletId(), pageIndex);
@@ -187,38 +167,15 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                 if (response.code() == Constant.HTTP_RESPONSE_SUCCESS) {
                     if (response.body() != null) {
                         if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_SUCCESS) {
-                            if (response.body().getItems().getMenu().size() == 0) {
-                                isLoading = false;
-                                binding.lottieLoading.loop(false);
-                            } else {
-                                pageLimit = response.body().getItems().getTotalPage();
-                                if (resume) {
-                                    if (menuList.size() != 0) {
-                                        menuList.remove(lastVisibleItemPosition);
-                                    }
-                                    resume = false;
-                                }
-                                menuList.addAll(response.body().getItems().getMenu());
-                                isLoading = false;
-                                binding.recyclerMenu.getAdapter().notifyDataSetChanged();
-                                binding.recyclerMenu.scrollToPosition(lastVisibleItemPosition);
-                                showData();
-                                binding.lottieMenuLoader.setVisibility(View.INVISIBLE);
-                            }
-                        } else {
-                            isLoading = false;
                         }
                     }
-                } else {
-                    isLoading = false;
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<FoodMenuResponse> call, @NonNull Throwable t) {
-                Log.e(TAG, "onFailure: "+t.getMessage());
+                Log.e(TAG, "onFailure: " + t.getMessage());
                 binding.lottieLoading.loop(false);
-                isLoading = false;
                 showError();
             }
         });
@@ -342,8 +299,6 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-        resume = true;
-        previousMenuList = menuList;
         getFullMenu();
     }
 
