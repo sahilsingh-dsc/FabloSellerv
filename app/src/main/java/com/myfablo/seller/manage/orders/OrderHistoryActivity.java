@@ -14,6 +14,7 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.myfablo.seller.R;
 import com.myfablo.seller.databinding.ActivityOrderHistoryBinding;
+import com.myfablo.seller.orders.v2.SellerOrdersResponse;
 import com.myfablo.seller.utils.interfaces.OrdersInterface;
 import com.myfablo.seller.manage.orders.model.OrderResponse;
 import com.myfablo.seller.utils.preference.OutletPref;
@@ -69,10 +70,10 @@ public class OrderHistoryActivity extends AppCompatActivity implements View.OnCl
         loadData();
         OutletPref outletPref = new OutletPref(context);
         OrdersInterface ordersInterface = RestClient.getRetrofitFabloOrderService(context).create(OrdersInterface.class);
-        Call<OrderResponse> orderResponseCall = ordersInterface.getOrderByDate(outletPref.getOutletId(), orderStatus, startDate, endDate);
-        orderResponseCall.enqueue(new Callback<OrderResponse>() {
+        Call<SellerOrdersResponse> orderResponseCall = ordersInterface.getOrderByDate(outletPref.getOutletId(), orderStatus, startDate, endDate);
+        orderResponseCall.enqueue(new Callback<SellerOrdersResponse>() {
             @Override
-            public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
+            public void onResponse(Call<SellerOrdersResponse> call, Response<SellerOrdersResponse> response) {
                 if (response.code() == Constant.HTTP_RESPONSE_SUCCESS) {
                     if (response.body() != null) {
                         if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_SUCCESS) {
@@ -87,8 +88,8 @@ public class OrderHistoryActivity extends AppCompatActivity implements View.OnCl
             }
 
             @Override
-            public void onFailure(Call<OrderResponse> call, Throwable t) {
-                Log.e(TAG, "onFailure: "+t.getMessage());
+            public void onFailure(Call<SellerOrdersResponse> call, Throwable t) {
+                Log.e(TAG, "onFailure: " + t.getMessage());
                 showError();
             }
         });
@@ -274,8 +275,8 @@ public class OrderHistoryActivity extends AppCompatActivity implements View.OnCl
             public void onPositiveButtonClick(Object selection) {
                 String dateRange = materialDatePicker.getHeaderText();
                 String[] dateRangeSplit = dateRange.split(" – ");
-                startDate = dateRangeSplit[0]+" 2022";
-                endDate = dateRangeSplit[1]+" 2022";
+                startDate = dateRangeSplit[0] + " 2022";
+                endDate = dateRangeSplit[1] + " 2022";
                 binding.tvCustomDateOrders.setText(materialDatePicker.getHeaderText());
                 getOrderHistory();
             }

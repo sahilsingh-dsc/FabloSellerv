@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.myfablo.seller.R;
-import com.myfablo.seller.manage.orders.model.Product;
+import com.myfablo.seller.orders.v2.Product;
 
 import java.util.List;
 
@@ -35,13 +35,16 @@ public class OrderItemRecyclerAdapter extends RecyclerView.Adapter<OrderItemRecy
     public void onBindViewHolder(@NonNull OrderItemRecyclerAdapter.ViewHolder holder, int position) {
         Product product = productList.get(position);
         if (product != null) {
-//            if (product.getHasCustomization()) {
-//                holder.tvItemName.setText(product.getProductName()+" ("+product.getCustomization().get(0).getCustomItemName()+")");
-//            } else {
-//                holder.tvItemName.setText(product.getProductName());
-//            }
+            if (product.getVariationName() != null) {
+                if (product.getAddOnName() != null) {
+                    holder.tvItemName.setText(product.getProductName()+" ("+product.getVariationName()+", "+product.getAddOnName()+")");
+                } else {
+                    holder.tvItemName.setText(product.getProductName()+" ("+product.getVariationName()+")");
+                }
+            } else {
+                holder.tvItemName.setText(product.getProductName());
+            }
             holder.tvItemQuantity.setText(product.getQuantity()+"");
-
         }
     }
 

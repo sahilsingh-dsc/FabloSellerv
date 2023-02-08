@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.myfablo.seller.common.BasicResponse;
 import com.myfablo.seller.databinding.ActivityPendingOrdersBinding;
+import com.myfablo.seller.orders.v2.SellerOrdersResponse;
 import com.myfablo.seller.utils.interfaces.OrdersInterface;
 import com.myfablo.seller.manage.orders.model.OrderResponse;
 import com.myfablo.seller.manage.orders.model.OrderStatusChangeRequest;
@@ -55,10 +56,10 @@ public class PendingOrdersActivity extends AppCompatActivity {
         loadData();
         AuthPref authPref = new AuthPref(context);
         OrdersInterface ordersInterface = RestClient.getRetrofitFabloOrderService(context).create(OrdersInterface.class);
-        Call<OrderResponse> call = ordersInterface.getOrderBySeller(authPref.getBearerToken());
-        call.enqueue(new Callback<OrderResponse>() {
+        Call<SellerOrdersResponse> call = ordersInterface.getOrderBySeller(authPref.getBearerToken());
+        call.enqueue(new Callback<SellerOrdersResponse>() {
             @Override
-            public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
+            public void onResponse(Call<SellerOrdersResponse> call, Response<SellerOrdersResponse> response) {
                 if (response.code() == Constant.HTTP_RESPONSE_SUCCESS) {
                     if (response.body() != null) {
                         if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_SUCCESS) {
@@ -74,7 +75,7 @@ public class PendingOrdersActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<OrderResponse> call, Throwable t) {
+            public void onFailure(Call<SellerOrdersResponse> call, Throwable t) {
                 Log.e(TAG, "onFailure: " + t.getMessage());
                 showError();
             }

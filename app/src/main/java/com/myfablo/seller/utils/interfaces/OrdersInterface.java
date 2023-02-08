@@ -2,11 +2,12 @@ package com.myfablo.seller.utils.interfaces;
 
 import com.myfablo.seller.common.BasicResponse;
 import com.myfablo.seller.home.account.insights.models.SellerProfitResponse;
-import com.myfablo.seller.manage.orders.model.OrderDetailsResponse;
 import com.myfablo.seller.manage.orders.model.OrderResponse;
 import com.myfablo.seller.manage.orders.model.OrderStatusChangeRequest;
 import com.myfablo.seller.orders.model.AllOrderRequest;
 import com.myfablo.seller.orders.model.AllOrderResponse;
+import com.myfablo.seller.orders.model.order_get.OrderDetailsResponse;
+import com.myfablo.seller.orders.v2.SellerOrdersResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -22,7 +23,7 @@ public interface OrdersInterface {
     Call<AllOrderResponse> getAllOrders(@Body AllOrderRequest allOrderRequest);
 
     @GET("order/upcoming/{outletId}")
-    Call<OrderResponse> getOrders(@Path("outletId") String outletId, @Query("status") String status);
+    Call<SellerOrdersResponse> getOrders(@Path("outletId") String outletId, @Query("status") String status);
 
     @POST("order/status")
     Call<BasicResponse> changeOrderStatus(@Header("Authorization") String token, @Body OrderStatusChangeRequest orderStatusChangeRequest);
@@ -31,10 +32,10 @@ public interface OrdersInterface {
     Call<OrderDetailsResponse> getOrderDetails(@Path("orderId") String orderId);
 
     @GET("order/outlet/{outletId}")
-    Call<OrderResponse> getOrderByDate(@Path("outletId") String outletId, @Query("status") String status, @Query("from") String from, @Query("to") String to);
+    Call<SellerOrdersResponse> getOrderByDate(@Path("outletId") String outletId, @Query("status") String status, @Query("from") String from, @Query("to") String to);
 
     @GET("order/seller")
-    Call<OrderResponse> getOrderBySeller(@Header("Authorization") String token);
+    Call<SellerOrdersResponse> getOrderBySeller(@Header("Authorization") String token);
 
     @GET("order/seller/profit")
     Call<SellerProfitResponse> getSellerProfit(@Header("Authorization") String token, @Query("from") String from, @Query("to") String to);

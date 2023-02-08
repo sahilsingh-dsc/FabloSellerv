@@ -52,11 +52,11 @@ public class FoodMenuProductRecyclerAdapter extends RecyclerView.Adapter<FoodMen
         if (product != null) {
             holder.tvProductPrice.setText("₹"+product.getProductPrice());
             holder.tvProductName.setText(product.getProductName());
-            if (product.getProductDesc().isEmpty()) {
+            if (product.getProductDesc() == null || product.getProductDesc().isEmpty()) {
                 holder.tvProductDescription.setVisibility(View.GONE);
             }
             holder.tvProductDescription.setText(product.getProductDesc());
-            if (product.getProductImage().isEmpty()) {
+            if (product.getProductImage() == null || product.getProductImage().isEmpty()) {
                 holder.cardImage.setVisibility(View.GONE);
             } else {
                 holder.cardImage.setVisibility(View.VISIBLE);

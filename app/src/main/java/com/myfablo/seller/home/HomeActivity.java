@@ -21,6 +21,7 @@ import com.myfablo.seller.home.account.SellerAccountActivity;
 import com.myfablo.seller.home.outlets.adapters.OutletsRecyclerAdapter;
 import com.myfablo.seller.home.outlets.models.OutletItem;
 import com.myfablo.seller.home.outlets.models.OutletsResponse;
+import com.myfablo.seller.orders.v2.SellerOrdersResponse;
 import com.myfablo.seller.utils.interfaces.ConfigInterface;
 import com.myfablo.seller.utils.interfaces.OrdersInterface;
 import com.myfablo.seller.utils.interfaces.OutletInterface;
@@ -240,10 +241,10 @@ public class HomeActivity extends AppCompatActivity implements SwitchButton.OnCh
     private void getOrder() {
         AuthPref authPref = new AuthPref(context);
         OrdersInterface ordersInterface = RestClient.getRetrofitFabloOrderService(context).create(OrdersInterface.class);
-        Call<OrderResponse> call = ordersInterface.getOrderBySeller(authPref.getBearerToken());
-        call.enqueue(new Callback<OrderResponse>() {
+        Call<SellerOrdersResponse> call = ordersInterface.getOrderBySeller(authPref.getBearerToken());
+        call.enqueue(new Callback<SellerOrdersResponse>() {
             @Override
-            public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
+            public void onResponse(Call<SellerOrdersResponse> call, Response<SellerOrdersResponse> response) {
                 if (response.code() == Constant.HTTP_RESPONSE_SUCCESS) {
                     if (response.body() != null) {
                         if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_SUCCESS) {
@@ -256,7 +257,7 @@ public class HomeActivity extends AppCompatActivity implements SwitchButton.OnCh
             }
 
             @Override
-            public void onFailure(Call<OrderResponse> call, Throwable t) {
+            public void onFailure(Call<SellerOrdersResponse> call, Throwable t) {
                 Log.e(TAG, "onFailure: " + t.getMessage());
                 showError();
             }
@@ -279,7 +280,7 @@ public class HomeActivity extends AppCompatActivity implements SwitchButton.OnCh
                             } else {
                                 Log.e(TAG, "onResponse: App update not available right now");
                             }
-                        } else if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_NO_DATA){
+                        } else if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_NO_DATA) {
                             OhSnapErrorAlert ohSnapErrorAlert = OhSnapErrorAlert.getInstance();
                             ohSnapErrorAlert.showAlert(context, "Critical app version check failed");
                         }
@@ -289,7 +290,7 @@ public class HomeActivity extends AppCompatActivity implements SwitchButton.OnCh
 
             @Override
             public void onFailure(Call<AppVersionResponse> call, Throwable t) {
-                Log.e(TAG, "onFailure: "+t.getMessage());
+                Log.e(TAG, "onFailure: " + t.getMessage());
             }
         });
     }

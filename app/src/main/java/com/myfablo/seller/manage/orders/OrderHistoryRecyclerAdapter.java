@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.myfablo.seller.R;
-import com.myfablo.seller.manage.orders.model.Item;
 import com.myfablo.seller.orders.model.OrderItemRecyclerAdapter;
+import com.myfablo.seller.orders.v2.Item;
 import com.myfablo.seller.utils.Constant;
 
 import java.util.List;

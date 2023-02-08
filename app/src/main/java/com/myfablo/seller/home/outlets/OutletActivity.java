@@ -16,6 +16,7 @@ import com.myfablo.seller.common.BasicResponse;
 import com.myfablo.seller.databinding.ActivityOutletBinding;
 import com.myfablo.seller.home.outlets.fragments.OutletSelectionBottomSheet;
 import com.myfablo.seller.home.outlets.models.single.OutletDetailsResponse;
+import com.myfablo.seller.orders.v2.SellerOrdersResponse;
 import com.myfablo.seller.utils.interfaces.OrdersInterface;
 import com.myfablo.seller.utils.interfaces.OutletInterface;
 import com.myfablo.seller.manage.ManageActivity;
@@ -107,10 +108,10 @@ public class OutletActivity extends AppCompatActivity implements View.OnClickLis
         loadData();
         OutletPref outletPref = new OutletPref(context);
         OrdersInterface ordersInterface = RestClient.getRetrofitFabloOrderService(context).create(OrdersInterface.class);
-        Call<OrderResponse> call = ordersInterface.getOrders(outletPref.getOutletId(), orderStatus);
-        call.enqueue(new Callback<OrderResponse>() {
+        Call<SellerOrdersResponse> call = ordersInterface.getOrders(outletPref.getOutletId(), orderStatus);
+        call.enqueue(new Callback<SellerOrdersResponse>() {
             @Override
-            public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
+            public void onResponse(Call<SellerOrdersResponse> call, Response<SellerOrdersResponse> response) {
                 if (response.code() == Constant.HTTP_RESPONSE_SUCCESS) {
                     if (response.body() != null) {
                         if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_SUCCESS) {
@@ -125,7 +126,7 @@ public class OutletActivity extends AppCompatActivity implements View.OnClickLis
             }
 
             @Override
-            public void onFailure(Call<OrderResponse> call, Throwable t) {
+            public void onFailure(Call<SellerOrdersResponse> call, Throwable t) {
                 Log.e(TAG, "onFailure: "+t.getMessage());
                 showError();
             }

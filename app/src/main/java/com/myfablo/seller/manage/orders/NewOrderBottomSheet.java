@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.myfablo.seller.databinding.BottomSheetNewOrderBinding;
+import com.myfablo.seller.orders.model.order_get.Item;
+import com.myfablo.seller.orders.model.order_get.OrderDetailsResponse;
 import com.myfablo.seller.utils.interfaces.OrdersInterface;
-import com.myfablo.seller.manage.orders.model.Item;
-import com.myfablo.seller.manage.orders.model.OrderDetailsResponse;
 import com.myfablo.seller.manage.orders.model.OrderStatusChangeRequest;
 import com.myfablo.seller.orders.model.OrderItemRecyclerAdapter;
 import com.myfablo.seller.utils.retrofit.RestClient;
@@ -66,10 +66,10 @@ public class NewOrderBottomSheet extends BottomSheetDialogFragment implements Vi
                     if (response.body() != null) {
                         if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_SUCCESS) {
                             OrderDetailsResponse orderDetailsResponse = response.body();
-                            Item item = orderDetailsResponse.getItems();
-                            if (item != null) {
-                                showOrderDetails(item);
-                            }
+                            Item item;
+//                            if (item != null) {
+//                                showOrderDetails(item);
+//                            }
                         }
                     }
                 }
@@ -87,8 +87,8 @@ public class NewOrderBottomSheet extends BottomSheetDialogFragment implements Vi
         binding.tvOrderTime.setText(item.getTiming().get(0).getTime());
         binding.tvCustomerName.setText(item.getClient().getClientName());
         binding.tvOrderTotal.setText(getPriceWithSymbol(item.getPayableAmount()));
-        OrderItemRecyclerAdapter orderItemRecyclerAdapter = new OrderItemRecyclerAdapter(context, item.getProductList());
-        binding.recyclerOrderItem.setAdapter(orderItemRecyclerAdapter);
+//        OrderItemRecyclerAdapter orderItemRecyclerAdapter = new OrderItemRecyclerAdapter(context, item.getProductList());
+//        binding.recyclerOrderItem.setAdapter(orderItemRecyclerAdapter);
     }
 
     private String getPriceWithSymbol(float amount) {
