@@ -20,8 +20,8 @@ android {
         applicationId "com.myfablo.seller"
         minSdk 21
         targetSdk 32
-        versionCode 3
-        versionName "0223.1 (Prod)"
+        versionCode 4
+        versionName "0223.2 (Prod)"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

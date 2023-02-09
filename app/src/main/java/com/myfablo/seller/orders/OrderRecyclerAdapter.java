@@ -94,7 +94,6 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
             }
 
 
-
             if (item.getStatus().equals(Constant.ORDER_STATUS_PENDING)) {
                 holder.lhOutletSelector.setVisibility(View.VISIBLE);
                 holder.tvOutletName.setText(item.getOutlet().getOutletName());

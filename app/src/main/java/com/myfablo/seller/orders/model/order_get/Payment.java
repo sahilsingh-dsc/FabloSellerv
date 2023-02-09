@@ -11,12 +11,6 @@ public class Payment {
     @SerializedName("paymentStatus")
     @Expose
     private String paymentStatus;
-    @SerializedName("method")
-    @Expose
-    private String method;
-    @SerializedName("_id")
-    @Expose
-    private String id;
 
     /**
      * No args constructor for use in serialization
@@ -25,17 +19,13 @@ public class Payment {
     }
 
     /**
-     * @param method
      * @param paymentMode
-     * @param id
      * @param paymentStatus
      */
-    public Payment(String paymentMode, String paymentStatus, String method, String id) {
+    public Payment(String paymentMode, String paymentStatus) {
         super();
         this.paymentMode = paymentMode;
         this.paymentStatus = paymentStatus;
-        this.method = method;
-        this.id = id;
     }
 
     public String getPaymentMode() {
@@ -52,22 +42,6 @@ public class Payment {
 
     public void setPaymentStatus(String paymentStatus) {
         this.paymentStatus = paymentStatus;
-    }
-
-    public String getMethod() {
-        return method;
-    }
-
-    public void setMethod(String method) {
-        this.method = method;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
 }
