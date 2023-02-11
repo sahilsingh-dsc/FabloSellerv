@@ -51,113 +51,16 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:id="@+id/lvAllItems"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tvAllItems"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/google_sans_medium"
-                android:padding="16dp"
-                android:text="All Items"
-                android:textColor="@color/color_text_title"
-                android:textSize="18sp" />
-
-            <View
-                android:id="@+id/viewAllItems"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:background="@color/color_primary" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="30dp"
-            android:background="@color/color_separator_light" />
-
-        <LinearLayout
-            android:id="@+id/lvAddons"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tvAddons"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/google_sans_medium"
-                android:padding="16dp"
-                android:text="Add-ons"
-                android:textColor="@color/color_text_description"
-                android:textSize="18sp" />
-
-            <View
-                android:id="@+id/viewAddons"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:background="@color/color_primary"
-                android:visibility="invisible" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/nestedScrollMenu"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerMenu"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerMenu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"/>
-
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/lottieMenuLoader"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    app:lottie_autoPlay="true"
-                    app:lottie_loop="true"
-                    android:visibility="invisible"
-                    app:lottie_rawRes="@raw/lottie_loading"
-                    android:layout_gravity="center"/>
-
-            </LinearLayout>
-
-        </androidx.core.widget.NestedScrollView>
+            android:layout_height="wrap_content"
+            android:visibility="visible"/>
 
         <LinearLayout
             android:id="@+id/lvNoData"
@@ -187,15 +90,6 @@
         </LinearLayout>
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lottieLoading"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:layout_gravity="center"
-            android:visibility="gone"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/lottie_loading"/>
-
-        <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottieError"
             android:layout_width="300dp"
             android:layout_height="300dp"
@@ -204,60 +98,43 @@
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/lottie_error"/>
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardAddMenu"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:cardElevation="5dp"
-            android:layout_gravity="bottom|end"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="@color/color_primary"
-            android:visibility="gone"
-            app:shapeAppearance="@style/circle">
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_add" />
-
-        </com.google.android.material.card.MaterialCardView>
-
     </FrameLayout>
 
-    <LinearLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_primary_alpha"
-        android:gravity="center"
-        android:visibility="gone"
-        android:orientation="horizontal">
+        app:cardCornerRadius="0dp"
+        app:cardElevation="10dp">
 
-        <TextView
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="16dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/google_sans_medium"
-            android:paddingTop="24dp"
-            android:paddingBottom="24dp"
-            android:text="Access menu tool from here."
-            android:textColor="@color/color_text_sub_head" />
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:orientation="horizontal">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnMenuTool"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:fontFamily="@font/google_sans_bold"
-            android:text="Menu Tool"
-            android:textAllCaps="false"
-            app:cornerRadius="8dp" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="You can find outlet addons from here"
+                android:fontFamily="@font/google_sans_medium"
+                android:textSize="14sp"
+                android:textColor="@color/color_text_title"/>
 
-    </LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddOns"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cornerRadius="10dp"
+                android:layout_marginEnd="16dp"
+                android:text="Addons"/>
 
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>

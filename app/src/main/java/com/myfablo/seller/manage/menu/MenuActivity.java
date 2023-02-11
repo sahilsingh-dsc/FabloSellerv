@@ -4,6 +4,7 @@ import static androidx.fragment.app.DialogFragment.STYLE_NORMAL;
 
 import android.animation.Animator;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -54,9 +55,12 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
     private ActivityMenuBinding binding;
     private Context context;
-    private OutletAddOnsContract outletAddOnsContract;
-    private String type;
     private Integer pageIndex = 1;
+    private Integer pageLimit;
+    private int visibleThreshold = 5;
+    private int lastVisibleItem;
+    private int totalItemCount;
+    private boolean isLoading = false;
     private FoodMenuCategoryRecyclerAdapter foodMenuCategoryRecyclerAdapter;
     private List<Menu> menuList;
 
@@ -74,90 +78,38 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView() {
-        initClick();
-        initAnimation();
-        initContract();
-        initRecycler();
-        selectAllItems();
-    }
-
-    private void initAdapter() {
         menuList = new ArrayList<>();
-        foodMenuCategoryRecyclerAdapter = new FoodMenuCategoryRecyclerAdapter(context, menuList);
+        initClick();
+        initRecycler();
     }
 
     private void initClick() {
         binding.ivGoBack.setOnClickListener(this);
-        binding.cardAddMenu.setOnClickListener(this);
-        binding.lvAllItems.setOnClickListener(this);
-        binding.lvAddons.setOnClickListener(this);
-        binding.btnMenuTool.setOnClickListener(this);
+        binding.btnAddOns.setOnClickListener(this);
     }
 
     private void initRecycler() {
-        binding.recyclerMenu.setLayoutManager(new CustomLayoutManager(context));
-        binding.recyclerMenu.setItemViewCacheSize(100);
-    }
+        binding.recyclerMenu.setLayoutManager(new LinearLayoutManager(context));
+        foodMenuCategoryRecyclerAdapter = new FoodMenuCategoryRecyclerAdapter(context);
+        binding.recyclerMenu.setAdapter(foodMenuCategoryRecyclerAdapter);
 
-    private void initAnimation() {
-        binding.lottieLoading.addAnimatorListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animator) {
-                noData();
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animator) {
-
-            }
+        binding.recyclerMenu.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            LinearLayoutManager linearLayoutManager = (LinearLayoutManager) binding.recyclerMenu.getLayoutManager();
+            assert linearLayoutManager != null;
+            totalItemCount = linearLayoutManager.getItemCount();
+            lastVisibleItem = linearLayoutManager.findLastVisibleItemPosition();
+                if (!isLoading && totalItemCount <= (lastVisibleItem + visibleThreshold)) {
+                    if (pageIndex <= pageLimit) {
+                        isLoading = true;
+                        pageIndex++;
+                        getFullMenu();
+                        isLoading = false;
+                    }
+                }
         });
-    }
-
-    private void initContract() {
-        outletAddOnsContract = new OutletAddOnsContract(context, new OutletAddonsInterface() {
-            @Override
-            public void onContractProgress() {
-                loadData();
-                type = "addons";
-            }
-
-            @Override
-            public void onContractResponse(List<Item> items) {
-                showData();
-                setAddOns(items);
-            }
-
-            @Override
-            public void onContractNotFound() {
-                noData();
-            }
-
-            @Override
-            public void onContractFailure() {
-                binding.lottieLoading.loop(false);
-                showError();
-            }
-        });
-    }
-
-    private void setAddOns(List<Item> items) {
-        AddonsCategoryRecyclerAdapter addonsCategoryRecyclerAdapter = new AddonsCategoryRecyclerAdapter(context, items);
-        binding.recyclerMenu.setAdapter(addonsCategoryRecyclerAdapter);
     }
 
     private void getFullMenu() {
-        binding.lottieMenuLoader.setVisibility(View.VISIBLE);
-        type = "items";
         OutletPref outletPref = new OutletPref(context);
         MenuInterface menuInterface = RestClient.getRetrofitFabloInventoryService(context).create(MenuInterface.class);
         Call<FoodMenuResponse> call = menuInterface.getFullMenu(outletPref.getOutletId(), pageIndex);
@@ -167,6 +119,10 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                 if (response.code() == Constant.HTTP_RESPONSE_SUCCESS) {
                     if (response.body() != null) {
                         if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_SUCCESS) {
+                            pageLimit = response.body().getItems().getTotalPage();
+                            menuList.addAll(response.body().getItems().getMenu());
+                            foodMenuCategoryRecyclerAdapter.submitList(menuList);
+                            binding.recyclerMenu.scrollToPosition(lastVisibleItem);
                         }
                     }
                 }
@@ -175,97 +131,8 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onFailure(@NonNull Call<FoodMenuResponse> call, @NonNull Throwable t) {
                 Log.e(TAG, "onFailure: " + t.getMessage());
-                binding.lottieLoading.loop(false);
-                showError();
             }
         });
-    }
-
-    private void setRecyclerData() {
-        foodMenuCategoryRecyclerAdapter.notifyDataSetChanged();
-        binding.recyclerMenu.setAdapter(foodMenuCategoryRecyclerAdapter);
-        showData();
-    }
-
-    private void addCategory(AddCategoryRequest addCategoryRequest) {
-        loadData();
-        MenuInterface menuInterface = RestClient.getRetrofitFabloInventoryService(context).create(MenuInterface.class);
-        Call<BasicResponse> call = menuInterface.addCategory(addCategoryRequest);
-        call.enqueue(new Callback<BasicResponse>() {
-            @Override
-            public void onResponse(@NonNull Call<BasicResponse> call, @NonNull Response<BasicResponse> response) {
-                if (response.code() == Constant.HTTP_RESPONSE_SUCCESS) {
-                    if (response.body() != null) {
-                        if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_SUCCESS) {
-                        } else {
-                            Toast.makeText(context, "Something went wrong...", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<BasicResponse> call, @NonNull Throwable t) {
-                Log.d(TAG, "onFailure: " + t.getMessage());
-                Toast.makeText(context, "Something went wrong...", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void selectAllItems() {
-        type = "items";
-        pageIndex = 1;
-        initAdapter();
-        binding.viewAllItems.setVisibility(View.VISIBLE);
-        binding.viewAddons.setVisibility(View.INVISIBLE);
-        binding.tvAllItems.setTextColor(getResources().getColor(R.color.color_text_title));
-        binding.tvAddons.setTextColor(getResources().getColor(R.color.color_text_description));
-        getFullMenu();
-    }
-
-    private void selectAddons() {
-        binding.viewAddons.setVisibility(View.VISIBLE);
-        binding.viewAllItems.setVisibility(View.INVISIBLE);
-        binding.tvAddons.setTextColor(getResources().getColor(R.color.color_text_title));
-        binding.tvAllItems.setTextColor(getResources().getColor(R.color.color_text_description));
-        outletAddOnsContract.getOutletAddOns();
-    }
-
-    private void loadData() {
-        binding.recyclerMenu.setVisibility(View.GONE);
-        binding.lvNoData.setVisibility(View.GONE);
-        binding.lottieLoading.setVisibility(View.VISIBLE);
-        binding.lottieError.setVisibility(View.GONE);
-        binding.lottieLoading.playAnimation();
-    }
-
-    private void noData() {
-        if (type.equals("items")) {
-            binding.tvNoData.setText("There are no menu items in this outlet");
-        } else if (type.equals("addons")) {
-            binding.tvNoData.setText("There are no addons in this outlet");
-        }
-        binding.lottieNoData.playAnimation();
-        binding.lvNoData.setVisibility(View.VISIBLE);
-        binding.recyclerMenu.setVisibility(View.GONE);
-        binding.lottieLoading.setVisibility(View.GONE);
-        binding.lottieError.setVisibility(View.GONE);
-    }
-
-    private void showData() {
-        binding.lottieNoData.cancelAnimation();
-        binding.lvNoData.setVisibility(View.GONE);
-        binding.recyclerMenu.setVisibility(View.VISIBLE);
-        binding.lottieError.setVisibility(View.GONE);
-        binding.lottieLoading.setVisibility(View.GONE);
-    }
-
-    private void showError() {
-        binding.recyclerMenu.setVisibility(View.GONE);
-        binding.lottieNoData.setVisibility(View.GONE);
-        binding.lottieLoading.setVisibility(View.GONE);
-        binding.lottieError.setVisibility(View.VISIBLE);
-        binding.lottieError.playAnimation();
     }
 
     private void retryService() {
@@ -275,18 +142,13 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(String data) {
         if (data.equals("menuToolReload")) {
-            if (type.equals("items")) {
-                selectAllItems();
-            } else if (type.equals("addons")) {
-                selectAddons();
-            }
+
         }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(AddCategoryRequest addCategoryRequest) {
         if (addCategoryRequest != null) {
-            addCategory(addCategoryRequest);
         }
     }
 
@@ -322,20 +184,9 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         if (view == binding.ivGoBack) {
             onBackPressed();
-        } else if (view == binding.cardAddMenu) {
-            Bundle bundle = new Bundle();
-            bundle.putBoolean("subCategory", false);
-            AddCategoryBottomSheet addCategoryBottomSheet = new AddCategoryBottomSheet();
-            addCategoryBottomSheet.setStyle(STYLE_NORMAL, R.style.DialogStyle);
-            addCategoryBottomSheet.setArguments(bundle);
-            addCategoryBottomSheet.show(getSupportFragmentManager(), "addCategory");
-        } else if (view == binding.lvAllItems) {
-            selectAllItems();
-        } else if (view == binding.lvAddons) {
-            selectAddons();
-        } else if (view == binding.btnMenuTool) {
-            MenuToolBottomSheet menuToolBottomSheet = new MenuToolBottomSheet();
-            menuToolBottomSheet.show(getSupportFragmentManager(), "menuTool");
+        } else if (view == binding.btnAddOns) {
+            Intent intent = new Intent(context, OutletAddonsActivity.class);
+            startActivity(intent);
         }
     }
 }

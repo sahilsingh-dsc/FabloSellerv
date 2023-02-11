@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Menu {
 
@@ -36,6 +37,19 @@ public class Menu {
      * No args constructor for use in serialization
      */
     public Menu() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Menu menu = (Menu) o;
+        return categoryId.equals(menu.categoryId) && categoryName.equals(menu.categoryName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(categoryId, categoryName);
     }
 
     /**

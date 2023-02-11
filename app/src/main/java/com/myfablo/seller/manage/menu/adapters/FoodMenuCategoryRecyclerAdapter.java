@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,6 +18,7 @@ import com.myfablo.seller.R;
 import com.myfablo.seller.manage.menu.MenuActivity;
 import com.myfablo.seller.manage.menu.fragments.MenuToolBottomSheet;
 import com.myfablo.seller.manage.menu.models.Menu;
+import com.myfablo.seller.utils.AsyncListDiffer;
 import com.myfablo.seller.utils.CustomLayoutManager;
 
 import java.util.List;
@@ -24,11 +26,25 @@ import java.util.List;
 public class FoodMenuCategoryRecyclerAdapter extends RecyclerView.Adapter<FoodMenuCategoryRecyclerAdapter.ViewHolder> {
 
     private Context context;
-    private List<Menu> menuList;
+    private AsyncListDiffer<Menu> differ;
 
-    public FoodMenuCategoryRecyclerAdapter(Context context, List<Menu> menuList) {
+    public FoodMenuCategoryRecyclerAdapter(Context context) {
         this.context = context;
-        this.menuList = menuList;
+        this.differ = new AsyncListDiffer<>(this, new DiffUtil.ItemCallback<Menu>() {
+            @Override
+            public boolean areItemsTheSame(@NonNull Menu oldItem, @NonNull Menu newItem) {
+                return oldItem.getCategoryId() == newItem.getCategoryId();
+            }
+
+            @Override
+            public boolean areContentsTheSame(@NonNull Menu oldItem, @NonNull Menu newItem) {
+                return oldItem.equals(newItem);
+            }
+        });
+    }
+
+    public void submitList(List<Menu> data) {
+        differ.submitList(data);
     }
 
     @NonNull
@@ -40,7 +56,7 @@ public class FoodMenuCategoryRecyclerAdapter extends RecyclerView.Adapter<FoodMe
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Menu menu = menuList.get(position);
+        Menu menu = differ.getCurrentList().get(position);
         if (menu != null) {
             holder.tvCategoryName.setText(menu.getCategoryName()+" ("+menu.getItemCount()+")");
             if (menu.getHasSubCategory()) {
@@ -88,7 +104,8 @@ public class FoodMenuCategoryRecyclerAdapter extends RecyclerView.Adapter<FoodMe
 
     @Override
     public int getItemCount() {
-        return menuList.size();
+        List<Menu> currentList = differ.getCurrentList();
+        return currentList != null ? currentList.size() : 0;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
