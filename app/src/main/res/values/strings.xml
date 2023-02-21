@@ -6,4 +6,6 @@
     <string name="str_status_inactive">Inactive</string>
     <string name="str_error_category_name_required">Category name is required</string>
     <string name="str_err_disabled">You cannot create offers and ads right now, please contact your dedicated manager for any help.</string>
+    <string name="str_rupee_symbol">₹</string>
+    <string name="str_qty_symbol">x</string>
 </resources>

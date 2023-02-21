@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.myfablo.seller.R;
 import com.myfablo.seller.orders.v2.Product;
+import com.myfablo.seller.utils.ExtraUtils;
 
 import java.util.List;
 
@@ -27,7 +29,7 @@ public class OrderItemRecyclerAdapter extends RecyclerView.Adapter<OrderItemRecy
     @NonNull
     @Override
     public OrderItemRecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_order_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_ordered_items, parent, false);
         return new ViewHolder(view);
     }
 
@@ -35,16 +37,24 @@ public class OrderItemRecyclerAdapter extends RecyclerView.Adapter<OrderItemRecy
     public void onBindViewHolder(@NonNull OrderItemRecyclerAdapter.ViewHolder holder, int position) {
         Product product = productList.get(position);
         if (product != null) {
-            if (product.getVariationName() != null) {
-                if (product.getAddOnName() != null) {
-                    holder.tvItemName.setText(product.getProductName()+" ("+product.getVariationName()+", "+product.getAddOnName()+")");
-                } else {
-                    holder.tvItemName.setText(product.getProductName()+" ("+product.getVariationName()+")");
-                }
+            holder.tvProductName.setText(product.getProductName()+" (Qty x"+product.getQuantity()+")");
+            holder.tvProductTotal.setText(String.format("%s%s", context.getString(R.string.str_rupee_symbol), product.getQuantityPrice()));
+            if (product.getIsVeg()) {
+                holder.ivServingType.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_food_type_veg));
             } else {
-                holder.tvItemName.setText(product.getProductName());
+                holder.ivServingType.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_food_type_non_veg));
             }
-            holder.tvItemQuantity.setText(product.getQuantity()+"");
+            if (product.getVariationName() != null && !product.getVariationName().isEmpty()) {
+                if (!product.getAddOnName().isEmpty()) {
+                    holder.tvCustomization.setText(new ExtraUtils(context).getCustomName(product.getVariationName(), product.getAddOnName()));
+                } else {
+                    holder.tvCustomization.setText(product.getVariationName());
+                }
+                holder.tvCustomization.setVisibility(View.VISIBLE);
+            } else {
+                holder.tvCustomization.setVisibility(View.GONE);
+            }
+
         }
     }
 
@@ -55,15 +65,17 @@ public class OrderItemRecyclerAdapter extends RecyclerView.Adapter<OrderItemRecy
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView tvItemQuantity;
-        private TextView tvItemName;
+        ImageView ivServingType;
+        TextView tvProductName;
+        TextView tvCustomization;
+        TextView tvProductTotal;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            tvItemQuantity = itemView.findViewById(R.id.tvItemQuantity);
-            tvItemName = itemView.findViewById(R.id.tvItemName);
-
+            ivServingType = itemView.findViewById(R.id.ivServingType);
+            tvProductName = itemView.findViewById(R.id.tvProductName);
+            tvCustomization = itemView.findViewById(R.id.tvCustomization);
+            tvProductTotal = itemView.findViewById(R.id.tvProductTotal);
         }
     }
 }

@@ -63,6 +63,14 @@ public class PendingOrdersActivity extends AppCompatActivity {
                 if (response.code() == Constant.HTTP_RESPONSE_SUCCESS) {
                     if (response.body() != null) {
                         if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_SUCCESS) {
+                            if (response.body().getItems().isEmpty()) {
+                                noData();
+                                onBackPressed();
+                            } else {
+                                OrderRecyclerAdapter orderRecyclerAdapter = new OrderRecyclerAdapter(context, response.body().getItems());
+                                binding.recyclerOrders.setAdapter(orderRecyclerAdapter);
+                                showData();
+                            }
                             OrderRecyclerAdapter orderRecyclerAdapter = new OrderRecyclerAdapter(context, response.body().getItems());
                             binding.recyclerOrders.setAdapter(orderRecyclerAdapter);
                             showData();
@@ -145,6 +153,14 @@ public class PendingOrdersActivity extends AppCompatActivity {
     public void onMessageEvent(OrderStatusChangeRequest orderStatusChangeRequest) {
         if (orderStatusChangeRequest != null) {
             changeOrderStatus(orderStatusChangeRequest);
+        }
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(String data) {
+        if (data.equals("rejectOrder")) {
+            getOrder();
         }
     }
 

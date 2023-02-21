@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/ivServingType"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="8dp"
+            android:padding="2dp"
+            android:src="@drawable/ic_food_type_veg"/>
+
+        <TextView
+            android:id="@+id/tvProductName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:fontFamily="@font/google_sans_medium"
+            android:textColor="@color/color_text_title"
+            android:text="Cheesy Garlic Bread"/>
+
+        <TextView
+            android:id="@+id/tvProductTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:textSize="16sp"
+            android:fontFamily="@font/google_sans_medium"
+            android:textColor="@color/color_text_sub_head"
+            android:text="₹129"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvCustomization"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="31dp"
+        android:textSize="14sp"
+        android:fontFamily="@font/google_sans_regular"
+        android:textColor="@color/color_text_description"
+        android:text="Personal Giant Slice (22.5  CM)"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/color_separator_light"/>
+
+</LinearLayout>

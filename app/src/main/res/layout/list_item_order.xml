@@ -28,7 +28,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -59,6 +59,12 @@
                 </LinearLayout>
 
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/color_separator_light"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -122,73 +128,82 @@
             android:fontFamily="@font/google_sans_regular"
             android:textColor="@color/color_text_description"
             android:textSize="14sp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/color_separator_light"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerOrderItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <View
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/color_separator_light"/>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Customer Name"
-                android:layout_marginStart="8dp"
-                android:layout_marginBottom="2dp"
-                android:fontFamily="@font/google_sans_regular"
-                android:textColor="@color/color_text_description"
-                android:textSize="12sp"/>
-
-            <TextView
-                android:id="@+id/tvCustomerName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sahil Singh"
-                android:layout_marginStart="8dp"
-                android:layout_marginBottom="8dp"
-                android:fontFamily="@font/google_sans_medium"
-                android:textColor="@color/color_text_title"
-                android:textSize="16sp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <TextView
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Customer Name"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/google_sans_regular"
+                    android:textColor="@color/color_text_description"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/tvCustomerName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sahil Singh"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/google_sans_medium"
+                    android:textColor="@color/color_text_title"
+                    android:textSize="16sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total"
-                android:layout_marginStart="8dp"
-                android:layout_marginBottom="4dp"
-                android:fontFamily="@font/google_sans_regular"
-                android:textColor="@color/color_text_description"
-                android:textSize="12sp"/>
+                android:gravity="end"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvOrderTotal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="₹100"
-                android:layout_marginStart="8dp"
-                android:layout_marginBottom="2sp"
-                android:fontFamily="@font/google_sans_medium"
-                android:textColor="@color/color_text_title"
-                android:textSize="16sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/google_sans_regular"
+                    android:textColor="@color/color_text_description"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/tvOrderTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="₹100"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/google_sans_medium"
+                    android:textColor="@color/color_text_title"
+                    android:textSize="16sp"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 

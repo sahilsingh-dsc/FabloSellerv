@@ -127,16 +127,6 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
                 }
             });
 
-//            holder.btnOrderReady.setOnLongClickListener(new View.OnLongClickListener() {
-//                @Override
-//                public boolean onLongClick(View view) {
-//                    OrderStatusChangeRequest orderStatusChangeRequest = new OrderStatusChangeRequest();
-//                    orderStatusChangeRequest.setOrderId(item.getOrderId());
-//                    orderStatusChangeRequest.setOrderStatus(Constant.ORDER_STATUS_READY);
-//                    EventBus.getDefault().post(orderStatusChangeRequest);
-//                    return true;
-//                }
-//            });
 
             holder.sliderOrderReady.setOnSlideCompleteListener(new SlideToActView.OnSlideCompleteListener() {
                 @Override

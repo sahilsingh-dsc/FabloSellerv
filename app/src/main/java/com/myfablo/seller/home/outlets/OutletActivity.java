@@ -69,6 +69,7 @@ public class OutletActivity extends AppCompatActivity implements View.OnClickLis
         binding.tvReadyOrders.setOnClickListener(this);
         binding.tvDispatchedOrders.setOnClickListener(this);
         binding.ivOutletImage.setOnClickListener(this);
+        binding.ivGoBack.setOnClickListener(this);
 
         binding.recyclerOrders.setLayoutManager(new LinearLayoutManager(context));
         binding.lottieRefresh.addAnimatorListener(this);
@@ -310,6 +311,8 @@ public class OutletActivity extends AppCompatActivity implements View.OnClickLis
             selectReadyOrders();
         } else if (view == binding.tvDispatchedOrders) {
             selectDispatchedOrders();
+        } else if (view == binding.ivGoBack) {
+            onBackPressed();
         }
     }
 
