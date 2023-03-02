@@ -22,6 +22,7 @@ import com.myfablo.seller.home.outlets.adapters.OutletsRecyclerAdapter;
 import com.myfablo.seller.home.outlets.models.OutletItem;
 import com.myfablo.seller.home.outlets.models.OutletsResponse;
 import com.myfablo.seller.orders.v2.SellerOrdersResponse;
+import com.myfablo.seller.utils.FabloNotificationManager;
 import com.myfablo.seller.utils.interfaces.ConfigInterface;
 import com.myfablo.seller.utils.interfaces.OrdersInterface;
 import com.myfablo.seller.utils.interfaces.OutletInterface;
@@ -376,6 +377,8 @@ public class HomeActivity extends AppCompatActivity implements SwitchButton.OnCh
             OrderNotificationAlert orderNotificationAlert = OrderNotificationAlert.getInstance();
             orderNotificationAlert.showAlert(context, orderServicePref.getServiceStatus());
         } else if (view == binding.cardPendingOrders) {
+            FabloNotificationManager fabloNotificationManager = new FabloNotificationManager(context);
+            fabloNotificationManager.stopAlertSound();
             Intent intent = new Intent(context, PendingOrdersActivity.class);
             startActivity(intent);
         } else if (view == binding.ivManageAccount) {

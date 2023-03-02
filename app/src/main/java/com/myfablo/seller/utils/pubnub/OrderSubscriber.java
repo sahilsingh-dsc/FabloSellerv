@@ -4,6 +4,7 @@ import android.content.Context;
 import android.media.MediaPlayer;
 
 import com.myfablo.seller.R;
+import com.myfablo.seller.utils.FabloNotificationManager;
 import com.myfablo.seller.utils.preference.AuthPref;
 import com.myfablo.seller.utils.Constant;
 import com.pubnub.api.PNConfiguration;
@@ -72,8 +73,8 @@ public class OrderSubscriber extends SubscribeCallback {
         System.out.println("Message Subscription: " + message.getSubscription());
         System.out.println("Message Channel: " + message.getChannel());
         System.out.println("Message timeToken: " + message.getTimetoken());
-        MediaPlayer mp = MediaPlayer.create(context, R.raw.notification);
-        mp.start();
+        FabloNotificationManager fabloNotificationManager = new FabloNotificationManager(context);
+        fabloNotificationManager.startAlertSound();
         EventBus.getDefault().post(message);
     }
 
