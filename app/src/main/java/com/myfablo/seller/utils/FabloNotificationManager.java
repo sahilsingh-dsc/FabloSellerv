@@ -3,6 +3,7 @@ package com.myfablo.seller.utils;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Handler;
+import android.util.Log;
 
 import com.myfablo.seller.R;
 
@@ -10,45 +11,24 @@ public class FabloNotificationManager {
 
     private Context context;
     private MediaPlayer mediaPlayer;
-    private Handler handler;
 
+    private static final String TAG = "FabloNotification";
     public FabloNotificationManager(Context context) {
         this.context = context;
         mediaPlayer = MediaPlayer.create(context, R.raw.notification);
-        handler = new Handler();
     }
 
     public void startAlertSound() {
-        initLooper();
-    }
-
-    public void stopAlertSound() {
-        stopMediaPlayer();
-        handler = null;
-    }
-
-    private void initLooper() {
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                getHapticFeedBack();
-                handler.postDelayed(this, 1000);
-            }
-        }, 1000);
         startMediaPlayer();
     }
 
-    private void startMediaPlayer() {
-        mediaPlayer.start();
-        mediaPlayer.setLooping(true);
-    }
-
-    private void stopMediaPlayer() {
+    public void stopAlertSound() {
         mediaPlayer.stop();
     }
 
-    private void getHapticFeedBack() {
-        new ExtraUtils(context).getHapticFeedback();
+    private void startMediaPlayer() {
+        new ExtraUtils(context).getLongHapticFeedback();
+        mediaPlayer.start();
+        mediaPlayer.setLooping(true);
     }
-
 }

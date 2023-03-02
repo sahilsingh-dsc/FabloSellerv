@@ -77,6 +77,8 @@ public class HomeActivity extends AppCompatActivity implements SwitchButton.OnCh
         binding.cardPendingOrders.setOnClickListener(this);
         binding.ivManageAccount.setOnClickListener(this);
         checkAppUpdate();
+        FabloNotificationManager fabloNotificationManager = new FabloNotificationManager(context);
+        fabloNotificationManager.startAlertSound();
     }
 
     private void initOrderService() {
