@@ -31,7 +31,7 @@ public class RestClient {
 
         if (retrofitFabloUserService == null) {
             retrofitFabloUserService = new Retrofit.Builder()
-                    .baseUrl(new AppConfig().getBaseUrl(Constant.APP_ENV_DEVELOPMENT).getUserBaseUrl())
+                    .baseUrl(new AppConfig().getBaseUrl(Constant.APP_ENV_PRODUCTION).getUserBaseUrl())
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient)
@@ -51,7 +51,7 @@ public class RestClient {
 
         if (retrofitFabloInventoryService == null) {
             retrofitFabloInventoryService = new Retrofit.Builder()
-                    .baseUrl(new AppConfig().getBaseUrl(Constant.APP_ENV_DEVELOPMENT).getInventoryBaseUrl())
+                    .baseUrl(new AppConfig().getBaseUrl(Constant.APP_ENV_PRODUCTION).getInventoryBaseUrl())
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient)
@@ -71,7 +71,7 @@ public class RestClient {
 
         if (retrofitFabloOrderService == null) {
             retrofitFabloOrderService = new Retrofit.Builder()
-                    .baseUrl(new AppConfig().getBaseUrl(Constant.APP_ENV_DEVELOPMENT).getOrderBaseUrl())
+                    .baseUrl(new AppConfig().getBaseUrl(Constant.APP_ENV_PRODUCTION).getOrderBaseUrl())
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient)
@@ -91,7 +91,7 @@ public class RestClient {
 
         if (retrofitFabloAdminService == null) {
             retrofitFabloAdminService = new Retrofit.Builder()
-                    .baseUrl(new AppConfig().getBaseUrl(Constant.APP_ENV_DEVELOPMENT).getAdminBaseUrl())
+                    .baseUrl(new AppConfig().getBaseUrl(Constant.APP_ENV_PRODUCTION).getAdminBaseUrl())
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient)

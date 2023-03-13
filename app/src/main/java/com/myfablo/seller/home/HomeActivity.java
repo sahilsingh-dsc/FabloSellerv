@@ -77,8 +77,6 @@ public class HomeActivity extends AppCompatActivity implements SwitchButton.OnCh
         binding.cardPendingOrders.setOnClickListener(this);
         binding.ivManageAccount.setOnClickListener(this);
         checkAppUpdate();
-        FabloNotificationManager fabloNotificationManager = new FabloNotificationManager(context);
-        fabloNotificationManager.startAlertSound();
     }
 
     private void initOrderService() {
@@ -251,6 +249,8 @@ public class HomeActivity extends AppCompatActivity implements SwitchButton.OnCh
                 if (response.code() == Constant.HTTP_RESPONSE_SUCCESS) {
                     if (response.body() != null) {
                         if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_SUCCESS) {
+                            FabloNotificationManager fabloNotificationManager = new FabloNotificationManager(context);
+                            fabloNotificationManager.stopAlertSound();
                             binding.cardPendingOrders.setVisibility(View.VISIBLE);
                         } else if (response.body().getSubCode() == Constant.SERVICE_RESPONSE_CODE_NO_DATA) {
                             binding.cardPendingOrders.setVisibility(View.GONE);
